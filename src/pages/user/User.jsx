@@ -5,10 +5,16 @@ import "../../scss/user.scss"
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import UserMenu from './UserMenu';
 import Dashboard from './Dashboard'
+import Downloads from './Downloads';
+import Items from './Items';
+import AprovedItems from './AprovedItems';
+import WaitingItems from './WaitingItems';
+import RejectedItems from './RejectedItems';
+import AddProduct from './AddProduct';
 export default function User() {
 
     let { path, url } = useRouteMatch();
-    const [active, setActive] = useState("dashboard")
+    const [active, setActive] = useState("")
     function stringAvatar(name) {
         return {
             children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
@@ -89,7 +95,7 @@ export default function User() {
                                     <h6 className="mb-1">
                                         Hi, Obito anass
                                     </h6>
-                                    <span>Joined: <strong>01/01/2022</strong></span>
+                                    <span className="text-muted">Joined: <strong>01/01/2022</strong></span>
                                 </div>
                             </div>
                             <div className="user-cover">
@@ -107,6 +113,12 @@ export default function User() {
                     <Switch>
                         <Route exact path={path} component={Dashboard} />
                         <Route exact path={path + "/dashboard"} component={Dashboard} />
+                        <Route exact path={path + "/download"} component={Downloads} />
+                        <Route exact path={path + "/myitems"} component={Items} />
+                        <Route exact path={path + "/my-products"} component={AprovedItems} />
+                        <Route exact path={path + "/my-waiting-products"} component={WaitingItems} />
+                        <Route exact path={path + "/my-rejected-products"} component={RejectedItems} />
+                        <Route exact path={path + "/add-product"} component={AddProduct} />
                     </Switch>
                 </div>
             </div>

@@ -4,20 +4,26 @@ a {
 }
 .App {
   background: #fcfcfc;
-  
 }
 
-
+body {
+  width: 100%;
+  background: #f4f4f4;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
 
 @media (max-width: 1080px) {
-
-  .collapse-button{
+  .collapse-button {
     display: block !important;
   }
   .navbar {
-     .items, .main-menu, .connection, .dropdown {
-        display: none!important;
-
-     } 
+    .items,
+    .main-menu,
+    .connection,
+    .dropdown {
+      display: none !important;
+    }
   }
 }

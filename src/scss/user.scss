@@ -1,3 +1,6 @@
+@import '../colors';
+
+
 .user-dashboard {
     height: 100%;
 
@@ -63,7 +66,7 @@
         vertical-align: top;
     }
 
-    .list-group{
+    .list-group {
         .fas {
             margin: 0 25px;
         }
@@ -74,9 +77,18 @@
         background-color: #6315b8 !important;
         border-color: #6315b8 !important;
         color: white;
-        
-        .fas{
+
+        .fas {
             color: white !important;
         }
     }
+}
+
+.my-items {
+    .navbar .nav-item.active {
+    }
+}
+
+.MuiStepLabel-iconContainer .css-vnkopk-MuiStepLabel-iconContainer {
+    background: $primary;
 }
