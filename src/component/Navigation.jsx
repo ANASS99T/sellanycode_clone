@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from "../assets/logo-sellanycode.png"
+import logo from "../assets/img/logo-sellanycode.png"
 import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Navigation() {
