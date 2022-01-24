@@ -4,8 +4,9 @@ import './App.scss';
 import "./scss/costum.scss"
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Navigation from './component/Navigation';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from './pages/Home';
+import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -15,11 +16,13 @@ function App() {
     <Router>
       <div className="App">
         <Navigation />
-        <Routes>
-          <Route exact path='/' element={<Home />} />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/user' component={User} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-        </Routes>
+          
+        </Switch>
       </div>
     </Router>
     

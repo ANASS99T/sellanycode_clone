@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from "../assets/img/logo-sellanycode.png"
 import MenuIcon from '@mui/icons-material/Menu';
-import { Navbar, NavDropdown } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
 import '../scss/navbar.scss'
 export default function Navigation() {
 
