@@ -7,7 +7,7 @@ a {
 }
 .navbar {
   height: 80px;
-  
+
   .logo {
     height: 36px;
     margin-left: 4px;
@@ -18,7 +18,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0;
 
+    
     & .menu-item a {
       text-decoration: none !important;
       padding: 0 15px;
@@ -61,11 +63,17 @@ a {
       line-height: normal;
       text-align: left;
       background: none;
-      
-      &:hover{
+
+      &:hover {
         color: $primary !important;
         background-color: $bg_primary;
       }
+    }
+
+    .menu-item {
+      height: 50px;
+      display: flex;
+      align-items: center;
     }
   }
 }

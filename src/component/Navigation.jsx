@@ -15,8 +15,8 @@ export default function Navigation() {
         <div className="items d-flex align-items-center">
           <ul className="main-menu">
             <li className=" menu-item" style={{ position: "relative" }}>
-              <Link to="/category" className="text-secondary" style={{ lineHeight: "79px", fontWeight: 300, fontSize: "19px" }}>App & Game Templates</Link>
-              <span className="nav-sub-soon" style={{ top: "13px", right: "10px", position: "absolute", textTransform: "uppercase", fontWeight: "700", fontSize: "11px", color: "#6315b8", letterSpacing: 0, opacity: 0.8 }}>(2148)</span>
+              <Link to="/category" className="text-secondary" style={{ fontWeight: 300, fontSize: "19px" }}>App & Game Templates</Link>
+              <span className="nav-sub-soon" style={{ top: "0px", right: "10px", position: "absolute", textTransform: "uppercase", fontWeight: "700", fontSize: "11px", color: "#6315b8", letterSpacing: 0, opacity: 0.8 }}>(2148)</span>
               <div className="sub-menu d-flex justify-content-around flex-column">
                 <div className="my-1 mx-1 item">
                   <Link to="/category/ios" className="text-secondary">iOS</Link>
@@ -30,7 +30,7 @@ export default function Navigation() {
               </div>
             </li>
             <li className=" menu-item" style={{ position: "relative" }}>
-              <Link to="/category" className="text-secondary" style={{ lineHeight: "79px", fontWeight: 300, fontSize: "19px" }}>Scripte & Codes</Link>
+              <Link to="/category" className="text-secondary" style={{ fontWeight: 300, fontSize: "19px" }}>Scripte & Codes</Link>
               <div className="sub-menu d-flex justify-content-around flex-column">
                 <div className="my-1 mx-1 item">
                   <Link to="/category/ios" className="text-secondary">iOS</Link>
@@ -43,9 +43,9 @@ export default function Navigation() {
                 </div>
               </div>
             </li>
-            <li className=" menu-item text-secondary" style={{ lineHeight: "79px", fontWeight: 300, fontSize: "19px" }}>
+            <li className=" menu-item text-secondary" style={{ fontWeight: 300, fontSize: "19px" }}>
 
-              <Link to="/category" className="text-secondary" style={{ lineHeight: "79px", fontWeight: 300, fontSize: "19px" }}>Upload your code</Link>
+              <Link to="/category" className="text-secondary" style={{ fontWeight: 300, fontSize: "19px" }}>Upload your code</Link>
 
             </li>
           </ul>
