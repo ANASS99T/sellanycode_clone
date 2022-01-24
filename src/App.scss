@@ -20,7 +20,7 @@ a {
     justify-content: center;
     margin-bottom: 0;
 
-    
+
     & .menu-item a {
       text-decoration: none !important;
       padding: 0 15px;
@@ -75,5 +75,10 @@ a {
       display: flex;
       align-items: center;
     }
+
+  }
+  .login-button{
+    color: #3d3d3d ;
+    background-color:#E9E9E9 !important;
   }
 }
