@@ -10,4 +10,8 @@
     font-family: 'Roboto-Regular';
     src: local("Roboto-Regular"), url('./fonts/Roboto/Roboto-Regular.ttf') format("truetype");    
   }
+  @font-face {
+    font-family: 'Roboto-Condensed-Regular';
+    src: local("RobotoCondensed-Regular"), url('./fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf') format("truetype");    
+  }
   
