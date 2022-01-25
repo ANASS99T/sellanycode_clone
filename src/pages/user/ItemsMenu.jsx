@@ -6,13 +6,6 @@ function ItemsMenu({ url, active, setActive }) {
 
 
     return (
-        // <div className="rounded bg-primary d-flex align-items-center justify-content-around py-5">
-        //     <Link to={`${url}/myitems`} className="text-white active my-items">My Items</Link>
-        //     <Link to={`${url}/my-products`} className="text-white my-items">Approved Items</Link>
-        //     <Link to={`${url}/my-waiting-products`} className="text-white my-items">Waiting Approval</Link>
-        //     <Link to={`${url}/my-rejected-products`} className="text-white my-items">Rejected Items</Link>
-        //     <Link to={`${url}/add-product`} className="text-white my-items">Add Item</Link>
-        // </div>
 
         <nav className="navbar navbar-expand-lg bg-primary text-white rounded bg-danger box-shadow">
             <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">

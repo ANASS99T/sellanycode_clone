@@ -1,6 +1,5 @@
 @import '../colors';
 
-
 .user-dashboard {
     height: 100%;
 
@@ -89,6 +88,12 @@
     }
 }
 
-.MuiStepLabel-iconContainer .css-vnkopk-MuiStepLabel-iconContainer {
-    background: $primary;
+// .MuiStepLabel-iconContainer .css-vnkopk-MuiStepLabel-iconContainer {
+//     background: $primary;
+// }
+.wishlist {
+    .badge-success {
+        color: #fff;
+        background-color: #28a745;
+    }
 }
