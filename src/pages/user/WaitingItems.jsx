@@ -72,7 +72,7 @@ function WaitingItems() {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="7">
+                            <th colSpan="7">
                                 <Alert severity="warning" className="my-2">No Items Added! Upload your Item & Code <Link to="/user/add-product">Here in 3 easy steps!</Link> 🚀🙂</Alert>
                             </th>
                         </tr>

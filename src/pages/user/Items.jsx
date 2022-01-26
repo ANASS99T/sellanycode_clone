@@ -51,18 +51,18 @@ function Items() {
                                 <div className="d-flex align-items-center">
                                     <Tooltip title="View Item" placement="top">
                                         <Link to="/view/item">
-                                            <button className="btn btn-success"><i className="fas fa-search-plus"></i></button>
+                                            <button className="btn btn-sm btn-success"><i className="fas fa-search-plus"></i></button>
                                         </Link>
                                     </Tooltip>
 
                                     <Tooltip title="Edit Item" placement="top">
                                         <Link to="/edite/item">
-                                            <button className="btn btn-primary"><i className="fas fa-pencil-alt"></i></button>
+                                            <button className="btn btn-sm btn-primary"><i className="fas fa-pencil-alt"></i></button>
                                         </Link>
                                     </Tooltip>
                                     <Tooltip title="Delete Item" placement="top">
                                         <Link to="/delete/item">
-                                            <button className="btn btn-danger"><i className="fas fa-trash-alt"></i></button>
+                                            <button className="btn btn-sm btn-danger"><i className="fas fa-trash-alt"></i></button>
                                         </Link>
                                     </Tooltip>
 
