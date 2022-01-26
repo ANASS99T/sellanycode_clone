@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Upload from './pages/Upload';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/user' component={User} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/sell-your-code' component={Upload} />
 
         </Switch>
       </div>
