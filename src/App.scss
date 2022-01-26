@@ -34,9 +34,23 @@ body {
   width: 100%;
   background: #f4f4f4;
   height: 100%;
-  font-family: "Roboto Condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif !important;
 }
 
+form label {
+  margin-bottom: 0.4em;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  color: #747474;
+}
+label {
+  font-size: 1.2em;
+  color: #4d4d4d;
+  cursor: pointer;
+  display: block;
+  font-weight: 300;
+  margin-bottom: 0.2em;
+}
 @media (max-width: 1080px) {
   .collapse-button {
     display: block !important;
