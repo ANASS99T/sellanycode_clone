@@ -6,8 +6,13 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useRouteMatch, Switch, Route, Link } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import ItemsMenu from './ItemsMenu';
+import { EditorState } from 'draft-js';
+import TextEditor from '../../component/TextEditor';
+import { useDropzone } from 'react-dropzone';
+import DropZonePreview from '../../component/DropZonePreview';
+
 const steps = ['add-product', 'Images & Assets', 'Files & Pricing'];
 
 function AddProduct() {
@@ -352,6 +357,28 @@ function AddProduct() {
     'MyBB 1.7.x',
   ]);
 
+  // Editor
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty()
+  );
+
+  //   Drop zine icon
+  const [icons, setIcons] = useState([]);
+  const [preview, setPreview] = useState([]);
+
+  const [description, setDescription] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [screen1, setScreen1] = useState([]);
+  const [screen2, setScreen2] = useState([]);
+  const [screen3, setScreen3] = useState([]);
+  const [screen4, setScreen4] = useState([]);
+  const [screen5, setScreen5] = useState([]);
+  const [screen6, setScreen6] = useState([]);
+  const [screen7, setScreen7] = useState([]);
+  const [screen8, setScreen8] = useState([]);
+  const [showMore, setShowMore] = useState(false);
+  const [mainZip, setMainZip] = useState([]);
+
   return (
     <div className='addProduct'>
       <ItemsMenu url={url} active={active} setActive={setActive} />
@@ -373,7 +400,7 @@ function AddProduct() {
                 </Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                   <Box sx={{ flex: '1 1 auto' }} />
-                  <Button onClick={handleReset}>Reset</Button>
+                  <Button onClick={handleReset} className="text-primary">Reset</Button>
                 </Box>
               </React.Fragment>
             ) : (
@@ -415,7 +442,7 @@ function AddProduct() {
                     <hr />
 
                     <div className='my-3'>
-                      <label htmlFor='dev-type' className='form-label'>
+                      <label className='form-label'>
                         Category: <span style={{ color: 'red' }}>*</span>
                       </label>
                       <select
@@ -433,7 +460,7 @@ function AddProduct() {
                       </select>
                     </div>
                     <div className='my-3'>
-                      <label htmlFor='dev-type' className='form-label'>
+                      <label className='form-label'>
                         Subcategory: <span style={{ color: 'red' }}>*</span>
                       </label>
                       <select
@@ -457,13 +484,13 @@ function AddProduct() {
                     {selectedCat === 'game templates' ||
                     selectedCat === 'app templates' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           Operating systems:{' '}
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {ops.map((ext, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -484,12 +511,12 @@ function AddProduct() {
                       </div>
                     ) : null}
                     <div className='my-3'>
-                      <label htmlFor='dev-type' className='form-label'>
+                      <label className='form-label'>
                         Files included: <span style={{ color: 'red' }}>*</span>
                       </label>
                       <div className='row'>
                         {files.map((ext, index) => (
-                          <div className='col-sm-12 col-md-3'>
+                          <div key={index} className='col-sm-12 col-md-3'>
                             <div className='form-check'>
                               <input
                                 className='form-check-input'
@@ -511,13 +538,13 @@ function AddProduct() {
                     {selectedCat === 'Themes' ||
                     selectedCat === 'Scripts & code' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           HTML/CSS Framework:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {htmlFram.map((fram, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -540,13 +567,13 @@ function AddProduct() {
                     {selectedCat === 'Themes' ||
                     selectedCat === 'Scripts & code' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           JavaScript Frameworks:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {jsFram.map((fram, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -568,13 +595,13 @@ function AddProduct() {
                     ) : null}
                     {selectedCat === 'Scripts & code' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           Software version:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {softV.map((fram, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -596,13 +623,13 @@ function AddProduct() {
                     ) : null}
                     {selectedCat === 'Scripts & code' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           Software framework:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {softF.map((fram, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -624,13 +651,13 @@ function AddProduct() {
                     ) : null}
                     {selectedCat === 'Scripts & code' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           Database:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {dbs.map((fram, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -652,13 +679,13 @@ function AddProduct() {
                     ) : null}
                     {selectedCat === 'Themes' || selectedCat === 'plugins' ? (
                       <div className='my-3'>
-                        <label htmlFor='dev-type' className='form-label'>
+                        <label className='form-label'>
                           Supported CMS:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
                           {suppCms.map((fram, index) => (
-                            <div className='col-sm-12 col-md-3'>
+                            <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
@@ -678,11 +705,332 @@ function AddProduct() {
                         </div>
                       </div>
                     ) : null}
+                    <div className='my-3'>
+                      <label>
+                        Description:
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
+                      <TextEditor
+                        editorState={editorState}
+                        setEditorState={setEditorState}
+                        setContent={setDescription}
+                      />
+                    </div>
+                    <div className='my-3'>
+                      <label>
+                        Features:
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
+                      <TextEditor
+                        editorState={editorState}
+                        setEditorState={setEditorState}
+                        setContent={setFeatures}
+                      />
+                    </div>
+                    <hr />
+                    <div className='mb-3'>
+                      <label
+                        htmlFor='exampleFormControlInput1'
+                        className='form-label'
+                      >
+                        Live Demo URL: (eg. your URL or Google Drive){' '}
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
+                      <input
+                        type='url'
+                        className='form-control'
+                        id='exampleFormControlInput1'
+                      />
+                    </div>
+                    <hr />
                   </div>
                 ) : activeStep === 1 ? (
-                  <>test 2</>
+                  <div className='my-3'>
+                    <div className='row'>
+                      <div className='col-md-6 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Icon Image:
+                            <span style={{ color: 'red' }}>*</span> (size:
+                            200x200)
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview maxFiles={1} setImages={setIcons}>
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='col-md-6 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Preview Image:
+                            <span style={{ color: 'red' }}>*</span> (size:
+                            590x300)
+                          </label>
+
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setPreview}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #1:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen1}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #2:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen2}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #3:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen3}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #4:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen4}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <div className='col-12'>
+                        <button
+                          className={`btn-link btn text-primary btn-sm float-end text-decoration-none ${
+                            showMore ? 'd-none' : ''
+                          }`}
+                          onClick={() => setShowMore(true)}
+                        >
+                          Add More Screenshots
+                        </button>
+                      </div>
+                    </div>
+                    <div className={`row ${!showMore ? 'd-none' : ''}`}>
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #5:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen5}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #6:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen6}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #7:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen7}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className='col-md-3 col-sm-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Screenshot #8:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setScreen8}
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ) : (
-                  <>test 3</>
+                  <div>
+                    <div className='row'>
+                      <div className='col-12'>
+                        <div className='mb-3'>
+                          <label
+                            htmlFor='exampleFormControlInput1'
+                            className='form-label'
+                          >
+                            Main File (.ZIP only):
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='dm-uploader'>
+                            <DropZonePreview
+                              maxFiles={1}
+                              setImages={setMainZip}
+                              accpet='.zip'
+                            >
+                              Drag 'n' drop some files here, or click to select
+                              files
+                            </DropZonePreview>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div className='my-3'>
+                      <label className='form-label'>
+                        Price: (Single Licence):{' '}
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
+                      <div className='input-group'>
+                        <span className='input-group-text'>$</span>
+                        <input
+                          type='number'
+                          min={0}
+                          className='form-control'
+                          aria-label='Amount (to the nearest dollar)'
+                        />
+                        <span className='input-group-text'>.00</span>
+                      </div>
+                    </div>
+                    <div className='my-3'>
+                      <label className='form-label'>
+                        Price: (Multiple Licence):{' '}
+                        <span style={{ color: 'red' }}>*</span>
+                      </label>
+                      <div className='input-group'>
+                        <span className='input-group-text'>$</span>
+                        <input
+                          type='number'
+                          min={0}
+                          className='form-control'
+                          aria-label='Amount (to the nearest dollar)'
+                        />
+                        <span className='input-group-text'>.00</span>
+                      </div>
+                    </div>
+                    <hr />
+                    
+                  </div>
                 )}
                 {/* </Typography> */}
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -714,7 +1062,7 @@ function AddProduct() {
                     ) : (
                       <Button onClick={handleComplete} className='text-primary'>
                         {completedSteps() === totalSteps() - 1
-                          ? 'Finish'
+                          ? 'Submit to Preview'
                           : 'Complete Step'}
                       </Button>
                     ))}
