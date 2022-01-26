@@ -101,7 +101,7 @@ export default function Navigation() {
                 style={{ position: 'relative' }}
               >
                 <Link
-                  to='/category'
+                  to='/sell-your-code'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -276,7 +276,7 @@ export default function Navigation() {
               style={{ position: 'relative' }}
             >
               <Link
-                to='/category'
+                to='/sell-your-code'
                 className='text-secondary'
                 style={{ fontWeight: 300, fontSize: '19px' }}
               >

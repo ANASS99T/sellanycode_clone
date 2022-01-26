@@ -10,6 +10,8 @@ import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AppGmBiblio from './pages/BiblioAppGames';
+import Upload from './pages/Upload';
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/apgmbiblio' component={AppGmBiblio} />
+          <Route path='/sell-your-code' component={Upload} />
 
         </Switch>
       </div>
