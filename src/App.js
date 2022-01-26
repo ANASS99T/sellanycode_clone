@@ -10,6 +10,7 @@ import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Upload from './pages/Upload';
+import DetailProduct from './pages/user/DetailProduct';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/sell-your-code' component={Upload} />
-
+          <Route path='/item/:id' component={DetailProduct} />
         </Switch>
       </div>
     </Router>
