@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+import AppGmBiblio from './pages/BiblioAppGames';
 
 function App() {
   return (
@@ -21,7 +21,8 @@ function App() {
           <Route path='/user' component={User} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          
+          <Route path='/apgmbiblio' component={AppGmBiblio} />
+
         </Switch>
       </div>
     </Router>
