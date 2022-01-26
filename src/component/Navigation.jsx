@@ -25,7 +25,7 @@ export default function Navigation() {
             <ul className='main-menu'>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/category'
+                  to='/apgmbiblio'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -67,7 +67,7 @@ export default function Navigation() {
               </li>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/category'
+                  to='/scriptcode'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >

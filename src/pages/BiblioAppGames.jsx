@@ -1,8 +1,5 @@
 import React from "react";
 import product1 from "../assets/img/Products/CasttoTVScreenMirroring_sellanycode_featured_image_1643113410.jpg";
-import product2 from "../assets/img/Products/AnimatedSidebarMenuUsingHTMLampCSSampJavaScriptResponsiveDashboardSideNavigationBar_sellanycode_featured_image_1643004869.jpg";
-import product3 from "../assets/img/Products/RealTrafficCarDriverRacinggame2020_sellanycode_featured_image_1642986683.png";
-import product4 from "../assets/img/Products/ForzaHorizon5CarRacing_sellanycode_featured_image_1642985795.png";
 
 import "../scss/biblio.scss";
 import { Link } from "react-router-dom";
@@ -49,7 +46,7 @@ export default function BiblioAppGames() {
                     id="button-addon2"
                   >
                     <i
-                      className="fas fa-search"
+                      className="fas fa-search text-white"
                       style={{ fontSize: "15px" }}
                     ></i>
                   </button>
@@ -505,8 +502,11 @@ export default function BiblioAppGames() {
                 
               </div>
               
+              {/* Pagination */}
+              
             </div>
           </div>
+
 
         </div>
       </div>

@@ -10,7 +10,9 @@ import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AppGmBiblio from './pages/BiblioAppGames';
+import ScrCodeBiblio from './pages/BiblioScrCod';
 import Upload from './pages/Upload';
+import Footer from './component/Footer';
 
 
 function App() {
@@ -24,9 +26,11 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/apgmbiblio' component={AppGmBiblio} />
+          <Route path='/scriptcode' component={ScrCodeBiblio} />
           <Route path='/sell-your-code' component={Upload} />
 
         </Switch>
+        <Footer />
       </div>
     </Router>
 

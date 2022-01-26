@@ -59,8 +59,8 @@ export default function Home() {
               </Link>          
           </div>
           <div className="row rowgames">
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -74,8 +74,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -89,8 +89,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -104,8 +104,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -119,8 +119,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -134,8 +134,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
@@ -149,8 +149,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
@@ -164,8 +164,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
@@ -195,8 +195,8 @@ export default function Home() {
               </Link>          
           </div>
           <div className="row rowgames">
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -210,8 +210,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -225,8 +225,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -240,8 +240,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -255,8 +255,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -270,8 +270,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
@@ -285,8 +285,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
@@ -300,8 +300,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
@@ -331,8 +331,8 @@ export default function Home() {
               </Link>          
           </div>
           <div className="row rowgames">
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -346,8 +346,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -361,8 +361,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -376,8 +376,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -391,8 +391,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -406,8 +406,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
@@ -421,8 +421,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
@@ -436,8 +436,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
@@ -467,8 +467,8 @@ export default function Home() {
               </Link>          
           </div>
           <div className="row rowgames">
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -482,8 +482,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -497,8 +497,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -512,8 +512,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -527,8 +527,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -542,8 +542,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
@@ -557,8 +557,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
@@ -572,8 +572,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
@@ -603,8 +603,8 @@ export default function Home() {
               </Link>          
           </div>
           <div className="row rowgames">
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -618,8 +618,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -633,8 +633,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -648,8 +648,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -663,8 +663,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
@@ -678,8 +678,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
@@ -693,8 +693,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
@@ -708,8 +708,8 @@ export default function Home() {
                       </Link>
                   </div>
               </div>
-              <div className="col-sm-3 mb-4">
-                  <div className="card box-shadow h-100">
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                  <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
                           <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
