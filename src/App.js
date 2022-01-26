@@ -4,7 +4,7 @@ import './App.scss';
 import "./scss/costum.scss"
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Navigation from './component/Navigation';
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import Home from './pages/Home';
 import User from './pages/user/User';
 import Login from './pages/Login';
@@ -15,26 +15,49 @@ import Upload from './pages/Upload';
 import DetailProduct from './pages/user/DetailProduct';
 import Footer from './component/Footer';
 import About from './pages/About';
+import Profile from './pages/Profile';
+
+const LoginContainer = () => (
+  <div>
+    <Route path='/login' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <Login />
+    } />
+    <Route path='/register' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <Register />
+    } />
+    <Route exact path="/" render={() => <Redirect to="/login" />} />
+  </div>
+)
+
+const DefaultContainer = () => (
+  <div>
+    <Navigation />
+    <Route exact path='/' component={Home} />
+    <Route path='/user' render={() =>
+      sessionStorage.getItem("token") ? <User /> : <Login />
+    } />
+
+    <Route path='/apgmbiblio' component={AppGmBiblio} />
+    <Route path='/scriptcode' component={ScrCodeBiblio} />
+    <Route path='/sell-your-code' component={Upload} />
+    <Route path='/item/:id' component={DetailProduct} />
+    <Route path='/about' component={About} />
+    <Route path='/profile/:id' component={Profile} />
+    <Footer />
+  </div>
+)
 
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Navigation />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/user' component={User} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/apgmbiblio' component={AppGmBiblio} />
-          <Route path='/scriptcode' component={ScrCodeBiblio} />
-          <Route path='/sell-your-code' component={Upload} />
-          <Route path='/item/:id' component={DetailProduct} />
-          <Route path='/about' component={About} />
 
+      <div className="App">
+        <Switch>
+          <Route exact path="/(login)" component={LoginContainer} />
+          <Route exact path="/(register)" component={LoginContainer} />
+          <Route component={DefaultContainer} />
         </Switch>
-        <Footer />
       </div>
     </Router>
 

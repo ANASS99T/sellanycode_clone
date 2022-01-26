@@ -7,6 +7,8 @@ import '../scss/navbar.scss';
 export default function Navigation() {
   const [toggled, setToggled] = useState(false);
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const logout = () => {};
   return (
     <>
@@ -25,7 +27,7 @@ export default function Navigation() {
             <ul className='main-menu'>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/apgmbiblio'
+                  to='/category'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -67,7 +69,7 @@ export default function Navigation() {
               </li>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/scriptcode'
+                  to='/category'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -101,7 +103,7 @@ export default function Navigation() {
                 style={{ position: 'relative' }}
               >
                 <Link
-                  to='/sell-your-code'
+                  to='/category'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -127,7 +129,11 @@ export default function Navigation() {
             </ul>
           </div>
 
-          <div className='connection d-flex align-items-center justify-content-center d-none'>
+          <div
+            className={`connection d-flex align-items-center justify-content-center ${
+              loggedIn ? 'd-none' : ''
+            }`}
+          >
             <Link to='/login' className='text-secondary'>
               <button className='btn login-button text-uppercase mx-1'>
                 Login
@@ -140,7 +146,7 @@ export default function Navigation() {
             </Link>
           </div>
 
-          <div className='dropdown'>
+          <div className={`dropdown ${!loggedIn ? 'd-none' : ''}`}>
             <Link
               className='btn dropdown-toggle text-secondary'
               to='/'
@@ -187,7 +193,10 @@ export default function Navigation() {
                 </Link>
               </li>
               <NavDropdown.Divider />
-              <li onClick={logout} className="dropdown-item my-1 text-secondary" style={{ cursor: 'pointer' }}>
+              <li
+                onClick={logout}
+                className='dropdown-item my-1 text-secondary'
+              >
                 <i className='fas fa-sign-out-alt me-2'></i>Log out
               </li>
             </ul>
@@ -276,7 +285,7 @@ export default function Navigation() {
               style={{ position: 'relative' }}
             >
               <Link
-                to='/sell-your-code'
+                to='/category'
                 className='text-secondary'
                 style={{ fontWeight: 300, fontSize: '19px' }}
               >
@@ -302,7 +311,11 @@ export default function Navigation() {
           </ul>
         </div>
 
-        <div className='connection d-flex align-items-center justify-content-center d-none'>
+        <div
+          className={`connection d-flex align-items-center justify-content-center ${
+            loggedIn ? 'd-none' : ''
+          }  `}
+        >
           <Link to='/login' className='text-secondary'>
             <button className='btn login-button text-uppercase mx-1'>
               Login
@@ -315,7 +328,7 @@ export default function Navigation() {
           </Link>
         </div>
 
-        <div className='dropdown ms-4'>
+        <div className={`dropdown ms-4 ${!loggedIn ? 'd-none' : ''}`}>
           <Link
             className='btn dropdown-toggle text-secondary'
             to='/'
