@@ -1,6 +1,7 @@
 @import './colors';
 a {
   text-decoration: none !important;
+  color: $primary !important;
 }
 .App {
   background: #fcfcfc;
