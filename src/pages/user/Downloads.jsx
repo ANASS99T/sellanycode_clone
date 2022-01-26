@@ -23,7 +23,7 @@ function Downloads() {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="5">
+                                <th colSpan="5">
                                     <Alert severity="warning" className="my-2">You have not purchased anything! Just browse in <Link to="/catalog">the catalog here!</Link> 🚀🙂</Alert>
                                 </th>
                             </tr>

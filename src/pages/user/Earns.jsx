@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { useRouteMatch, Switch, Route, Link } from "react-router-dom";
-import ItemsMenu from './ItemsMenu';
 import "../../scss/user.scss"
 import { Alert, Tooltip } from '@mui/material';
+import TransactionList from './TransactionList';
 
-function RejectedItems() {
+function Earns() {
 
     let { path, url } = useRouteMatch();
-    const [active, setActive] = useState("my-rejected-products")
+    const [active, setActive] = useState("my-earns")
 
     return <div className="my-items">
 
-        <ItemsMenu url={url} active={active} setActive={setActive} />
+        <TransactionList url={url} active={active} setActive={setActive} />
 
-        <div id="transactions" className="collapse show mt-2">
+        {/* <div id="transactions" className="collapse show mt-2">
             <div className="table-responsive">
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
@@ -70,10 +70,21 @@ function RejectedItems() {
                             </td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colSpan="7">
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
+        </div> */}
+
+        <div className="my-2 p-3 bg-white">
+
+            <Alert severity="warning" className="my-2">No Item Sold!</Alert>
         </div>
     </div>;
 }
 
-export default RejectedItems;
+export default Earns;
