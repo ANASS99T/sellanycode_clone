@@ -27,7 +27,7 @@ export default function Navigation() {
             <ul className='main-menu'>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/category'
+                  to='/apgmbiblio'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -51,17 +51,17 @@ export default function Navigation() {
                 </span>
                 <div className='sub-menu d-flex justify-content-around flex-column'>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/category/ios' className='text-secondary'>
+                    <Link to='/apgmbiblio/ios' className='text-secondary'>
                       iOS
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/category/android' className='text-secondary'>
+                    <Link to='/apgmbiblio/android' className='text-secondary'>
                       Android
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/category/unity' className='text-secondary'>
+                    <Link to='/apgmbiblio/unity' className='text-secondary'>
                       Unity
                     </Link>
                   </div>
@@ -69,7 +69,7 @@ export default function Navigation() {
               </li>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/category'
+                  to='/scriptcode'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
