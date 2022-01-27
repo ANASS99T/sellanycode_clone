@@ -89,16 +89,16 @@ export default function Footer() {
                 <h4 className="beta">How it works</h4>
                 <ul className="links responsive">
                   <li>
-                    <Link to="/">Build a Mobile App</Link>
+                    <Link to="/build-an-app">Build a Mobile App</Link>
                   </li>
                   <li>
-                    <Link to="/">Create iOS Apps</Link>
+                    <Link to="/sell-buy-ios-apps">Create iOS Apps</Link>
                   </li>
                   <li>
-                    <Link to="/">Create Android Apps</Link>
+                    <Link to="/sell-buy-android-apps">Create Android Apps</Link>
                   </li>
                   <li>
-                    <Link to="/">Sell App Source Code</Link>
+                    <Link to="/sell-your-work">Sell App Source Code</Link>
                   </li>
                   <li>
                     <Link to="/sell-your-code">Sell Your Source Code</Link>
