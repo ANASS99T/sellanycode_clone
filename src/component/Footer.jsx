@@ -112,7 +112,7 @@ export default function Footer() {
                 <h4 className="beta">About us</h4>
                 <ul className="links responsive">
                   <li>
-                    <Link to="/about-sellanycode">About SellAnyCode</Link>
+                    <Link to="/about">About SellAnyCode</Link>
                   </li>
                   <li>
                     <Link to="/developer-terms-conditions">

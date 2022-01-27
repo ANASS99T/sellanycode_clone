@@ -15,6 +15,8 @@ import Upload from './pages/Upload';
 import DetailProduct from './pages/user/DetailProduct';
 import Footer from './component/Footer';
 import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+
 import Profile from './pages/Profile';
 
 const LoginContainer = () => (
@@ -43,6 +45,8 @@ const DefaultContainer = () => (
     <Route path='/item/:id' component={DetailProduct} />
     <Route path='/about' component={About} />
     <Route path='/profile/:id' component={Profile} />
+    <Route path='/about' component={About} />
+    <Route path='/privacy-policy' component={PrivacyPolicy} />
     <Footer />
   </div>
 )
