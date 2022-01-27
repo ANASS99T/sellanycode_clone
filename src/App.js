@@ -16,6 +16,9 @@ import DetailProduct from './pages/user/DetailProduct';
 import Footer from './component/Footer';
 import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import DeveloperTermsConditions from './pages/TermsConditions';
+import BuyerTermsConditions from './pages/BuyerTermsConditions';
+
 import SellBuyIos from './pages/SellBuyIos';
 import SellBuyAndroid from './pages/SellBuyAndroid';
 import SellWork from './pages/SellWork';
@@ -53,6 +56,9 @@ const DefaultContainer = () => (
     <Route path='/profile/:id' component={Profile} />
     <Route path='/about' component={About} />
     <Route path='/privacy-policy' component={PrivacyPolicy} />
+    <Route path='/developer-terms-conditions' component={DeveloperTermsConditions} />
+    <Route path='/buyer-terms-conditions' component={BuyerTermsConditions} />
+
     <Route path='/build-an-app' component={BuildAnApp} />
     <Route path='/sell-buy-ios-apps' component={SellBuyIos} />
     <Route path='/sell-buy-android-apps' component={SellBuyAndroid} />
