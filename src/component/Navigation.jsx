@@ -139,7 +139,7 @@ export default function Navigation() {
                 Login
               </button>
             </Link>
-            <Link to='/signup' className='text-secondary'>
+            <Link to='/register' className='text-secondary'>
               <button className='btn login-button text-uppercase '>
                 sign up
               </button>
