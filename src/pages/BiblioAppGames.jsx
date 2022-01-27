@@ -64,7 +64,7 @@ export default function BiblioAppGames() {
                     </span>
                   </Link> 
                   <Link  to="/" className="list-group-item list-group-item-action menu-item">
-                    <span className="ml-2 font-weight-bold">
+                    <span className="ml-2 font-weight-bold ">
                       <i className="fas fa-code" style={{paddingRight:"20px",paddinLeft:"20px"}}/>
                       App Templates
                     </span>
@@ -100,7 +100,7 @@ export default function BiblioAppGames() {
               <div className="card-header font-weight-bold bg-light">Current Category </div>
               <div className="list-group bg-light">
                   <Link to="/" className="list-group-item list-group-item-action active" >
-                    <span className="ml-2 font-weight-bold" >
+                    <span className="ml-2 font-weight-bold text-white" >
                         <i className="fas fa-code" style={{paddingRight:"20px",paddinLeft:"20px"}}/>
                         All Source Codes
                     </span>
