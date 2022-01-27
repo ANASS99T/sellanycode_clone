@@ -75,7 +75,7 @@
         color: #fff;
         background-color: #6315b8 !important;
         border-color: #6315b8 !important;
-        color: white;
+        color: white !important;
 
         .fas {
             color: white !important;
@@ -83,10 +83,10 @@
     }
 }
 
-.my-items {
-    .navbar .nav-item.active {
-    }
-}
+// .my-items {
+//     .navbar .nav-item.active {
+//     }
+// }
 
 // .MuiStepLabel-iconContainer .css-vnkopk-MuiStepLabel-iconContainer {
 //     background: $primary;

@@ -45,7 +45,7 @@ const DefaultContainer = () => (
     <Navigation />
     <Route exact path='/' component={Home} />
     <Route path='/user' render={() =>
-      sessionStorage.getItem("token") ? <User /> : <Login />
+      sessionStorage.getItem("token") ? <User /> : <User />
     } />
 
     <Route path='/apgmbiblio' component={AppGmBiblio} />
