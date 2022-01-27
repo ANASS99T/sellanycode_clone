@@ -7,7 +7,7 @@ import '../scss/navbar.scss';
 export default function Navigation() {
   const [toggled, setToggled] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const logout = () => {};
   return (
@@ -155,7 +155,7 @@ export default function Navigation() {
               data-bs-toggle='dropdown'
               aria-expanded='false'
             >
-              Hi, Obito <span className='badge bg-primary'>$ 0.00</span>
+              Hi, Chifaa <span className='badge bg-primary'>$ 0.00</span>
             </Link>
 
             <ul className='dropdown-menu' aria-labelledby='dropdownMenuLink'>

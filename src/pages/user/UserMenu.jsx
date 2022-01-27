@@ -8,7 +8,7 @@ function UserMenu({ url, active, setActive }) {
       <div className='list-group '>
         <Link
           to={`${url}/dashboard`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'dashboard' ? 'active' : ''}`}
           onClick={() => setActive('dashboard')}
         >
@@ -17,7 +17,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/download`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'download' ? 'active' : ''}`}
           onClick={() => setActive('download')}
         >
@@ -26,7 +26,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/myitems`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'myitems' ? 'active' : ''}`}
           onClick={() => setActive('myitems')}
         >
@@ -35,7 +35,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/transactions`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'transactions' ? 'active' : ''}`}
           onClick={() => setActive('transactions')}
         >
@@ -44,7 +44,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/my-earns`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'my-earns' ? 'active' : ''}`}
           onClick={() => setActive('my-earns')}
         >
@@ -53,7 +53,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/faq`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'faq' ? 'active' : ''}`}
           onClick={() => setActive('faq')}
         >
@@ -62,7 +62,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/wishlist`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'wishlist' ? 'active' : ''}`}
           onClick={() => setActive('wishlist')}
         >
@@ -71,7 +71,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/payments`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'Payments' ? 'active' : ''}`}
           onClick={() => setActive('Payments')}
         >
@@ -80,7 +80,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/my-account`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'My account' ? 'active' : ''}`}
           onClick={() => setActive('My account')}
         >
@@ -89,7 +89,7 @@ function UserMenu({ url, active, setActive }) {
         </Link>
         <Link
           to={`${url}/support`}
-          className={`list-group-item list-group-item-action d-flex align-items-center 
+          className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'support' ? 'active' : ''}`}
           onClick={() => setActive('support')}
         >

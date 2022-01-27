@@ -34,14 +34,14 @@ function Wishlist() {
                       <Tooltip title='View Item' placement='top'>
                         <Link to='/view/item'>
                           <button className='btn btn-sm btn-warning'>
-                            <i className='fas fa-search-plus'></i>
+                            <i className='fas text-white fa-search-plus'></i>
                           </button>
                         </Link>
                       </Tooltip>
                       <Tooltip title='Delete Item' placement='top'>
                         <Link to='/delete/item'>
                           <button className='btn btn-sm btn-danger'>
-                            <i className='fas fa-trash-alt'></i>
+                            <i className='fas text-white fa-trash-alt'></i>
                           </button>
                         </Link>
                       </Tooltip>

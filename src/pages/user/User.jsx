@@ -78,13 +78,13 @@ export default function User() {
                     <Link to='/user'>
                       <Avatar
                         alt='Remy Sharp'
-                        {...stringAvatar('Anass Obito')}
+                        {...stringAvatar('Chifaa Bel')}
                         sx={{ width: 100, height: 100 }}
                       />
                     </Link>
                   </div>
                   <div className='user-data'>
-                    <h6 className='mb-1'>Hi, Obito anass</h6>
+                    <h6 className='mb-1'>Hi, Chifaa Bel</h6>
                     <span className='text-muted'>
                       Joined: <strong>01/01/2022</strong>
                     </span>
