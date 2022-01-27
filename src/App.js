@@ -15,6 +15,8 @@ import Upload from './pages/Upload';
 import DetailProduct from './pages/user/DetailProduct';
 import Footer from './component/Footer';
 import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
           <Route path='/sell-your-code' component={Upload} />
           <Route path='/item/:id' component={DetailProduct} />
           <Route path='/about' component={About} />
+          <Route path='/privacy-policy' component={PrivacyPolicy} />
 
         </Switch>
         <Footer />
