@@ -153,7 +153,7 @@ export default function BiblioScrCod() {
                   to="/"
                   className="list-group-item list-group-item-action active"
                 >
-                  <span className="ml-2 font-weight-bold">
+                  <span className="ml-2 text-white font-weight-bold">
                     <i
                       className="fas fa-code"
                       style={{ paddingRight: "20px", paddinLeft: "20px" }}
