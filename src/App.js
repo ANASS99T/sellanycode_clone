@@ -16,6 +16,9 @@ import DetailProduct from './pages/user/DetailProduct';
 import Footer from './component/Footer';
 import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import DeveloperTermsConditions from './pages/TermsConditions';
+import BuyerTermsConditions from './pages/BuyerTermsConditions';
+
 
 import Profile from './pages/Profile';
 
@@ -47,6 +50,9 @@ const DefaultContainer = () => (
     <Route path='/profile/:id' component={Profile} />
     <Route path='/about' component={About} />
     <Route path='/privacy-policy' component={PrivacyPolicy} />
+    <Route path='/developer-terms-conditions' component={DeveloperTermsConditions} />
+    <Route path='/buyer-terms-conditions' component={BuyerTermsConditions} />
+
     <Footer />
   </div>
 )
