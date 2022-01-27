@@ -16,8 +16,14 @@ import DetailProduct from './pages/user/DetailProduct';
 import Footer from './component/Footer';
 import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import SellBuyIos from './pages/SellBuyIos';
+import SellBuyAndroid from './pages/SellBuyAndroid';
+import SellWork from './pages/SellWork';
 
 import Profile from './pages/Profile';
+import BuildAnApp from './pages/BuildAnApp';
+import Dmca from './pages/Dmca';
+import Gurantee from './pages/Gurantee';
 
 const LoginContainer = () => (
   <div>
@@ -47,6 +53,12 @@ const DefaultContainer = () => (
     <Route path='/profile/:id' component={Profile} />
     <Route path='/about' component={About} />
     <Route path='/privacy-policy' component={PrivacyPolicy} />
+    <Route path='/build-an-app' component={BuildAnApp} />
+    <Route path='/sell-buy-ios-apps' component={SellBuyIos} />
+    <Route path='/sell-buy-android-apps' component={SellBuyAndroid} />
+    <Route path='/sell-your-work' component={SellWork} />
+    <Route path='/dmca' component={Dmca} />
+    <Route path='/money-back-guarantee' component={Gurantee} />
     <Footer />
   </div>
 )
