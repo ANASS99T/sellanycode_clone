@@ -18,6 +18,10 @@ import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DeveloperTermsConditions from './pages/TermsConditions';
 import BuyerTermsConditions from './pages/BuyerTermsConditions';
+import ThemesBiblio from './pages/Themes';
+import PluginsBiblio from './pages/Plugins';
+import GamesBiblio from './pages/Games';
+import GraphicBiblio from './pages/Graphics';
 
 import SellBuyIos from './pages/SellBuyIos';
 import SellBuyAndroid from './pages/SellBuyAndroid';
@@ -47,14 +51,21 @@ const DefaultContainer = () => (
     <Route path='/user' render={() =>
       sessionStorage.getItem("token") ? <User /> : <User />
     } />
-
+    
+     {/* Galeries Navigation */}
     <Route path='/apgmbiblio' component={AppGmBiblio} />
     <Route path='/scriptcode' component={ScrCodeBiblio} />
+    <Route path='/themes' component={ThemesBiblio} />
+    <Route path='/plugins' component={PluginsBiblio} />
+    <Route path='/themes' component={ThemesBiblio} />
+    <Route path='/gametemplates' component={GamesBiblio} />
+    <Route path='/graphics' component={GraphicBiblio} />
+
+
     <Route path='/sell-your-code' component={Upload} />
     <Route path='/item/:id' component={DetailProduct} />
     <Route path='/about' component={About} />
     <Route path='/profile/:id' component={Profile} />
-    <Route path='/about' component={About} />
     <Route path='/privacy-policy' component={PrivacyPolicy} />
     <Route path='/developer-terms-conditions' component={DeveloperTermsConditions} />
     <Route path='/buyer-terms-conditions' component={BuyerTermsConditions} />

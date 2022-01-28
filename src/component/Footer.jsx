@@ -69,17 +69,17 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/apgmbiblio">
+                    <Link to="/themes">
                       <span>Themes</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/apgmbiblio">
+                    <Link to="/plugins">
                       <span>Plugins</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/apgmbiblio">
+                    <Link to="/graphics">
                       <span>Graphics</span>
                     </Link>
                   </li>
