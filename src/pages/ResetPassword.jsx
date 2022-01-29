@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/img/logo-sellanycode-light.png";
 import "../scss/logincard.scss";
 
-export default function Login() {
+export default function ResetPassword() {
   return (
     <div className="container logincard">
       <div className="row justify-content-md-center h-100">
@@ -14,7 +14,7 @@ export default function Login() {
         
         <div className="card shadow p-3 mb-5 bg-body rounded ">
           <div className="card-body  ">
-            <h4 className="text-center"> Welcome back!</h4>
+            <h4 className="text-center"> Forgot Password </h4>
             <form>
               <div className="mb-3 " >
                 <label htmlFor="exampleInputEmail1" className="form-label">
@@ -26,30 +26,14 @@ export default function Login() {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
-              </div>
-              <div className="">
-                <label htmlFor="exampleInputPassword1" className="form-label">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                />
-              </div>
-              <div className="mb-3 float-end" style={{marginbottom:"5px"}}>
-              <Link to="/resetpassword" align="right"> Forget Password
-                </Link>
+                <div class="form-text text-muted" style={{fontSize: "15px"}}> By clicking "Reset Password" you will get reset link.</div>
               </div>
               <div className="mb-3">
+                  <Link to="/resetpasswordconfirm">
                 <button type="submit" className="btn btn-primary w-100">
-                Sign In
-              </button>  
-              </div>
-              
-              <div className="mb-3" style={{marginTop:"2px"}} align="center">
-                 Don't have an account?
-                 <Link to="/register"> Sign Up </Link>
+                Reset Password
+              </button> 
+              </Link> 
               </div>
             </form>
           </div>

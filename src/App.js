@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import User from './pages/user/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ResetPasswrod from './pages/ResetPassword';
+import ResetPasswrodConfirm from './pages/ResetPasswordConfirm';
 import AppGmBiblio from './pages/BiblioAppGames';
 import ScrCodeBiblio from './pages/BiblioScrCod';
 import Upload from './pages/Upload';
@@ -39,6 +41,12 @@ const LoginContainer = () => (
     } />
     <Route path='/register' render={() =>
       sessionStorage.getItem("token") ? <Home /> : <Register />
+    } />
+    <Route path='/resetpassword' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <ResetPasswrod />
+    } />
+    <Route path='/resetpasswordconfirm' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <ResetPasswrodConfirm />
     } />
     <Route exact path="/" render={() => <Redirect to="/login" />} />
   </div>
@@ -89,6 +97,8 @@ function App() {
         <Switch>
           <Route exact path="/(login)" component={LoginContainer} />
           <Route exact path="/(register)" component={LoginContainer} />
+          <Route exact path="/(resetpassword)" component={LoginContainer} />
+          <Route exact path="/(resetpasswordconfirm)" component={LoginContainer} />
           <Route component={DefaultContainer} />
         </Switch>
       </div>
