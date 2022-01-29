@@ -1,7 +1,8 @@
 import { Tooltip } from '@mui/material';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 import "../../scss/user.scss"
+import userService from '../../services/User.service';
 
 function Dashboard({ url }) {
     return <div className="dashbaord">

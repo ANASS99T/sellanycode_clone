@@ -18,7 +18,7 @@ export default function Navigation() {
     AuthService.jwt()
       .then((res) => {
         // console.log(res.success);
-        if (res.success) {
+        if (!res.success) {
           toggleLogin();
         }
       })
@@ -34,16 +34,18 @@ export default function Navigation() {
       .catch((err) => console.error(err.response.data?.error));
 
     setTimeout(() => {
-      AuthService.jwt()
-        .then((res) => {
-          // console.log(res.success);
-          if (res.success) {
-            toggleLogin();
-          }
-        })
-        .catch((err) => {
-          console.error(err.response.data?.error);
-        });
+      if (loggedIn) {
+        AuthService.jwt()
+          .then((res) => {
+            // console.log(res.success);
+            if (!res.success) {
+              toggleLogin();
+            }
+          })
+          .catch((err) => {
+            console.error(err.response.data?.error);
+          });
+      }
     }, 60000);
   }, []);
 
@@ -51,6 +53,7 @@ export default function Navigation() {
     AuthService.logout()
       .then((res) => {
         // console.log(res);
+        toggleLogin();
         window.location.reload();
       })
       .catch((err) => {
@@ -246,6 +249,7 @@ export default function Navigation() {
               <li
                 onClick={logout}
                 className='dropdown-item my-1 text-secondary'
+                style={{ cursor: 'pointer' }}
               >
                 <i className='fas fa-sign-out-alt me-2'></i>Log out
               </li>
@@ -387,7 +391,10 @@ export default function Navigation() {
             data-bs-toggle='dropdown'
             aria-expanded='false'
           >
-            Hi, Obito <span className='badge bg-primary'>$ 0.00</span>
+            Hi, {user?.fullName}
+            <span className='badge bg-primary'>
+              $ {parseFloat((user?.income + user?.withdraw).toFixed(2))}
+            </span>
           </Link>
 
           <ul className='dropdown-menu' aria-labelledby='dropdownMenuLink'>
