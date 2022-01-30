@@ -1,15 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/img/logo-sellanycode.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavDropdown } from 'react-bootstrap';
 import '../scss/navbar.scss';
+import { LoginContext } from '../LoginContext';
+import AuthService from '../services/Auth';
+import userService from '../services/User.service';
+
 export default function Navigation() {
   const [toggled, setToggled] = useState(false);
+  const [user, setUser] = useState(null);
+  const { loggedIn, toggleLogin } = useContext(LoginContext);
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  useEffect(() => {
+    // console.log(loggedIn)
+    AuthService.jwt()
+      .then((res) => {
+        // console.log(res.success);
+        if (res.success) {
+          toggleLogin();
+        }
+      })
+      .catch((err) => {
+        console.error(err.response.data?.error);
+      });
 
-  const logout = () => {};
+    userService
+      .loggedInUser()
+      .then((res) => {
+        setUser(res.user);
+      })
+      .catch((err) => console.error(err.response.data?.error));
+
+    setTimeout(() => {
+      AuthService.jwt()
+        .then((res) => {
+          // console.log(res.success);
+          if (res.success) {
+            toggleLogin();
+          }
+        })
+        .catch((err) => {
+          console.error(err.response.data?.error);
+        });
+    }, 60000);
+  }, []);
+
+  const logout = () => {
+    AuthService.logout()
+      .then((res) => {
+        // console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error(err.response.data?.error);
+      });
+  };
   return (
     <>
       <nav className='bg-white navbar navbar-expanded-lg border-bottom'>
@@ -103,11 +150,11 @@ export default function Navigation() {
                 style={{ position: 'relative' }}
               >
                 <Link
-                  to='/category'
+                  to='/sell-your-code'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
-                  Upload your code
+                  Upload your code{loggedIn}
                 </Link>
                 <span
                   className='nav-sub-soon'
@@ -155,7 +202,10 @@ export default function Navigation() {
               data-bs-toggle='dropdown'
               aria-expanded='false'
             >
-              Hi, Chifaa <span className='badge bg-primary'>$ 0.00</span>
+              Hi, {user?.fullName}
+              <span className='badge bg-primary mx-1'>
+                $ {parseFloat((user?.income + user?.withdraw).toFixed(2))}
+              </span>
             </Link>
 
             <ul className='dropdown-menu' aria-labelledby='dropdownMenuLink'>
@@ -285,7 +335,7 @@ export default function Navigation() {
               style={{ position: 'relative' }}
             >
               <Link
-                to='/category'
+                to='/sell-your-code'
                 className='text-secondary'
                 style={{ fontWeight: 300, fontSize: '19px' }}
               >
