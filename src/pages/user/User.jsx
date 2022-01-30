@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/user.scss';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
@@ -21,17 +21,25 @@ import Account from './Account';
 import Support from './Support';
 import userService from '../../services/User.service';
 import Moment from 'react-moment';
+import { LoginContext } from '../../LoginContext';
 export default function User() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    userService
-      .loggedInUser()
-      .then((res) => {
-        console.log(res.user);
-        setUser(res.user);
-      })
-      .catch((err) => console.error(err.response.data?.error));
+    // console.log("the user is : " , user)
+
+    // if (!user) {
+    //   userService
+    //     .loggedInUser()
+    //     .then((res) => {
+    //       // console.log(res.user);
+    //       // updateUser(res.user);
+    //       setUser()
+    //     })
+    //     .catch((err) => console.error(err.response.data?.error));
+    // }
+    const obj = JSON.parse(localStorage.getItem('user'));
+    setUser(obj);
   }, []);
 
   let { path, url } = useRouteMatch();
@@ -92,19 +100,22 @@ export default function User() {
                 <div className='user-info'>
                   <div className='user-avatar'>
                     <Link to='/user'>
-                      {/* {user?.avatar ? (
+                      {user?.avatar ? (
                         <Avatar
                           alt='Remy Sharp'
-                          src={user?.avatar}
+                          src={
+                            'http://localhost:3001/uploads/avatar/' +
+                            user?.avatar
+                          }
                           sx={{ width: 100, height: 100 }}
                         />
-                      ) : (
+                      ) : user?.fullName ? (
                         <Avatar
                           alt='Remy Sharp'
                           {...stringAvatar(user?.fullName)}
                           sx={{ width: 100, height: 100 }}
                         />
-                      )} */}
+                      ) : null}
                     </Link>
                   </div>
                   <div className='user-data'>
