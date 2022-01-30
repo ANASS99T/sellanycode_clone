@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/user.scss';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
@@ -19,11 +19,25 @@ import Faq from './Faq';
 import Wishlist from './Wishlist';
 import Account from './Account';
 import Support from './Support';
-
+import userService from '../../services/User.service';
+import Moment from 'react-moment';
 export default function User() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    userService
+      .loggedInUser()
+      .then((res) => {
+        console.log(res.user);
+        setUser(res.user);
+      })
+      .catch((err) => console.error(err.response.data?.error));
+  }, []);
+
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState('');
   function stringAvatar(name) {
+    console.log(name);
     return {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
@@ -35,7 +49,9 @@ export default function User() {
           <div className='col-sm-12 col-md-6 col-lg-3'>
             <div className='btn btn-primary  w-100 d-flex align-items-center justify-content-around'>
               <div className='title'>Credit</div>
-              <div className='number'>$ 0.00</div>
+              <div className='number'>
+                $ {parseFloat((user?.income + user?.withdraw).toFixed(2))}
+              </div>
               <div className='logo'>
                 <i className='far fa-money-bill-alt'></i>
               </div>
@@ -76,17 +92,28 @@ export default function User() {
                 <div className='user-info'>
                   <div className='user-avatar'>
                     <Link to='/user'>
-                      <Avatar
-                        alt='Remy Sharp'
-                        {...stringAvatar('Chifaa Bel')}
-                        sx={{ width: 100, height: 100 }}
-                      />
+                      {/* {user?.avatar ? (
+                        <Avatar
+                          alt='Remy Sharp'
+                          src={user?.avatar}
+                          sx={{ width: 100, height: 100 }}
+                        />
+                      ) : (
+                        <Avatar
+                          alt='Remy Sharp'
+                          {...stringAvatar(user?.fullName)}
+                          sx={{ width: 100, height: 100 }}
+                        />
+                      )} */}
                     </Link>
                   </div>
                   <div className='user-data'>
-                    <h6 className='mb-1'>Hi, Chifaa Bel</h6>
+                    <h6 className='mb-1'>Hi, {user?.fullName}</h6>
                     <span className='text-muted'>
-                      Joined: <strong>01/01/2022</strong>
+                      Joined:
+                      <strong>
+                        <Moment format='YYYY/MM/DD'>{user?.createdAt}</Moment>
+                      </strong>
                     </span>
                   </div>
                 </div>

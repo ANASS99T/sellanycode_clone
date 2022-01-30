@@ -114,6 +114,7 @@ const DefaultContainer = () => {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [API_URL, setAPI_URL] = useState('http://localhost:3001/api');
+  const [userId, setUserId] = useState(null);
 
   const toggleLogin = () => {
     setLoggedIn((prevStat) => !prevStat);
@@ -136,7 +137,7 @@ function App() {
   }, []);
 
   return (
-    <LoginContext.Provider value={{ loggedIn, toggleLogin, API_URL }}>
+    <LoginContext.Provider value={{ userId,loggedIn, toggleLogin, API_URL }}>
       <Router>
         <div className='App'>
           <Switch>

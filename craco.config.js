@@ -1,4 +1,6 @@
 // craco.config.js
+var webpack = require('webpack');
+
 module.exports = {
     style: {
     //   postcss: {
@@ -6,5 +8,14 @@ module.exports = {
     //       require('autoprefixer'),
     //     ],
     //   },
+    webpack: {
+      plugins: {
+        add: [
+          new webpack.DefinePlugin({
+            process: {env: {}}
+          })
+        ]
+      }
+    }
     },
   }
