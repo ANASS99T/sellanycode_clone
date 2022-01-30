@@ -12,9 +12,15 @@ const loggedInUser = () => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+const getUserById = (id) => {
+  return instance
+    .get(`/${id}`)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
 
 const userService = {
-    loggedInUser,
-
+  loggedInUser,
+  getUserById
 };
 export default userService;

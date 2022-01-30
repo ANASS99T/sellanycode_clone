@@ -27,7 +27,7 @@ export default function Navigation() {
       });
 
     userService
-      .loggedInUser()
+      .getUserById(localStorage.getItem('user'))
       .then((res) => {
         setUser(res.user);
       })
@@ -46,7 +46,7 @@ export default function Navigation() {
             console.error(err.response.data?.error);
           });
       }
-    }, 60000);
+    }, 240000);
   }, []);
 
   const logout = () => {
@@ -431,3 +431,4 @@ export default function Navigation() {
     </>
   );
 }
+

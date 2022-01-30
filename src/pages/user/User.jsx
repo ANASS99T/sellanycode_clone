@@ -21,31 +21,43 @@ import Account from './Account';
 import Support from './Support';
 import userService from '../../services/User.service';
 import Moment from 'react-moment';
+import AuthService from '../../services/Auth';
 import { LoginContext } from '../../LoginContext';
 export default function User() {
   const [user, setUser] = useState(null);
+  const { toggleLogin } = useContext(LoginContext);
+
+  const logout = () => {
+    AuthService.logout()
+      .then((res) => {
+        // console.log(res);
+        toggleLogin();
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error(err.response.data?.error);
+      });
+  };
 
   useEffect(() => {
-    // console.log("the user is : " , user)
-
-    // if (!user) {
-    //   userService
-    //     .loggedInUser()
-    //     .then((res) => {
-    //       // console.log(res.user);
-    //       // updateUser(res.user);
-    //       setUser()
-    //     })
-    //     .catch((err) => console.error(err.response.data?.error));
-    // }
-    const obj = JSON.parse(localStorage.getItem('user'));
-    setUser(obj);
+    const userId = localStorage.getItem('user');
+    userService
+      .getUserById(userId)
+      .then((res) => {
+        console.log(res.user)
+        setUser(res.user);
+      })
+      .catch(
+        err => {
+          console.log(err)
+        }
+      );
   }, []);
 
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState('');
   function stringAvatar(name) {
-    console.log(name);
+    // console.log(name);
     return {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
@@ -100,22 +112,26 @@ export default function User() {
                 <div className='user-info'>
                   <div className='user-avatar'>
                     <Link to='/user'>
-                      {user?.avatar ? (
-                        <Avatar
-                          alt='Remy Sharp'
-                          src={
-                            'http://localhost:3001/uploads/avatar/' +
-                            user?.avatar
-                          }
-                          sx={{ width: 100, height: 100 }}
-                        />
-                      ) : user?.fullName ? (
-                        <Avatar
-                          alt='Remy Sharp'
-                          {...stringAvatar(user?.fullName)}
-                          sx={{ width: 100, height: 100 }}
-                        />
-                      ) : null}
+                      {
+                        user?.avatar ? (
+                          <Avatar
+                            alt='Remy Sharp'
+                            src={
+                              'http://localhost:3001/uploads/avatar/' +
+                              user?.avatar
+                            }
+                            sx={{ width: 100, height: 100 }}
+                          />
+                        ) : (
+                          /*user?.fullName ? ( */
+                          <Avatar
+                            alt='Remy Sharp'
+                            {...stringAvatar('Anass Obito')}
+                            sx={{ width: 100, height: 100 }}
+                          />
+                        )
+                        /*) : null*/
+                      }
                     </Link>
                   </div>
                   <div className='user-data'>
@@ -129,7 +145,7 @@ export default function User() {
                   </div>
                 </div>
                 <div className='user-cover'>
-                  <Link to='user/account' className='float-end m-2'>
+                  <Link to='user/my-account' className='float-end m-2'>
                     <button className='btn btn-sm btn-primary '>
                       Edit Account
                     </button>

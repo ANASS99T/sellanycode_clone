@@ -147,7 +147,7 @@ function App() {
           .then((res) => {
             // console.log(res.data.user)
             // setUser(res.data.user)}
-            localStorage.setItem('user', JSON.stringify(res.data.user));
+            localStorage.setItem('user', res.data.user.id);
           })
           .catch((err) => err);
       })
