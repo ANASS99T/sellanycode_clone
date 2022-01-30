@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
-import { useRouteMatch, Switch, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import '../../scss/user.scss';
-import { Alert, Avatar, Tooltip } from '@mui/material';
-import TransactionList from './TransactionList';
+import { Avatar } from '@mui/material';
 
-function Account() {
+import { useForm } from 'react-hook-form';
+import userService from '../../services/User.service';
+
+function Account({ user }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   function stringAvatar(name) {
     return {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
   }
+
+  const updateUser = (data) => {
+    // console.log(data);
+
+    userService
+      .updateUSer(data)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(
+          err.response.data?.message
+            ? err.response.data?.message
+            : err.response.data?.error
+        );
+      });
+  };
 
   return (
     <div className='account'>
@@ -35,7 +57,7 @@ function Account() {
               data-bs-parent='#accordionExample'
             >
               <div className='accordion-body'>
-                <form action='' id='whithdraw'>
+                <form onSubmit={handleSubmit(updateUser)}>
                   <div className='my-3'>
                     <div className='input-group'>
                       <span className='input-group-text' id='email-address'>
@@ -43,12 +65,19 @@ function Account() {
                       </span>
                       <input
                         type='email'
-                        name='email'
+                        // name='email'
                         className='form-control'
                         aria-label='Email Address'
                         placeholder='Enter your Email'
                         aria-describedby='email-address'
-                        required
+                        defaultValue={user?.email}
+                        {...register('email', {
+                          required: true,
+                          pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: 'Email format is not valid',
+                          },
+                        })}
                       />
                     </div>
                   </div>
@@ -62,12 +91,15 @@ function Account() {
                       </span>
                       <input
                         type='text'
-                        name='name'
+                        // name='fulla'
                         className='form-control'
                         aria-label='Name'
                         placeholder='Enter your Name'
                         aria-describedby='Name'
-                        required
+                        defaultValue={user?.fullName}
+                        {...register('fullName', {
+                          required: true,
+                        })}
                       />
                     </div>
                   </div>
@@ -81,12 +113,15 @@ function Account() {
                       </span>
                       <input
                         type='text'
-                        name='username'
+                        // name='username'
                         className='form-control'
                         aria-label='Name'
                         placeholder='Enter your Username'
                         aria-describedby='Username'
-                        required
+                        defaultValue={user?.username}
+                        {...register('username', {
+                          required: true,
+                        })}
                       />
                     </div>
                   </div>
@@ -97,11 +132,19 @@ function Account() {
                       </span>
                       <input
                         type='email'
-                        name='email-paypal'
+                        // name='email-paypal'
                         className='form-control'
                         aria-label='Email Paypal'
                         placeholder='Enter your PayPal Email'
                         aria-describedby='email-address'
+                        defaultValue={user?.paypalEmail}
+                        {...register('paypalEmail', {
+                          required: true,
+                          pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: 'Email format is not valid',
+                          },
+                        })}
                       />
                     </div>
                   </div>
@@ -213,7 +256,10 @@ function Account() {
                         value=''
                         id='native-android'
                       />
-                      <label className='form-check-label' htmlFor='native-android'>
+                      <label
+                        className='form-check-label'
+                        htmlFor='native-android'
+                      >
                         Native Android
                       </label>
                     </div>

@@ -19,8 +19,16 @@ const getUserById = (id) => {
     .catch((err) => err);
 };
 
+const updateUSer = (data) => {
+  return instance
+    .put('/', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
 const userService = {
   loggedInUser,
-  getUserById
+  getUserById,
+  updateUSer,
 };
 export default userService;

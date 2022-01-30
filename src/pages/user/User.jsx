@@ -44,14 +44,12 @@ export default function User() {
     userService
       .getUserById(userId)
       .then((res) => {
-        console.log(res.user)
+        console.log(res.user);
         setUser(res.user);
       })
-      .catch(
-        err => {
-          console.log(err)
-        }
-      );
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   let { path, url } = useRouteMatch();
@@ -200,7 +198,11 @@ export default function User() {
               <Route exact path={path + '/faq'} component={Faq} />
               <Route exact path={path + '/wishlist'} component={Wishlist} />
               <Route exact path={path + '/payments'} component={NewWithdraw} />
-              <Route exact path={path + '/my-account'} component={Account} />
+              <Route
+                exact
+                path={path + '/my-account'}
+                render={() => <Account user={user} />}
+              />
               <Route exact path={path + '/support'} component={Support} />
             </Switch>
           </div>
