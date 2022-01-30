@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ResetPasswrod from './pages/ResetPassword';
 import ResetPasswrodConfirm from './pages/ResetPasswordConfirm';
+import Newpasswordlogin from './pages/NewLoginPass';
 import AppGmBiblio from './pages/BiblioAppGames';
 import ScrCodeBiblio from './pages/BiblioScrCod';
 import Upload from './pages/Upload';
@@ -43,14 +44,22 @@ import axios from 'axios';
 
 const LoginContainer = () => (
   <div>
-    <Route path='/login' render={() => <Login />} />
-    <Route path='/register' render={() => <Register />} />
-    <Route path='/resetpassword' render={() => <ResetPasswrod />} />
-    <Route
-      path='/resetpasswordconfirm'
-      render={() => <ResetPasswrodConfirm />}
-    />
-    <Route exact path='/' render={() => <Redirect to='/login' />} />
+    <Route path='/login' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <Login />
+    } />
+    <Route path='/register' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <Register />
+    } />
+    <Route path='/resetpassword' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <ResetPasswrod />
+    } />
+    <Route path='/resetpasswordconfirm' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <ResetPasswrodConfirm />
+    } />
+    <Route path='/newpasswordlogin' render={() =>
+      sessionStorage.getItem("token") ? <Home /> : <Newpasswordlogin />
+    } />
+    <Route exact path="/" render={() => <Redirect to="/login" />} />
   </div>
 );
 
@@ -155,6 +164,13 @@ function App() {
             <Route
               exact
               path='/(resetpasswordconfirm)'
+              render={() =>
+                loggedIn ? <Redirect to='/' /> : <LoginContainer />
+              }
+            />
+            <Route
+              exact
+              path='/(newpasswordlogin)'
               render={() =>
                 loggedIn ? <Redirect to='/' /> : <LoginContainer />
               }
