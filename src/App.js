@@ -44,22 +44,33 @@ import axios from 'axios';
 
 const LoginContainer = () => (
   <div>
-    <Route path='/login' render={() =>
-      sessionStorage.getItem("token") ? <Home /> : <Login />
-    } />
-    <Route path='/register' render={() =>
-      sessionStorage.getItem("token") ? <Home /> : <Register />
-    } />
-    <Route path='/resetpassword' render={() =>
-      sessionStorage.getItem("token") ? <Home /> : <ResetPasswrod />
-    } />
-    <Route path='/resetpasswordconfirm' render={() =>
-      sessionStorage.getItem("token") ? <Home /> : <ResetPasswrodConfirm />
-    } />
-    <Route path='/newpasswordlogin' render={() =>
-      sessionStorage.getItem("token") ? <Home /> : <Newpasswordlogin />
-    } />
-    <Route exact path="/" render={() => <Redirect to="/login" />} />
+    <Route
+      path='/login'
+      render={() => (sessionStorage.getItem('token') ? <Home /> : <Login />)}
+    />
+    <Route
+      path='/register'
+      render={() => (sessionStorage.getItem('token') ? <Home /> : <Register />)}
+    />
+    <Route
+      path='/resetpassword'
+      render={() =>
+        sessionStorage.getItem('token') ? <Home /> : <ResetPasswrod />
+      }
+    />
+    <Route
+      path='/resetpasswordconfirm'
+      render={() =>
+        sessionStorage.getItem('token') ? <Home /> : <ResetPasswrodConfirm />
+      }
+    />
+    <Route
+      path='/newpasswordlogin'
+      render={() =>
+        sessionStorage.getItem('token') ? <Home /> : <Newpasswordlogin />
+      }
+    />
+    <Route exact path='/' render={() => <Redirect to='/login' />} />
   </div>
 );
 
@@ -74,10 +85,7 @@ const DefaultContainer = () => {
     <div>
       <Navigation />
       <Route exact path='/' component={Home} />
-      <Route
-        path='/user/:id'
-        render={() => (loggedIn ? <User /> : <User />)}
-      />
+      <Route path='/user/:id' render={() => (loggedIn ? <User /> : <User />)} />
 
       {/* Galeries Navigation */}
       <Route path='/apgmbiblio' component={AppGmBiblio} />
@@ -114,11 +122,15 @@ const DefaultContainer = () => {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [API_URL, setAPI_URL] = useState('http://localhost:3001/api');
-  const [userId, setUserId] = useState(null);
+  // const [user, setUser] = useState(null);
 
   const toggleLogin = () => {
     setLoggedIn((prevStat) => !prevStat);
   };
+
+  // const updateUser = (user) => {
+  //   setUser(user);
+  // };
 
   const instance = axios.create({
     withCredentials: true,
@@ -130,6 +142,14 @@ function App() {
       .get('/user/jwt')
       .then((response) => {
         setLoggedIn(true);
+        instance
+          .post('/user/logged-in')
+          .then((res) => {
+            // console.log(res.data.user)
+            // setUser(res.data.user)}
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+          })
+          .catch((err) => err);
       })
       .catch((err) => {
         setLoggedIn(false);
@@ -137,7 +157,7 @@ function App() {
   }, []);
 
   return (
-    <LoginContext.Provider value={{ userId,loggedIn, toggleLogin, API_URL }}>
+    <LoginContext.Provider value={{ loggedIn, toggleLogin, API_URL }}>
       <Router>
         <div className='App'>
           <Switch>
