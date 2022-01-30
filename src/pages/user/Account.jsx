@@ -6,6 +6,29 @@ import { useForm } from 'react-hook-form';
 import userService from '../../services/User.service';
 
 function Account({ user }) {
+  const [devlopingExperience, setDevlopingExperience] = useState(
+    user?.devlopingExperience ? user?.devlopingExperience : ''
+  );
+  const [devType, setDevType] = useState(
+    user?.devloperType ? user?.devloperType : ''
+  );
+  const [publicContact, setPublicContact] = useState(
+    user?.publicContact ? user?.publicContact : ''
+  );
+
+  function clean(obj) {
+    for (var propName in obj) {
+      if (
+        obj[propName] === null ||
+        obj[propName] === undefined ||
+        obj[propName] === ''
+      ) {
+        delete obj[propName];
+      }
+    }
+    return obj;
+  }
+
   const {
     register,
     handleSubmit,
@@ -18,9 +41,16 @@ function Account({ user }) {
     };
   }
 
-  const updateUser = (data) => {
-    // console.log(data);
+  const updateDevUser = (e) => {
+    e.preventDefault();
+    let data = {};
 
+    data.devloperType = devType;
+    data.operatingSystem = checkedDevTypes.join(';');
+    data.frameworks = checkedFrameworks.join(';');
+    data.publicContact = publicContact;
+    data.devlopingExperience = devlopingExperience;
+    data = clean(data);
     userService
       .updateUSer(data)
       .then((res) => {})
@@ -31,6 +61,87 @@ function Account({ user }) {
             : err.response.data?.error
         );
       });
+  };
+
+  const updateUser = (data) => {
+    userService
+      .updateUSer(data)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(
+          err.response.data?.message
+            ? err.response.data?.message
+            : err.response.data?.error
+        );
+      });
+  };
+
+  const [avatar, setAvatar] = useState();
+  const updateAvatar = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+    userService
+      .updateAvatar(formData)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(
+          err.response.data?.message
+            ? err.response.data?.message
+            : err.response.data?.error
+        );
+      });
+  };
+
+  const updatePassword = (data) => {
+    // return console.log(data)
+    userService
+      .updatePassword(data)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(
+          err.response.data?.message
+            ? err.response.data?.message
+            : err.response.data?.error
+        );
+      });
+  };
+
+  const devTypes = ['iOS', 'Android', 'Unity'];
+  const [checkedDevTypes, setCheckedDevTypes] = useState([]);
+
+  const handleCheckDevTypes = (event) => {
+    var updatedList = [...checkedDevTypes];
+    if (event.target.checked) {
+      updatedList = [...checkedDevTypes, event.target.value];
+    } else {
+      updatedList.splice(checkedDevTypes.indexOf(event.target.value), 1);
+    }
+    setCheckedDevTypes(updatedList);
+  };
+
+  const frameworks = [
+    'Native iOS',
+    'Native Android',
+    'Cocos2d',
+    'Unity',
+    'Swift',
+    'Xcode',
+    'PHP',
+    'JavaScript',
+    'C#',
+    'C++',
+    'Java',
+  ];
+  const [checkedFrameworks, setCheckedFrameworks] = useState([]);
+  const handleCheckFrameworks = (event) => {
+    var updatedList = [...checkedFrameworks];
+    if (event.target.checked) {
+      updatedList = [...checkedFrameworks, event.target.value];
+    } else {
+      updatedList.splice(checkedFrameworks.indexOf(event.target.value), 1);
+    }
+    setCheckedFrameworks(updatedList);
   };
 
   return (
@@ -182,17 +293,19 @@ function Account({ user }) {
               data-bs-parent='#accordionExample2'
             >
               <div className='accordion-body'>
-                <form action='' id='whithdraw'>
+                <form onSubmit={updateDevUser}>
                   <div className='my-3'>
                     <label htmlFor='dev-type' className='form-label'>
                       Developer Type:
                     </label>
                     <select
                       id='dev-type'
+                      value={devType ? devType : ''}
                       className='form-select form-select-sm'
                       aria-label='.form-select-sm example'
+                      onChange={(e) => setDevType(e.target.value)}
                     >
-                      <option value='independant developer' selected>
+                      <option value='independant developer'>
                         Independant Developer
                       </option>
                       <option value='developement agency'>
@@ -202,166 +315,42 @@ function Account({ user }) {
                   </div>
                   <div className='my-3'>
                     <label className='form-label'>Operation Systems:</label>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='ios'
-                      />
-                      <label className='form-check-label' htmlFor='ios'>
-                        iOS
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='android'
-                      />
-                      <label className='form-check-label' htmlFor='android'>
-                        Android
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='unity'
-                      />
-                      <label className='form-check-label' htmlFor='unity'>
-                        Unity
-                      </label>
-                    </div>
+                    {devTypes.map((item, index) => (
+                      <div className='form-check' key={index}>
+                        <input
+                          className='form-check-input'
+                          type='checkbox'
+                          value={item}
+                          id={item}
+                          defaultChecked={user?.operatingSystem.includes(item)}
+                          onChange={handleCheckDevTypes}
+                        />
+                        <label className='form-check-label' htmlFor={item}>
+                          {item}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                   <div className='my-3'>
                     <label className='form-label'>Frameworks:</label>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='native-ios'
-                      />
-                      <label className='form-check-label' htmlFor='native-ios'>
-                        Native iOS
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='native-android'
-                      />
-                      <label
-                        className='form-check-label'
-                        htmlFor='native-android'
-                      >
-                        Native Android
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='cocos2d'
-                      />
-                      <label className='form-check-label' htmlFor='cocos2d'>
-                        Cocos2d
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='unity'
-                      />
-                      <label className='form-check-label' htmlFor='unity'>
-                        Unity
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='swift'
-                      />
-                      <label className='form-check-label' htmlFor='swift'>
-                        Swift
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='xcode'
-                      />
-                      <label className='form-check-label' htmlFor='xcode'>
-                        Xcode
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='php'
-                      />
-                      <label className='form-check-label' htmlFor='php'>
-                        PHP
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='javascript'
-                      />
-                      <label className='form-check-label' htmlFor='javascript'>
-                        JavaScript
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='c#'
-                      />
-                      <label className='form-check-label' htmlFor='c#'>
-                        C#
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='c++'
-                      />
-                      <label className='form-check-label' htmlFor='c++'>
-                        C++
-                      </label>
-                    </div>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        value=''
-                        id='java'
-                      />
-                      <label className='form-check-label' htmlFor='java'>
-                        Java
-                      </label>
-                    </div>
+                    {frameworks.map((item, index) => (
+                      <div className='form-check' key={index}>
+                        <input
+                          className='form-check-input'
+                          type='checkbox'
+                          value={item}
+                          id={item + index}
+                          defaultChecked={user?.frameworks.includes(item)}
+                          onChange={handleCheckFrameworks}
+                        />
+                        <label
+                          className='form-check-label'
+                          htmlFor={item + index}
+                        >
+                          {item}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                   <div className='my-3'>
                     <label htmlFor='dev-exp' className='form-label'>
@@ -371,12 +360,14 @@ function Account({ user }) {
                       id='dev-exp'
                       className='form-select form-select-sm'
                       aria-label='.form-select-sm example'
+                      value={devlopingExperience ? devlopingExperience : ''}
+                      onChange={(e) => setDevlopingExperience(e.target.value)}
                     >
-                      <option value='1-3y' selected>
-                        1 - 3 Years
+                      <option value='1 - 3 Years'>1 - 3 Years</option>
+                      <option value='3 - 5 Years'>3 - 5 Years</option>
+                      <option value='More than 5 years'>
+                        More than 5 years
                       </option>
-                      <option value='3-5y'>3 - 5 Years</option>
-                      <option value='more 5'>More than 5 years</option>
                     </select>
                   </div>
 
@@ -395,6 +386,8 @@ function Account({ user }) {
                         aria-label='Email Address'
                         placeholder='Enter your Email'
                         aria-describedby='email-address'
+                        value={publicContact ? publicContact : ''}
+                        onChange={(e) => setPublicContact(e.target.value)}
                       />
                     </div>
                   </div>
@@ -433,7 +426,7 @@ function Account({ user }) {
               data-bs-parent='#accordionExample3'
             >
               <div className='accordion-body'>
-                <form action='' id='whithdraw'>
+                <form onSubmit={handleSubmit(updatePassword)}>
                   <div className='my-3'>
                     <div className='input-group'>
                       <span className='input-group-text' id='current-password'>
@@ -441,12 +434,19 @@ function Account({ user }) {
                       </span>
                       <input
                         type='password'
-                        name='currentPassword'
+                        // name='currentPassword'
                         className='form-control'
                         aria-label='Current Password'
                         placeholder='Current Password'
                         aria-describedby='current-password'
-                        required
+                        // required
+                        {...register('oldPassword', {
+                          required: 'Current password is required',
+                          minLength: {
+                            value: 8,
+                            message: 'Password not valid',
+                          },
+                        })}
                       />
                     </div>
                   </div>
@@ -457,12 +457,19 @@ function Account({ user }) {
                       </span>
                       <input
                         type='password'
-                        name='newPassword'
+                        // name='newPassword'
                         className='form-control'
                         aria-label='New Password'
                         placeholder='New Password'
                         aria-describedby='new-password'
-                        required
+                        // required
+                        {...register('newPassword', {
+                          required: 'new password is required',
+                          minLength: {
+                            value: 8,
+                            message: 'Password not valid',
+                          },
+                        })}
                       />
                     </div>
                   </div>
@@ -473,12 +480,19 @@ function Account({ user }) {
                       </span>
                       <input
                         type='password'
-                        name='confirmPassword'
+                        // name='confirmPassword'
                         className='form-control'
                         aria-label='confirm Password'
                         placeholder='Confirm Password'
                         aria-describedby='confirm-password'
-                        required
+                        {...register('confirmPassword', {
+                          required: 'confirm password is required',
+                          minLength: {
+                            value: 8,
+                            message: 'Password not valid',
+                          },
+                        })}
+                        // required
                       />
                     </div>
                   </div>
@@ -517,7 +531,7 @@ function Account({ user }) {
               data-bs-parent='#accordionExample4'
             >
               <div className='accordion-body'>
-                <form action='' id='whithdraw'>
+                <form onSubmit={updateAvatar}>
                   <Avatar
                     alt='Remy Sharp'
                     {...stringAvatar('Anass Obito')}
@@ -526,7 +540,11 @@ function Account({ user }) {
                   <p>
                     Please upload size 300x300 or 512x512 (.png or .jpg file)
                   </p>
-                  <input type='file' name='avatar' id='avatar' />
+                  <input
+                    type='file'
+                    id='avatar'
+                    onChange={(event) => setAvatar(event.target.files[0])}
+                  />
                   <hr />
                   <div className='d-flex w-100 align-items-center justify-content-end'>
                     <button className='btn btn-sm btn-primary' type='submit'>

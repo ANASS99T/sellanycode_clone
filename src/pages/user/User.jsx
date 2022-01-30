@@ -26,7 +26,7 @@ import { LoginContext } from '../../LoginContext';
 export default function User() {
   const [user, setUser] = useState(null);
   const { toggleLogin } = useContext(LoginContext);
-
+  const [loading, setLoading] = useState(true);
   const logout = () => {
     AuthService.logout()
       .then((res) => {
@@ -44,8 +44,9 @@ export default function User() {
     userService
       .getUserById(userId)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         setUser(res.user);
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err);
@@ -143,7 +144,7 @@ export default function User() {
                   </div>
                 </div>
                 <div className='user-cover'>
-                  <Link to='user/my-account' className='float-end m-2'>
+                  <Link to={path + '/my-account'} className='float-end m-2'>
                     <button className='btn btn-sm btn-primary '>
                       Edit Account
                     </button>
@@ -153,59 +154,67 @@ export default function User() {
               <UserMenu url={url} active={active} setActive={setActive} />
             </div>
           </div>
-          <div className='col-sm-8'>
-            <Switch>
-              <Route exact path={path} component={Dashboard} />
-              <Route exact path={path + '/dashboard'} component={Dashboard} />
-              <Route exact path={path + '/download'} component={Downloads} />
-              <Route exact path={path + '/myitems'} component={Items} />
-              <Route
-                exact
-                path={path + '/my-products'}
-                component={AprovedItems}
-              />
-              <Route
-                exact
-                path={path + '/my-waiting-products'}
-                component={WaitingItems}
-              />
-              <Route
-                exact
-                path={path + '/my-rejected-products'}
-                component={RejectedItems}
-              />
-              <Route
-                exact
-                path={path + '/add-product'}
-                component={AddProduct}
-              />
-              <Route
-                exact
-                path={path + '/transactions'}
-                component={Transactions}
-              />
-              <Route exact path={path + '/my-earns'} component={Earns} />
-              <Route
-                exact
-                path={path + '/withdraw-money'}
-                component={NewWithdraw}
-              />
-              <Route
-                exact
-                path={path + '/withdraw-past'}
-                component={WithdrawPast}
-              />
-              <Route exact path={path + '/faq'} component={Faq} />
-              <Route exact path={path + '/wishlist'} component={Wishlist} />
-              <Route exact path={path + '/payments'} component={NewWithdraw} />
-              <Route
-                exact
-                path={path + '/my-account'}
-                render={() => <Account user={user} />}
-              />
-              <Route exact path={path + '/support'} component={Support} />
-            </Switch>
-          </div>
+          {loading ? (
+            null
+          ) : (
+            <div className='col-sm-8'>
+              <Switch>
+                <Route exact path={path} component={Dashboard} />
+                <Route exact path={path + '/dashboard'} component={Dashboard} />
+                <Route exact path={path + '/download'} component={Downloads} />
+                <Route exact path={path + '/myitems'} component={Items} />
+                <Route
+                  exact
+                  path={path + '/my-products'}
+                  component={AprovedItems}
+                />
+                <Route
+                  exact
+                  path={path + '/my-waiting-products'}
+                  component={WaitingItems}
+                />
+                <Route
+                  exact
+                  path={path + '/my-rejected-products'}
+                  component={RejectedItems}
+                />
+                <Route
+                  exact
+                  path={path + '/add-product'}
+                  component={AddProduct}
+                />
+                <Route
+                  exact
+                  path={path + '/transactions'}
+                  component={Transactions}
+                />
+                <Route exact path={path + '/my-earns'} component={Earns} />
+                <Route
+                  exact
+                  path={path + '/withdraw-money'}
+                  component={NewWithdraw}
+                />
+                <Route
+                  exact
+                  path={path + '/withdraw-past'}
+                  component={WithdrawPast}
+                />
+                <Route exact path={path + '/faq'} component={Faq} />
+                <Route exact path={path + '/wishlist'} component={Wishlist} />
+                <Route
+                  exact
+                  path={path + '/payments'}
+                  component={NewWithdraw}
+                />
+                <Route
+                  exact
+                  path={path + '/my-account'}
+                  render={() => <Account user={user} />}
+                />
+                <Route exact path={path + '/support'} component={Support} />
+              </Switch>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -85,7 +85,7 @@ const DefaultContainer = () => {
     <div>
       <Navigation />
       <Route exact path='/' component={Home} />
-      <Route path='/user/:id' render={() => (loggedIn ? <User /> : <User />)} />
+      <Route path='/user' render={() => (loggedIn ? <User /> : <User />)} />
 
       {/* Galeries Navigation */}
       <Route path='/apgmbiblio' component={AppGmBiblio} />

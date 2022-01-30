@@ -25,10 +25,24 @@ const updateUSer = (data) => {
     .then((res) => res)
     .catch((err) => err);
 };
+const updatePassword = (data) => {
+  return instance
+    .put('/password', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const updateAvatar = (data) => {
+  return instance
+    .put('/avatar', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
 
 const userService = {
   loggedInUser,
   getUserById,
   updateUSer,
+  updatePassword,
+  updateAvatar
 };
 export default userService;
