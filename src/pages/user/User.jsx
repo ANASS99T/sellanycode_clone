@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/user.scss';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
@@ -21,23 +21,67 @@ import Account from './Account';
 import Support from './Support';
 import userService from '../../services/User.service';
 import Moment from 'react-moment';
+import AuthService from '../../services/Auth';
+import productService from '../../services/Product.service';
+import { LoginContext } from '../../LoginContext';
+
 export default function User() {
   const [user, setUser] = useState(null);
+  const { toggleLogin } = useContext(LoginContext);
+  const [loading, setLoading] = useState(true);
+  const logout = () => {
+    AuthService.logout()
+      .then((res) => {
+        // console.log(res);
+        toggleLogin();
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error(err.response.data?.error);
+      });
+  };
+
+  const [categories, setCategories] = useState([]);
+  // const [subcategories, setSubcategories] = useState([]);
 
   useEffect(() => {
+    const userId = localStorage.getItem('user');
     userService
-      .loggedInUser()
+      .getUserById(userId)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         setUser(res.user);
+        setLoading(false);
       })
-      .catch((err) => console.error(err.response.data?.error));
+      .catch((err) => {
+        logout();
+        console.log(err);
+      });
+
+    productService
+      .getCategories()
+      .then((res) => {
+        // console.log(res.categories);
+        setCategories(res.categories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // productService
+    //   .getSubcategories()
+    //   .then((res) => {
+    //     // console.log(res);
+    //     setCategories(res.subcategories);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState('');
   function stringAvatar(name) {
-    console.log(name);
+    // console.log(name);
     return {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
@@ -92,19 +136,26 @@ export default function User() {
                 <div className='user-info'>
                   <div className='user-avatar'>
                     <Link to='/user'>
-                      {/* {user?.avatar ? (
-                        <Avatar
-                          alt='Remy Sharp'
-                          src={user?.avatar}
-                          sx={{ width: 100, height: 100 }}
-                        />
-                      ) : (
-                        <Avatar
-                          alt='Remy Sharp'
-                          {...stringAvatar(user?.fullName)}
-                          sx={{ width: 100, height: 100 }}
-                        />
-                      )} */}
+                      {
+                        user?.avatar ? (
+                          <Avatar
+                            alt='Remy Sharp'
+                            src={
+                              'http://localhost:3001/uploads/avatar/' +
+                              user?.avatar
+                            }
+                            sx={{ width: 100, height: 100 }}
+                          />
+                        ) : (
+                          /*user?.fullName ? ( */
+                          <Avatar
+                            alt='Remy Sharp'
+                            {...stringAvatar('Anass Obito')}
+                            sx={{ width: 100, height: 100 }}
+                          />
+                        )
+                        /*) : null*/
+                      }
                     </Link>
                   </div>
                   <div className='user-data'>
@@ -118,7 +169,7 @@ export default function User() {
                   </div>
                 </div>
                 <div className='user-cover'>
-                  <Link to='user/account' className='float-end m-2'>
+                  <Link to={path + '/my-account'} className='float-end m-2'>
                     <button className='btn btn-sm btn-primary '>
                       Edit Account
                     </button>
@@ -128,55 +179,70 @@ export default function User() {
               <UserMenu url={url} active={active} setActive={setActive} />
             </div>
           </div>
-          <div className='col-sm-8'>
-            <Switch>
-              <Route exact path={path} component={Dashboard} />
-              <Route exact path={path + '/dashboard'} component={Dashboard} />
-              <Route exact path={path + '/download'} component={Downloads} />
-              <Route exact path={path + '/myitems'} component={Items} />
-              <Route
-                exact
-                path={path + '/my-products'}
-                component={AprovedItems}
-              />
-              <Route
-                exact
-                path={path + '/my-waiting-products'}
-                component={WaitingItems}
-              />
-              <Route
-                exact
-                path={path + '/my-rejected-products'}
-                component={RejectedItems}
-              />
-              <Route
-                exact
-                path={path + '/add-product'}
-                component={AddProduct}
-              />
-              <Route
-                exact
-                path={path + '/transactions'}
-                component={Transactions}
-              />
-              <Route exact path={path + '/my-earns'} component={Earns} />
-              <Route
-                exact
-                path={path + '/withdraw-money'}
-                component={NewWithdraw}
-              />
-              <Route
-                exact
-                path={path + '/withdraw-past'}
-                component={WithdrawPast}
-              />
-              <Route exact path={path + '/faq'} component={Faq} />
-              <Route exact path={path + '/wishlist'} component={Wishlist} />
-              <Route exact path={path + '/payments'} component={NewWithdraw} />
-              <Route exact path={path + '/my-account'} component={Account} />
-              <Route exact path={path + '/support'} component={Support} />
-            </Switch>
-          </div>
+          {loading ? null : (
+            <div className='col-sm-8'>
+              <Switch>
+                <Route exact path={path} component={Dashboard} />
+                <Route exact path={path + '/dashboard'} component={Dashboard} />
+                <Route exact path={path + '/download'} component={Downloads} />
+                <Route exact path={path + '/myitems'} component={Items} />
+                <Route
+                  exact
+                  path={path + '/my-products'}
+                  component={AprovedItems}
+                />
+                <Route
+                  exact
+                  path={path + '/my-waiting-products'}
+                  component={WaitingItems}
+                />
+                <Route
+                  exact
+                  path={path + '/my-rejected-products'}
+                  component={RejectedItems}
+                />
+                <Route
+                  exact
+                  path={path + '/add-product'}
+                  render={() => (
+                    <AddProduct
+                      categories={categories}
+                      // subcategories={subcategories}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={path + '/transactions'}
+                  component={Transactions}
+                />
+                <Route exact path={path + '/my-earns'} component={Earns} />
+                <Route
+                  exact
+                  path={path + '/withdraw-money'}
+                  component={NewWithdraw}
+                />
+                <Route
+                  exact
+                  path={path + '/withdraw-past'}
+                  component={WithdrawPast}
+                />
+                <Route exact path={path + '/faq'} component={Faq} />
+                <Route exact path={path + '/wishlist'} component={Wishlist} />
+                <Route
+                  exact
+                  path={path + '/payments'}
+                  component={NewWithdraw}
+                />
+                <Route
+                  exact
+                  path={path + '/my-account'}
+                  render={() => <Account user={user} />}
+                />
+                <Route exact path={path + '/support'} component={Support} />
+              </Switch>
+            </div>
+          )}
         </div>
       </div>
     </div>

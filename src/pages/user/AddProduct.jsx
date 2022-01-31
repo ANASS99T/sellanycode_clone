@@ -12,10 +12,11 @@ import { EditorState } from 'draft-js';
 import TextEditor from '../../component/TextEditor';
 import { useDropzone } from 'react-dropzone';
 import DropZonePreview from '../../component/DropZonePreview';
+import productService from '../../services/Product.service';
 
 const steps = ['add-product', 'Images & Assets', 'Files & Pricing'];
 
-function AddProduct() {
+function AddProduct({ categories }) {
   let { path, url } = useRouteMatch();
   const [active, setActive] = React.useState('add-product');
   const [activeStep, setActiveStep] = React.useState(0);
@@ -62,103 +63,130 @@ function AddProduct() {
     handleNext();
   };
 
-  const handleReset = () => {
+  const handleReset = ({ categories }) => {
     setActiveStep(0);
     setCompleted({});
   };
 
   const [selectedCat, setSelectedCat] = useState('');
+  const [subcategories, setSubcategories] = useState([]);
   const [selectedSubCat, setSelectedSubCat] = useState('');
 
-  const [categories, setCategories] = useState([
-    {
-      category: 'game templates',
-      subcategories: ['untiy', 'cordova', 'construct 2', 'cocos2d', 'buildbox'],
-    },
-    {
-      category: 'app templates',
-      subcategories: [
-        'xamrin',
-        'unity',
-        'titanuim',
-        'react',
-        'iOS',
-        'ionic',
-        'flutter',
-        'corona',
-        'cordova',
-        'construct 2',
-        'buildbox',
-        'android',
-      ],
-    },
-    {
-      category: 'plugins',
-      subcategories: [
-        'X-Cart',
-        'WordPress Plugins',
-        'WeeCommerce Plugins',
-        'PrestaShop Plugins',
-        'osCommerce Plugins',
-        'osClass Plugins',
-        'nopCommer Plugins',
-        'OpenCart Pluginss',
-        'Megento Plugins',
-        'Joomla Plugins',
-        'Drupal Plugins',
-        'CS-cart Plugins',
-        'Other Plugins',
-      ],
-    },
-    {
-      category: 'Graphics',
-      subcategories: [
-        'User Interface',
-        'Texture',
-        'Product Mockups',
-        'Print',
-        'Logos',
-        'Icons',
-        'Game Assets',
-      ],
-    },
-    {
-      category: 'Themes',
-      subcategories: [
-        'WordPress Themes',
-        'Woocommerce Themes',
-        'Tumblr Themes',
-        'Shopify Themes',
-        'PrestaShop Themes',
-        'osClass Themes',
-        'OpenCart Themes',
-        'nopCommerce Themes',
-        'MyDB Themes',
-        'Muse Themes',
-        'Miscellaneous',
-        'Magento Themes',
-        'Joomla Themes',
-        'HTML Themes',
-        'Ghost Themes',
-        'Drupal Themes',
-      ],
-    },
-    {
-      category: 'Scripts & code',
-      subcategories: [
-        'VB.NET',
-        'Ruby',
-        'Python',
-        'PHP Scripts',
-        'Miscellaneous',
-        'JavaScript',
-        'Java',
-        'CSS',
-        'C#',
-        'C & C++',
-      ],
-    },
-  ]);
+  const loadSubcategories = (category) => {
+    // console.log(category)
+    productService
+      .getSubcategoriesByCategory(category)
+      .then((res) => {
+        // console.log(res);
+        setSubcategories(res.subcategories);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // const [categories, setCategories] = useState([
+  //   {
+  //     category: 'game templates',
+  //     subcategories: ['untiy', 'cordova', 'construct 2', 'cocos2d', 'buildbox'],
+  //   },
+  //   {
+  //     category: 'app templates',
+  //     subcategories: [
+  //       'xamrin',
+  //       'unity',
+  //       'titanuim',
+  //       'react',
+  //       'iOS',
+  //       'ionic',
+  //       'flutter',
+  //       'corona',
+  //       'cordova',
+  //       'construct 2',
+  //       'buildbox',
+  //       'android',
+  //     ],
+  //   },
+  //   {
+  //     category: 'plugins',
+  //     subcategories: [
+  //       'X-Cart',
+  //       'WordPress Plugins',
+  //       'WeeCommerce Plugins',
+  //       'PrestaShop Plugins',
+  //       'osCommerce Plugins',
+  //       'osClass Plugins',
+  //       'nopCommer Plugins',
+  //       'OpenCart Pluginss',
+  //       'Megento Plugins',
+  //       'Joomla Plugins',
+  //       'Drupal Plugins',
+  //       'CS-cart Plugins',
+  //       'Other Plugins',
+  //     ],
+  //   },
+  //   {
+  //     category: 'Graphics',
+  //     subcategories: [
+  //       'User Interface',
+  //       'Texture',
+  //       'Product Mockups',
+  //       'Print',
+  //       'Logos',
+  //       'Icons',
+  //       'Game Assets',
+  //     ],
+  //   },
+  //   {
+  //     category: 'Themes',
+  //     subcategories: [
+  //       'WordPress Themes',
+  //       'Woocommerce Themes',
+  //       'Tumblr Themes',
+  //       'Shopify Themes',
+  //       'PrestaShop Themes',
+  //       'osClass Themes',
+  //       'OpenCart Themes',
+  //       'nopCommerce Themes',
+  //       'MyDB Themes',
+  //       'Muse Themes',
+  //       'Miscellaneous',
+  //       'Magento Themes',
+  //       'Joomla Themes',
+  //       'HTML Themes',
+  //       'Ghost Themes',
+  //       'Drupal Themes',
+  //     ],
+  //   },
+  //   {
+  //     category: 'Scripts & code',
+  //     subcategories: [
+  //       'VB.NET',
+  //       'Ruby',
+  //       'Python',
+  //       'PHP Scripts',
+  //       'Miscellaneous',
+  //       'JavaScript',
+  //       'Java',
+  //       'CSS',
+  //       'C#',
+  //       'C & C++',
+  //     ],
+  //   },
+  // ]);
+
+  const [checkedOps, setCheckedOps] = useState([]);
+
+  const handleCheckOps = (event) => {
+    var updatedList = [...checkedOps];
+    if (event.target.checked) {
+      updatedList = [...checkedOps, event.target.value];
+    } else {
+      updatedList.splice(checkedOps.indexOf(event.target.value), 1);
+    }
+    // updateDataHandler('operatingSystems', updatedList.join(';'));
+    setCheckedOps(updatedList);
+  };
 
   const [ops, setOps] = useState([
     'iOS 8.0.x',
@@ -379,8 +407,30 @@ function AddProduct() {
   const [showMore, setShowMore] = useState(false);
   const [mainZip, setMainZip] = useState([]);
 
+  const [data, setData] = useState({});
+
+  // const updateDataHandler = (item) => {
+  //   setData({
+  //     ...data,
+  //     item.key: value,
+  //   });
+  // };
+
+  const step = (e) => {
+    e.preventDefault();
+    // let data = {};
+
+    console.log(checkedOps);
+    data.category = selectedCat;
+    data.subcategory = selectedSubCat;
+    data.operatingSystems = checkedOps.join(';');
+
+    console.log(data);
+  };
+
   return (
     <div className='addProduct'>
+      {selectedCat}
       <ItemsMenu url={url} active={active} setActive={setActive} />
 
       <div className='my-1 p-3 bg-white rounded box-shadow'>
@@ -400,7 +450,9 @@ function AddProduct() {
                 </Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                   <Box sx={{ flex: '1 1 auto' }} />
-                  <Button onClick={handleReset} className="text-primary">Reset</Button>
+                  <Button onClick={handleReset} className='text-primary'>
+                    Reset
+                  </Button>
                 </Box>
               </React.Fragment>
             ) : (
@@ -408,69 +460,77 @@ function AddProduct() {
                 {/* <Typography sx={{ mt: 2, mb: 1 }}> */}
                 {activeStep === 0 ? (
                   <div>
-                    <div className='my-3'>
-                      <label className='form-label'>
-                        Name: <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <div className='input-group'>
-                        <input
-                          type='text'
-                          name='name'
-                          className='form-control'
-                          aria-label='Name'
-                          aria-describedby='name'
-                          required
-                        />
+                    <form onSubmit={step}>
+                      <div className='my-3'>
+                        <label className='form-label'>
+                          Name: <span style={{ color: 'red' }}>*</span>
+                        </label>
+                        <div className='input-group'>
+                          <input
+                            type='text'
+                            name='name'
+                            className='form-control'
+                            aria-label='Name'
+                            aria-describedby='name'
+                            // required
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className='my-3'>
-                      <label className='form-label'>
-                        Short Description: (Max. 80 characters):{' '}
-                        <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <div className='input-group'>
-                        <input
-                          type='text'
-                          name='name'
-                          className='form-control'
-                          aria-label='Name'
-                          aria-describedby='name'
-                          required
-                        />
+                      <div className='my-3'>
+                        <label className='form-label'>
+                          Short Description: (Max. 80 characters):
+                          <span style={{ color: 'red' }}>*</span>
+                        </label>
+                        <div className='input-group'>
+                          <input
+                            type='text'
+                            name='name'
+                            className='form-control'
+                            aria-label='Name'
+                            aria-describedby='name'
+                            // required
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <hr />
+                      <hr />
 
-                    <div className='my-3'>
-                      <label className='form-label'>
-                        Category: <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <select
-                        id='dev-type'
-                        className='form-select form-select-sm'
-                        aria-label='.form-select-sm example'
-                        defaultValue={selectedCat}
-                        onChange={(e) => setSelectedCat(e.target.value)}
-                      >
-                        {categories.map((item, key) => (
-                          <option key={key} value={item.category}>
-                            {item.category}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className='my-3'>
-                      <label className='form-label'>
-                        Subcategory: <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <select
-                        id='dev-type'
-                        className='form-select form-select-sm'
-                        aria-label='.form-select-sm example'
-                        defaultValue={selectedSubCat}
-                        onChange={(e) => setSelectedSubCat(e.target.value)}
-                      >
-                        {categories.map((item) =>
+                      <div className='my-3'>
+                        <label className='form-label'>
+                          Category: <span style={{ color: 'red' }}>*</span>
+                        </label>
+                        <select
+                          id='dev-type'
+                          className='form-select form-select-sm'
+                          aria-label='.form-select-sm example'
+                          value={selectedCat}
+                          onChange={(e) => {
+                            loadSubcategories(e.target.value);
+                            setSelectedCat(e.target.value);
+                            // updateDataHandler('category', e.target.value);
+                          }}
+                        >
+                          {categories.map((item, key) => (
+                            <option key={key} value={item.id}>
+                              {item.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className='my-3'>
+                        <label className='form-label'>
+                          Subcategory: <span style={{ color: 'red' }}>*</span>
+                        </label>
+                        <select
+                          id='dev-type'
+                          className='form-select form-select-sm'
+                          aria-label='.form-select-sm example'
+                          value={selectedSubCat}
+                          onChange={(e) => {
+                            setSelectedSubCat(e.target.value);
+                            // updateDataHandler('subcategory', e.target.value);
+                          }}
+                        >
+                          {/* {categories.map((item) =>
                           item.category === selectedCat
                             ? item.subcategories.map((sub, index) => (
                                 <option key={index} value={sub}>
@@ -478,29 +538,65 @@ function AddProduct() {
                                 </option>
                               ))
                             : null
-                        )}
-                      </select>
-                    </div>
-                    {selectedCat === 'game templates' ||
-                    selectedCat === 'app templates' ? (
+                        )} */}
+                          {subcategories.length &&
+                            subcategories.map((sub, index) => (
+                              <option key={index} value={sub.id}>
+                                {sub.name}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                      {selectedCat === 'game templates' ||
+                      selectedCat === '12325117-f27d-4cbc-8b9a-740b21de60ab' ||
+                      selectedCat === 'app templates' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            Operating systems:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {ops.map((ext, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value={'.' + ext}
+                                    id={`os${index}`}
+                                    defaultChecked={checkedOps.includes(ext)}
+                                    onChange={handleCheckOps}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`os${index}`}
+                                  >
+                                    .{ext}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
                       <div className='my-3'>
                         <label className='form-label'>
-                          Operating systems:{' '}
+                          Files included:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
                         <div className='row'>
-                          {ops.map((ext, index) => (
+                          {files.map((ext, index) => (
                             <div key={index} className='col-sm-12 col-md-3'>
                               <div className='form-check'>
                                 <input
                                   className='form-check-input'
                                   type='checkbox'
                                   value=''
-                                  id={`os${index}`}
+                                  id={`ext${index}`}
                                 />
                                 <label
                                   className='form-check-label'
-                                  htmlFor={`os${index}`}
+                                  htmlFor={`ext${index}`}
                                 >
                                   .{ext}
                                 </label>
@@ -509,240 +605,232 @@ function AddProduct() {
                           ))}
                         </div>
                       </div>
-                    ) : null}
-                    <div className='my-3'>
-                      <label className='form-label'>
-                        Files included: <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <div className='row'>
-                        {files.map((ext, index) => (
-                          <div key={index} className='col-sm-12 col-md-3'>
-                            <div className='form-check'>
-                              <input
-                                className='form-check-input'
-                                type='checkbox'
-                                value=''
-                                id={`ext${index}`}
-                              />
-                              <label
-                                className='form-check-label'
-                                htmlFor={`ext${index}`}
-                              >
-                                .{ext}
-                              </label>
-                            </div>
+                      {selectedCat === 'Themes' ||
+                      selectedCat === 'Scripts & code' ||
+                      selectedCat === '3edd4d14-4502-424d-863f-ec708e5a4cef' ||
+                      selectedCat === 'd6d6ced0-b328-470b-be10-8367467015ea' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            HTML/CSS Framework:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {htmlFram.map((fram, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value=''
+                                    id={`fram${index}`}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`fram${index}`}
+                                  >
+                                    {fram}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                    {selectedCat === 'Themes' ||
-                    selectedCat === 'Scripts & code' ? (
+                        </div>
+                      ) : null}
+                      {selectedCat === 'Themes' ||
+                      selectedCat === 'Scripts & code' ||
+                      selectedCat === '3edd4d14-4502-424d-863f-ec708e5a4cef' ||
+                      selectedCat === 'd6d6ced0-b328-470b-be10-8367467015ea' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            JavaScript Frameworks:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {jsFram.map((fram, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value=''
+                                    id={`jsfram${index}`}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`jsfram${index}`}
+                                  >
+                                    {fram}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                      {selectedCat === 'Scripts & code' ||
+                      selectedCat === '3edd4d14-4502-424d-863f-ec708e5a4cef' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            Software version:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {softV.map((fram, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value=''
+                                    id={`softv${index}`}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`softv${index}`}
+                                  >
+                                    {fram}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                      {selectedCat === 'Scripts & code' ||
+                      selectedCat === '3edd4d14-4502-424d-863f-ec708e5a4cef' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            Software framework:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {softF.map((fram, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value=''
+                                    id={`softf${index}`}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`softf${index}`}
+                                  >
+                                    {fram}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                      {selectedCat === 'Scripts & code' ||
+                      selectedCat === '3edd4d14-4502-424d-863f-ec708e5a4cef' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            Database:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {dbs.map((fram, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value=''
+                                    id={`db${index}`}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`db${index}`}
+                                  >
+                                    {fram}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                      {selectedCat === 'Themes' ||
+                      selectedCat === 'plugins' ||
+                      selectedCat === 'd6d6ced0-b328-470b-be10-8367467015ea' ||
+                      selectedCat === 'd6378f4c-b719-4705-993b-26d32db1315b' ? (
+                        <div className='my-3'>
+                          <label className='form-label'>
+                            Supported CMS:
+                            <span style={{ color: 'red' }}>*</span>
+                          </label>
+                          <div className='row'>
+                            {suppCms.map((fram, index) => (
+                              <div key={index} className='col-sm-12 col-md-3'>
+                                <div className='form-check'>
+                                  <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    value=''
+                                    id={`cms${index}`}
+                                  />
+                                  <label
+                                    className='form-check-label'
+                                    htmlFor={`cms${index}`}
+                                  >
+                                    {fram}
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
                       <div className='my-3'>
-                        <label className='form-label'>
-                          HTML/CSS Framework:
+                        <label>
+                          Description:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
-                        <div className='row'>
-                          {htmlFram.map((fram, index) => (
-                            <div key={index} className='col-sm-12 col-md-3'>
-                              <div className='form-check'>
-                                <input
-                                  className='form-check-input'
-                                  type='checkbox'
-                                  value=''
-                                  id={`fram${index}`}
-                                />
-                                <label
-                                  className='form-check-label'
-                                  htmlFor={`fram${index}`}
-                                >
-                                  {fram}
-                                </label>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        <TextEditor
+                          editorState={editorState}
+                          setEditorState={setEditorState}
+                          setContent={setDescription}
+                        />
                       </div>
-                    ) : null}
-                    {selectedCat === 'Themes' ||
-                    selectedCat === 'Scripts & code' ? (
                       <div className='my-3'>
-                        <label className='form-label'>
-                          JavaScript Frameworks:
+                        <label>
+                          Features:
                           <span style={{ color: 'red' }}>*</span>
                         </label>
-                        <div className='row'>
-                          {jsFram.map((fram, index) => (
-                            <div key={index} className='col-sm-12 col-md-3'>
-                              <div className='form-check'>
-                                <input
-                                  className='form-check-input'
-                                  type='checkbox'
-                                  value=''
-                                  id={`jsfram${index}`}
-                                />
-                                <label
-                                  className='form-check-label'
-                                  htmlFor={`jsfram${index}`}
-                                >
-                                  {fram}
-                                </label>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        <TextEditor
+                          editorState={editorState}
+                          setEditorState={setEditorState}
+                          setContent={setFeatures}
+                        />
                       </div>
-                    ) : null}
-                    {selectedCat === 'Scripts & code' ? (
-                      <div className='my-3'>
-                        <label className='form-label'>
-                          Software version:
+                      <hr />
+                      <div className='mb-3'>
+                        <label
+                          htmlFor='exampleFormControlInput1'
+                          className='form-label'
+                        >
+                          Live Demo URL: (eg. your URL or Google Drive)
                           <span style={{ color: 'red' }}>*</span>
                         </label>
-                        <div className='row'>
-                          {softV.map((fram, index) => (
-                            <div key={index} className='col-sm-12 col-md-3'>
-                              <div className='form-check'>
-                                <input
-                                  className='form-check-input'
-                                  type='checkbox'
-                                  value=''
-                                  id={`softv${index}`}
-                                />
-                                <label
-                                  className='form-check-label'
-                                  htmlFor={`softv${index}`}
-                                >
-                                  {fram}
-                                </label>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        <input
+                          type='url'
+                          className='form-control'
+                          id='exampleFormControlInput1'
+                        />
                       </div>
-                    ) : null}
-                    {selectedCat === 'Scripts & code' ? (
-                      <div className='my-3'>
-                        <label className='form-label'>
-                          Software framework:
-                          <span style={{ color: 'red' }}>*</span>
-                        </label>
-                        <div className='row'>
-                          {softF.map((fram, index) => (
-                            <div key={index} className='col-sm-12 col-md-3'>
-                              <div className='form-check'>
-                                <input
-                                  className='form-check-input'
-                                  type='checkbox'
-                                  value=''
-                                  id={`softf${index}`}
-                                />
-                                <label
-                                  className='form-check-label'
-                                  htmlFor={`softf${index}`}
-                                >
-                                  {fram}
-                                </label>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
-                    {selectedCat === 'Scripts & code' ? (
-                      <div className='my-3'>
-                        <label className='form-label'>
-                          Database:
-                          <span style={{ color: 'red' }}>*</span>
-                        </label>
-                        <div className='row'>
-                          {dbs.map((fram, index) => (
-                            <div key={index} className='col-sm-12 col-md-3'>
-                              <div className='form-check'>
-                                <input
-                                  className='form-check-input'
-                                  type='checkbox'
-                                  value=''
-                                  id={`db${index}`}
-                                />
-                                <label
-                                  className='form-check-label'
-                                  htmlFor={`db${index}`}
-                                >
-                                  {fram}
-                                </label>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
-                    {selectedCat === 'Themes' || selectedCat === 'plugins' ? (
-                      <div className='my-3'>
-                        <label className='form-label'>
-                          Supported CMS:
-                          <span style={{ color: 'red' }}>*</span>
-                        </label>
-                        <div className='row'>
-                          {suppCms.map((fram, index) => (
-                            <div key={index} className='col-sm-12 col-md-3'>
-                              <div className='form-check'>
-                                <input
-                                  className='form-check-input'
-                                  type='checkbox'
-                                  value=''
-                                  id={`cms${index}`}
-                                />
-                                <label
-                                  className='form-check-label'
-                                  htmlFor={`cms${index}`}
-                                >
-                                  {fram}
-                                </label>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
-                    <div className='my-3'>
-                      <label>
-                        Description:
-                        <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <TextEditor
-                        editorState={editorState}
-                        setEditorState={setEditorState}
-                        setContent={setDescription}
-                      />
-                    </div>
-                    <div className='my-3'>
-                      <label>
-                        Features:
-                        <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <TextEditor
-                        editorState={editorState}
-                        setEditorState={setEditorState}
-                        setContent={setFeatures}
-                      />
-                    </div>
-                    <hr />
-                    <div className='mb-3'>
-                      <label
-                        htmlFor='exampleFormControlInput1'
-                        className='form-label'
+                      <hr />
+                      <button
+                        className='btn btn-primary w-100'
+                        type='submit'
+                        onClick={completedSteps}
                       >
-                        Live Demo URL: (eg. your URL or Google Drive){' '}
-                        <span style={{ color: 'red' }}>*</span>
-                      </label>
-                      <input
-                        type='url'
-                        className='form-control'
-                        id='exampleFormControlInput1'
-                      />
-                    </div>
-                    <hr />
+                        Next Step
+                      </button>
+                    </form>
                   </div>
                 ) : activeStep === 1 ? (
                   <div className='my-3'>
@@ -998,7 +1086,7 @@ function AddProduct() {
 
                     <div className='my-3'>
                       <label className='form-label'>
-                        Price: (Single Licence):{' '}
+                        Price: (Single Licence):
                         <span style={{ color: 'red' }}>*</span>
                       </label>
                       <div className='input-group'>
@@ -1014,7 +1102,7 @@ function AddProduct() {
                     </div>
                     <div className='my-3'>
                       <label className='form-label'>
-                        Price: (Multiple Licence):{' '}
+                        Price: (Multiple Licence):
                         <span style={{ color: 'red' }}>*</span>
                       </label>
                       <div className='input-group'>
@@ -1029,43 +1117,47 @@ function AddProduct() {
                       </div>
                     </div>
                     <hr />
-                    
                   </div>
                 )}
                 {/* </Typography> */}
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                  <Button
+                  {/* <Button
                     className='text-primary'
                     disabled={activeStep === 0}
                     onClick={handleBack}
                     sx={{ mr: 1 }}
                   >
                     Back
-                  </Button>
+                  </Button> */}
                   <Box sx={{ flex: '1 1 auto' }} />
-                  <Button
+                  {/* <Button
                     onClick={handleNext}
                     sx={{ mr: 1 }}
                     className='text-primary'
                   >
                     Next
-                  </Button>
-                  {activeStep !== steps.length &&
-                    (completed[activeStep] ? (
-                      <Typography
-                        variant='caption'
-                        sx={{ display: 'inline-block' }}
-                        className='text-primary'
-                      >
-                        Step {activeStep + 1} already completed
-                      </Typography>
-                    ) : (
-                      <Button onClick={handleComplete} className='text-primary'>
-                        {completedSteps() === totalSteps() - 1
-                          ? 'Submit to Preview'
-                          : 'Complete Step'}
-                      </Button>
-                    ))}
+                  </Button> */}
+                  {
+                    activeStep !== steps.length &&
+                      (completed[activeStep] ? (
+                        <Typography
+                          variant='caption'
+                          sx={{ display: 'inline-block' }}
+                          className='text-primary'
+                        >
+                          Step {activeStep + 1} already completed
+                        </Typography>
+                      ) : null)
+                    // <Button
+                    //   onClick={handleComplete}
+                    //   className='text-primary'
+                    //   type='submit'
+                    // >
+                    //   {completedSteps() === totalSteps() - 1
+                    //     ? 'Submit product'
+                    //     : 'Complete Step'}
+                    // </Button>
+                  }
                 </Box>
               </React.Fragment>
             )}
