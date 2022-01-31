@@ -22,7 +22,9 @@ import Support from './Support';
 import userService from '../../services/User.service';
 import Moment from 'react-moment';
 import AuthService from '../../services/Auth';
+import productService from '../../services/Product.service';
 import { LoginContext } from '../../LoginContext';
+
 export default function User() {
   const [user, setUser] = useState(null);
   const { toggleLogin } = useContext(LoginContext);
@@ -39,6 +41,9 @@ export default function User() {
       });
   };
 
+  const [categories, setCategories] = useState([]);
+  // const [subcategories, setSubcategories] = useState([]);
+
   useEffect(() => {
     const userId = localStorage.getItem('user');
     userService
@@ -46,11 +51,31 @@ export default function User() {
       .then((res) => {
         // console.log(res.user);
         setUser(res.user);
-        setLoading(false)
+        setLoading(false);
+      })
+      .catch((err) => {
+        logout();
+        console.log(err);
+      });
+
+    productService
+      .getCategories()
+      .then((res) => {
+        // console.log(res.categories);
+        setCategories(res.categories);
       })
       .catch((err) => {
         console.log(err);
       });
+    // productService
+    //   .getSubcategories()
+    //   .then((res) => {
+    //     // console.log(res);
+    //     setCategories(res.subcategories);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   let { path, url } = useRouteMatch();
@@ -154,9 +179,7 @@ export default function User() {
               <UserMenu url={url} active={active} setActive={setActive} />
             </div>
           </div>
-          {loading ? (
-            null
-          ) : (
+          {loading ? null : (
             <div className='col-sm-8'>
               <Switch>
                 <Route exact path={path} component={Dashboard} />
@@ -181,7 +204,12 @@ export default function User() {
                 <Route
                   exact
                   path={path + '/add-product'}
-                  component={AddProduct}
+                  render={() => (
+                    <AddProduct
+                      categories={categories}
+                      // subcategories={subcategories}
+                    />
+                  )}
                 />
                 <Route
                   exact
