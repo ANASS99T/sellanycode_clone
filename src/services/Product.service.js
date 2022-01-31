@@ -1,14 +1,26 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:3001/api/user';
+const API_URL = 'http://localhost:3001/api';
 
 const instance = axios.create({
   withCredentials: true,
   baseURL: API_URL,
 });
 
-const loggedInUser = () => {
+const getCategories = () => {
   return instance
-    .post('/logged-in')
+    .get('/category')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getSubcategories = () => {
+  return instance
+    .get('/subcategory')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getSubcategoriesByCategory = (id) => {
+  return instance
+    .get('/subcategory/category/'+id)
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -38,11 +50,9 @@ const updateAvatar = (data) => {
     .catch((err) => err);
 };
 
-const userService = {
-  loggedInUser,
-  getUserById,
-  updateUSer,
-  updatePassword,
-  updateAvatar
+const productService = {
+  getCategories,
+  getSubcategories,
+  getSubcategoriesByCategory
 };
-export default userService;
+export default productService;
