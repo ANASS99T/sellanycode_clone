@@ -54,7 +54,7 @@ export default function User() {
         setLoading(false);
       })
       .catch((err) => {
-        logout();
+        // logout();
         console.log(err);
       });
 

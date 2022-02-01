@@ -24,9 +24,9 @@ const getSubcategoriesByCategory = (id) => {
     .then((res) => res.data)
     .catch((err) => err);
 };
-const getUserById = (id) => {
+const addProduct = (data) => {
   return instance
-    .get(`/${id}`)
+    .post(`/product`, data)
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -53,6 +53,7 @@ const updateAvatar = (data) => {
 const productService = {
   getCategories,
   getSubcategories,
-  getSubcategoriesByCategory
+  getSubcategoriesByCategory,
+  addProduct
 };
 export default productService;
