@@ -20,7 +20,7 @@ const getSubcategories = () => {
 };
 const getSubcategoriesByCategory = (id) => {
   return instance
-    .get('/subcategory/category/'+id)
+    .get('/subcategory/category/' + id)
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -31,15 +31,15 @@ const addProduct = (data) => {
     .catch((err) => err);
 };
 
-const updateUSer = (data) => {
+const updateProduct = (data, id) => {
   return instance
-    .put('/', data)
+    .put('/product/' + id, data)
     .then((res) => res)
     .catch((err) => err);
 };
-const updatePassword = (data) => {
+const getProductById = (id) => {
   return instance
-    .put('/password', data)
+    .get('/product/'+id)
     .then((res) => res)
     .catch((err) => err);
 };
@@ -54,6 +54,8 @@ const productService = {
   getCategories,
   getSubcategories,
   getSubcategoriesByCategory,
-  addProduct
+  addProduct,
+  updateProduct,
+  getProductById
 };
 export default productService;

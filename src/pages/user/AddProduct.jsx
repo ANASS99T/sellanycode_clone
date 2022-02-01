@@ -647,7 +647,7 @@ function AddProduct({ categories }) {
 
   return (
     <div className='addProduct'>
-      {selectedCat}
+      {/* {selectedCat} */}
       <ItemsMenu url={url} active={active} setActive={setActive} />
 
       <div className='my-1 p-3 bg-white rounded box-shadow'>
