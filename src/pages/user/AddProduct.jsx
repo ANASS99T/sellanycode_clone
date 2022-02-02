@@ -10,14 +10,14 @@ import { useRouteMatch } from 'react-router-dom';
 import ItemsMenu from './ItemsMenu';
 import { EditorState } from 'draft-js';
 import TextEditor from '../../component/TextEditor';
-import { useDropzone } from 'react-dropzone';
+// import { useDropzone } from 'react-dropzone';
 import DropZonePreview from '../../component/DropZonePreview';
 import productService from '../../services/Product.service';
 
 const steps = ['add-product', 'Images & Assets', 'Files & Pricing'];
 
 function AddProduct({ categories }) {
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
   const [active, setActive] = React.useState('add-product');
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});

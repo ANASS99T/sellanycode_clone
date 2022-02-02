@@ -41,7 +41,7 @@ const jwt = () => {
     .then((response) => {
       return response.data;
     })
-    .catch((err) => err.response);
+    .catch((err) => window.location.href = "/login");
 };
 
 const AuthService = {
