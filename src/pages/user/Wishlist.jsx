@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
 import { useRouteMatch, Switch, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import '../../scss/user.scss';
 import { Alert, Tooltip } from '@mui/material';
 import TransactionList from './TransactionList';
+import whishlistService from '../../services/Whishlist.service';
 
-function Wishlist() {
+
+function Wishlist({wishlistprod}) {
+
+  
+
   return (
     <div className='wishlist'>
       <div className='my-1 p-3 bg-white rounded box-shadow'>
@@ -19,14 +24,15 @@ function Wishlist() {
                 </tr>
               </thead>
               <tbody>
-                <tr height='58px'>
-                  <td>Kareem Taxi App - Cab Booking Solution + admin panel</td>
-                  <td align='center' style={{ verticalAlign: 'middle' }}>
+              {wishlistprod && wishlistprod.map((item, key) => (
+                  <tr height='58px' key={key} value={item.id}>
+                    <td style={{ verticalAlign: 'middle' }}>{item.product.name}</td>
+                    <td align='center' style={{ verticalAlign: 'middle' }}>
                     <span
                       className='badge badge-success'
                       style={{ fontSize: '85%' }}
                     >
-                      $30.00
+                      {item.product.priceSingle}
                     </span>
                   </td>
                   <td>
@@ -47,7 +53,8 @@ function Wishlist() {
                       </Tooltip>
                     </div>
                   </td>
-                </tr>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

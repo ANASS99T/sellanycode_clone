@@ -16,8 +16,9 @@ import Earns from './Earns';
 import NewWithdraw from './NewWithdraw';
 import WithdrawPast from './WithdrawPast';
 import Faq from './Faq';
-import Wishlist from './Wishlist';
+import whishlistService from '../../services/Whishlist.service';
 import Account from './Account';
+import Whishlist from './Wishlist';
 import Support from './Support';
 import userService from '../../services/User.service';
 import Moment from 'react-moment';
@@ -30,6 +31,7 @@ export default function User() {
   const [user, setUser] = useState(null);
   const { toggleLogin } = useContext(LoginContext);
   const [loading, setLoading] = useState(true);
+  const [loadingwhishlist, setLoadingWhishlist] = useState(true);
   const logout = () => {
     AuthService.logout()
       .then((res) => {
@@ -43,6 +45,7 @@ export default function User() {
   };
 
   const [categories, setCategories] = useState([]);
+  const [wishlistprod, setWishlistprod] = useState([]);
   // const [subcategories, setSubcategories] = useState([]);
 
   useEffect(() => {
@@ -68,6 +71,8 @@ export default function User() {
       .catch((err) => {
         console.log(err);
       });
+
+   
     // productService
     //   .getSubcategories()
     //   .then((res) => {
@@ -76,8 +81,22 @@ export default function User() {
     //   })
     //   .catch((err) => {
     //     console.log(err);
-    //   });
+    //   }); 
+    
+  whishlistService
+      .getUserWhishlist()
+      .then((res) => {
+        // console.log(res);
+        setWishlistprod(res.wishlistprod);
+        setLoadingWhishlist(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    
   }, []);
+console.log(wishlistprod.length)
 
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState('');
@@ -105,7 +124,9 @@ export default function User() {
           <div className='col-sm-12 col-md-6 col-lg-3'>
             <div className='btn btn-primary  w-100 d-flex align-items-center justify-content-around'>
               <div className='title text-capitalize'>My Wishlist</div>
-              <div className='number'>4</div>
+                <div className='number'>
+                  {loadingwhishlist ? 0 :wishlistprod.lenght}
+                  </div>
               <div className='logo'>
                 <i className='fas fa-heart'></i>
               </div>
@@ -239,7 +260,11 @@ export default function User() {
                   component={WithdrawPast}
                 />
                 <Route exact path={path + '/faq'} component={Faq} />
-                <Route exact path={path + '/wishlist'} component={Wishlist} />
+                <Route 
+                exact 
+                path={path + '/wishlist'} 
+                render={() => <Whishlist wishlistprod={wishlistprod} />}
+                />
                 <Route
                   exact
                   path={path + '/payments'}
