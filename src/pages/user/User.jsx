@@ -24,6 +24,7 @@ import Moment from 'react-moment';
 import AuthService from '../../services/Auth';
 import productService from '../../services/Product.service';
 import { LoginContext } from '../../LoginContext';
+import UpdateProduct from './UpdateProduct';
 
 export default function User() {
   const [user, setUser] = useState(null);
@@ -54,7 +55,7 @@ export default function User() {
         setLoading(false);
       })
       .catch((err) => {
-        logout();
+        // logout();
         console.log(err);
       });
 
@@ -206,6 +207,16 @@ export default function User() {
                   path={path + '/add-product'}
                   render={() => (
                     <AddProduct
+                      categories={categories}
+                      // subcategories={subcategories}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path={path + '/edit-product/:id'}
+                  render={() => (
+                    <UpdateProduct
                       categories={categories}
                       // subcategories={subcategories}
                     />

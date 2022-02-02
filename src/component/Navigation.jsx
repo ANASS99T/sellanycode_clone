@@ -32,21 +32,22 @@ export default function Navigation() {
         setUser(res.user);
       })
       .catch((err) => console.error(err.response.data?.error));
-
-    setTimeout(() => {
-      if (loggedIn) {
-        AuthService.jwt()
+      // while (true) {
+      setTimeout(() => {
+        if (loggedIn) {
+          AuthService.jwt()
           .then((res) => {
-            // console.log(res.success);
-            if (!res.success) {
-              toggleLogin();
-            }
-          })
-          .catch((err) => {
-            console.error(err.response.data?.error);
-          });
-      }
-    }, 240000);
+              // console.log(res.success);
+              if (!res.success) {
+                toggleLogin();
+              }
+            })
+            .catch((err) => {
+              console.error(err.response.data?.error);
+            });
+        }
+      }, 240000);
+    // }
   }, []);
 
   const logout = () => {
@@ -431,4 +432,3 @@ export default function Navigation() {
     </>
   );
 }
-
