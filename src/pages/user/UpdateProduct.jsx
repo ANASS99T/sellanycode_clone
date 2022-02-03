@@ -10,108 +10,106 @@ import { useRouteMatch } from 'react-router-dom';
 import ItemsMenu from './ItemsMenu';
 import { EditorState } from 'draft-js';
 import TextEditor from '../../component/TextEditor';
-import { useDropzone } from 'react-dropzone';
+// import { useDropzone } from 'react-dropzone';
 import DropZonePreview from '../../component/DropZonePreview';
 import productService from '../../services/Product.service';
 import { useParams } from 'react-router-dom';
-const steps = ['add-product', 'Images & Assets', 'Files & Pricing'];
+// const steps = ['add-product', 'Images & Assets', 'Files & Pricing'];
+// import createDOMPurify from 'dompurify';
+// import { JSDOM } from 'jsdom';
 
 function UpdateProduct({ categories }) {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
 
+    const [descriptionPreview, setDescriptionPreview] = useState('');
+    const [featuresPreview, setFeaturesPreview] = useState('');
+
   useEffect(() => {
     productService
       .getProductById(id)
       .then((res) => {
+        loadSubcategories(res.data?.product?.category?.id);
+        console.log(res.data?.product);
+        setName(res.data?.product.name);
+        setShortDescription(res.data?.product?.shortDescription);
+        setSelectedCat(res.data?.product?.category?.id);
+        setSelectedSubCat(res.data?.product?.subcategory?.id);
+        setCheckedOps(
+          res.data?.product?.operatingSystems
+            ? res.data?.product?.operatingSystems.split(';')
+            : []
+        );
+        setCheckedFiles(
+          res.data?.product?.filesIncluded
+            ? res.data?.product?.filesIncluded.split(';')
+            : []
+        );
+        setCheckedSuppCms(
+          res.data?.product?.supportedCms
+            ? res.data?.product?.supportedCms.split(';')
+            : []
+        );
+        setCheckedHtmlFram(
+          res.data?.product?.htmlFrameworks
+            ? res.data?.product?.htmlFrameworks.split(';')
+            : []
+        );
+        setCheckedJsFram(
+          res.data?.product?.jsFrameworks
+            ? res.data?.product?.jsFrameworks.split(';')
+            : []
+        );
+        setCheckedSoftV(
+          res.data?.product?.softwareVersions
+            ? res.data?.product?.softwareVersions.split(';')
+            : []
+        );
+        setCheckedSoftF(
+          res.data?.product?.softwareFrameworks
+            ? res.data?.product?.softwareFrameworks.split(';')
+            : []
+        );
+        setCheckedSoftF(
+          res.data?.product?.softwareFrameworks
+            ? res.data?.product?.softwareFrameworks.split(';')
+            : []
+        );
+        setCheckedDb(
+          res.data?.product?.database
+            ? res.data?.product?.database.split(';')
+            : []
+        );
+        setLiveDemo(res.data?.product?.liveDemo);
+        setPriceSingle(res.data?.product?.priceSingle);
+        setPriceMultiple(res.data?.product?.priceMultiple);
+        setDescriptionPreview(res.data?.product?.description);
+        setFeaturesPreview(res.data?.product?.features);
         setProduct(res.data?.product);
+        // setEditorStateDescription(res.data?.product?.description);
+
         setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  let { path, url } = useRouteMatch();
+  //   console.log(product);
+  let { url } = useRouteMatch();
   const [active, setActive] = React.useState('add-product');
-  //   const [activeStep, setActiveStep] = React.useState(0);
-  //   const [completed, setCompleted] = React.useState({});
 
-  //   const totalSteps = () => {
-  //     return steps.length;
-  //   };
-
-  //   const completedSteps = () => {
-  //     // handleNext();
-  //     return Object.keys(completed).length;
-  //   };
-
-  //   const isLastStep = () => {
-  //     return activeStep === totalSteps() - 1;
-  //   };
-
-  //   const allStepsCompleted = () => {
-  //     return completedSteps() === totalSteps();
-  //   };
-
-  //   const handleNext = () => {
-  //     const newActiveStep =
-  //       isLastStep() && !allStepsCompleted()
-  //         ? // It's the last step, but not all steps have been completed,
-  //           // find the first step that has been completed
-  //           steps.findIndex((step, i) => !(i in completed))
-  //         : activeStep + 1;
-  //     setActiveStep(newActiveStep);
-  //   };
-
-  //   const handleBack = () => {
-  //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //   };
-
-  //   const handleStep = (step) => () => {
-  //     setActiveStep(step);
-  //   };
-
-  //   const handleComplete1 = () => {
-  //     step1();
-
-  //     const newCompleted = completed;
-  //     newCompleted[activeStep] = true;
-  //     setCompleted(newCompleted);
-  //     handleNext();
-  //   };
-  //   const handleComplete2 = () => {
-  //     step2();
-
-  //     const newCompleted = completed;
-  //     newCompleted[activeStep] = true;
-  //     setCompleted(newCompleted);
-  //     handleNext();
-  //   };
   const handleComplete3 = () => {
     step3();
-    // setActiveStep(0);
-    // setCompleted({});
-    // const newCompleted = completed;
-    // newCompleted[activeStep] = true;
-    // setCompleted(newCompleted);
-    // handleNext();
   };
-
-  //   const handleReset = ({ categories }) => {
-  //     setActiveStep(0);
-  //     setCompleted({});
-  //   };
 
   const [selectedCat, setSelectedCat] = useState('');
   const [subcategories, setSubcategories] = useState([]);
   const [selectedSubCat, setSelectedSubCat] = useState('');
 
   const loadSubcategories = (category) => {
-    // console.log(category)
     productService
       .getSubcategoriesByCategory(category)
       .then((res) => {
-        // console.log(res);
         setSubcategories(res.subcategories);
       })
       .catch((err) => {
@@ -439,58 +437,11 @@ function UpdateProduct({ categories }) {
 
   const [data, setData] = useState({});
 
-  // const updateDataHandler = (item) => {
-  //   setData({
-  //     ...data,
-  //     item.key: value,
-  //   });
-  // };
-
   const [name, setName] = useState('');
   const [shortDescription, setShortDescription] = useState('');
   const [liveDemo, setLiveDemo] = useState('');
   const [PriceSingle, setPriceSingle] = useState(0);
   const [priceMultiple, setPriceMultiple] = useState(0);
-
-  //   const step1 = () => {
-  //     // e.preventDefault();
-  //     // let data = {};
-
-  //     // console.log(checkedOps);
-  //     data.name = name;
-  //     data.shortDescription = shortDescription;
-  //     data.description = description;
-  //     data.features = features;
-  //     data.category = selectedCat;
-  //     data.subcategory = selectedSubCat;
-  //     data.operatingSystems = checkedOps.join(';');
-  //     data.filesIncluded = checkedFiles.join(';');
-  //     data.supportedCms = checkedSuppCms.join(';');
-  //     data.htmlFrameworks = checkedHtmlFram.join(';');
-  //     data.jsFrameworks = checkedJsFram.join(';');
-  //     data.softwareVersions = checkedSoftV.join(';');
-  //     data.softwareFrameworks = checkedSoftF.join(';');
-  //     data.database = checkedDb.join(';');
-  //     data.liveDemo = liveDemo;
-
-  //     // console.log(data);
-  //   };
-
-  //   const step2 = () => {
-  //     data.icon = icons;
-  //     data.preview = preview;
-  //     data.screenshot1 = screen1;
-  //     data.screenshot2 = screen2;
-  //     data.screenshot3 = screen3;
-  //     data.screenshot4 = screen4;
-  //     data.screenshot5 = screen5;
-  //     data.screenshot6 = screen6;
-  //     data.screenshot7 = screen7;
-  //     data.screenshot8 = screen8;
-  //     // data.mainZip = mainZip;
-
-  //     // console.log(data);
-  //   };
 
   const step3 = () => {
     data.name = name;
@@ -522,7 +473,7 @@ function UpdateProduct({ categories }) {
     data.priceSingle = PriceSingle;
     data.priceMultiple = priceMultiple;
 
-    // console.log(data);
+    console.log(data);
 
     const formData = new FormData();
     formData.append('name', data.name);
@@ -577,19 +528,12 @@ function UpdateProduct({ categories }) {
     formData.append('mainZip', data?.mainZip[0]);
     formData.append('priceSingle', data.priceSingle);
     formData.append('priceMultiple', data.priceMultiple);
-    // console.log(formData.get('icon'));
-    // for (var key in data) {
-    //   productData.append(key, data[key]);
-    // }
-    // for (var value of formData.values()) {
-    //   console.log(value);
-    // }
 
     productService
-      .addProduct(formData)
+      .updateProduct(formData, product.id)
       .then((res) => {
         // console.log(res);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => console.log(err.response.data));
   };
@@ -600,33 +544,7 @@ function UpdateProduct({ categories }) {
         <ItemsMenu url={url} active={active} setActive={setActive} />
 
         <div className='my-1 p-3 bg-white rounded box-shadow'>
-          {/* <Box sx={{ width: '100%' }} className='mt-2'>
-          <Stepper nonLinear activeStep={activeStep}>
-            {steps.map((label, index) => (
-              <Step key={label} completed={completed[index]}>
-                <StepButton onClick={handleStep(index)}>{label}</StepButton>
-              </Step>
-            ))}
-          </Stepper>
           <div>
-            {allStepsCompleted() ? (
-              <React.Fragment>
-                <Typography sx={{ mt: 2, mb: 1 }}>
-                  All steps completed - you&apos;re finished
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                  <Box sx={{ flex: '1 1 auto' }} />
-                  <Button onClick={handleReset} className='text-primary'>
-                    Reset
-                  </Button>
-                </Box>
-              </React.Fragment>
-            ) : (
-              <React.Fragment> */}
-          {/* <Typography sx={{ mt: 2, mb: 1 }}> */}
-          {/* {activeStep === 0 ? ( */}
-          <div>
-            {/* <form onSubmit={step}> */}
             <div className='my-3'>
               <label className='form-label'>
                 Name: <span style={{ color: 'red' }}>*</span>
@@ -681,7 +599,11 @@ function UpdateProduct({ categories }) {
               >
                 <option value=''></option>
                 {categories.map((item, key) => (
-                  <option key={key} value={item.id}>
+                  <option
+                    key={key}
+                    value={item.id}
+                    // selected={product?.category.id === item.id ? true : false}
+                  >
                     {item.name}
                   </option>
                 ))}
@@ -736,7 +658,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={'.' + ext}
                           id={`os${index}`}
-                          defaultChecked={checkedOps.includes(ext)}
+                          defaultChecked={
+                            checkedOps.includes('.' + ext) ? true : false
+                          }
                           onChange={handleCheckOps}
                         />
                         <label
@@ -765,9 +689,12 @@ function UpdateProduct({ categories }) {
                         type='checkbox'
                         value={'.' + ext}
                         id={`ext${index}`}
-                        defaultChecked={checkedFiles.includes(ext)}
+                        defaultChecked={
+                          checkedFiles.includes('.' + ext) ? true : false
+                        }
                         onChange={handleCheckFiles}
                       />
+
                       <label
                         className='form-check-label'
                         htmlFor={`ext${index}`}
@@ -797,7 +724,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={fram}
                           id={`fram${index}`}
-                          defaultChecked={checkedHtmlFram.includes(fram)}
+                          defaultChecked={
+                            checkedHtmlFram.includes(fram) ? true : false
+                          }
                           onChange={handleCheckHtmlFram}
                         />
                         <label
@@ -830,7 +759,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={fram}
                           id={`jsfram${index}`}
-                          defaultChecked={checkedJsFram.includes(fram)}
+                          defaultChecked={
+                            checkedJsFram.includes(fram) ? true : false
+                          }
                           onChange={handleCheckJsFram}
                         />
                         <label
@@ -861,7 +792,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={fram}
                           id={`softv${index}`}
-                          defaultChecked={checkedSoftV.includes(fram)}
+                          defaultChecked={
+                            checkedSoftV.includes(fram) ? true : false
+                          }
                           onChange={handleCheckSoftV}
                         />
                         <label
@@ -892,7 +825,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={fram}
                           id={`softf${index}`}
-                          defaultChecked={checkedSoftF.includes(fram)}
+                          defaultChecked={
+                            checkedSoftF.includes(fram) ? true : false
+                          }
                           onChange={handleCheckSoftF}
                         />
                         <label
@@ -923,7 +858,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={fram}
                           id={`db${index}`}
-                          defaultChecked={checkedDb.includes(fram)}
+                          defaultChecked={
+                            checkedDb.includes(fram) ? true : false
+                          }
                           onChange={handleCheckDb}
                         />
                         <label
@@ -956,7 +893,9 @@ function UpdateProduct({ categories }) {
                           type='checkbox'
                           value={fram}
                           id={`cms${index}`}
-                          defaultChecked={checkedSuppCms.includes(fram)}
+                          defaultChecked={
+                            checkedSuppCms.includes(fram) ? true : false
+                          }
                           onChange={handleCheckSuppCms}
                         />
                         <label
@@ -971,11 +910,17 @@ function UpdateProduct({ categories }) {
                 </div>
               </div>
             ) : null}
+
             <div className='my-3'>
               <label>
                 Description:
                 <span style={{ color: 'red' }}>*</span>
+                (Copy your text in the text editor to edit)
               </label>
+              <div className='my-3'>
+
+                <div dangerouslySetInnerHTML={{ __html: descriptionPreview }} />
+              </div>
               <TextEditor
                 editorState={editorStateDescription}
                 setEditorState={setEditorStateDescription}
@@ -986,7 +931,11 @@ function UpdateProduct({ categories }) {
               <label>
                 Features:
                 <span style={{ color: 'red' }}>*</span>
+                (Copy your text in the text editor to edit)
               </label>
+              <div className='my-3'>
+                <div dangerouslySetInnerHTML={{ __html: featuresPreview }} />
+              </div>
               <TextEditor
                 editorState={editorStateFeatures}
                 setEditorState={setEditorStateFeatures}
@@ -1008,16 +957,7 @@ function UpdateProduct({ categories }) {
               />
             </div>
             <hr />
-            {/* <button
-                      className='btn btn-primary w-100'
-                      type='submit'
-                      onClick={handleComplete1}
-                    >
-                      Next Step
-                    </button> */}
-            {/* </form> */}
           </div>
-          {/* ) : activeStep === 1 ? ( */}
           <div className='my-3'>
             <div className='row'>
               <div className='col-md-6 col-sm-12'>
@@ -1281,46 +1221,10 @@ function UpdateProduct({ categories }) {
             </button>
             <hr />
           </div>
-          {/* )} */}
-          {/* </Typography> */}
-          {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}> */}
-          {/* <Button
-                    className='text-primary'
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    sx={{ mr: 1 }}
-                  >
-                    Back
-                  </Button> */}
-          {/* <Box sx={{ flex: '1 1 auto' }} /> */}
-          {/* <Button
-                    onClick={handleNext}
-                    sx={{ mr: 1 }}
-                    className='text-primary'
-                  >
-                    Next
-                  </Button> */}
-          {/* {
-                    activeStep !== steps.length &&
-                      (completed[activeStep] ? (
-                        <Typography
-                          variant='caption'
-                          sx={{ display: 'inline-block' }}
-                          className='text-primary'
-                        >
-                          Step {activeStep + 1} already completed
-                        </Typography>
-                      ) : null)
-                    
-                  } */}
-          {/* </Box> */}
-          {/* </React.Fragment> */}
-          {/* )} */}
-          {/* </div> */}
-          {/* </Box> */}
+
         </div>
       </div>
-    )
+    );
   else return <div className='text'>Loading Product ...</div>;
 }
 

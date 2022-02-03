@@ -43,12 +43,6 @@ const getProductById = (id) => {
     .then((res) => res)
     .catch((err) => err);
 };
-const updateAvatar = (data) => {
-  return instance
-    .put('/avatar', data)
-    .then((res) => res)
-    .catch((err) => err);
-};
 
 const productService = {
   getCategories,

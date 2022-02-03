@@ -23,7 +23,7 @@ export default function Navigation() {
         }
       })
       .catch((err) => {
-        console.error(err.response.data?.error);
+        console.error(err.response?.data?.error);
       });
 
     userService
