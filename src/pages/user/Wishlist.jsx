@@ -8,7 +8,7 @@ import whishlistService from '../../services/Whishlist.service';
 
 function Wishlist({wishlistprod}) {
 
-  
+
 
   return (
     <div className='wishlist'>
@@ -36,9 +36,9 @@ function Wishlist({wishlistprod}) {
                     </span>
                   </td>
                   <td>
-                    <div className='d-flex align-items-center'>
+                    <div className='d-flex align-items-center justify-content-between'>
                       <Tooltip title='View Item' placement='top'>
-                        <Link to='/view/item'>
+                        <Link to={'/item/'+item.product.id}>
                           <button className='btn btn-sm btn-warning'>
                             <i className='fas text-white fa-search-plus'></i>
                           </button>

@@ -86,7 +86,7 @@ export default function User() {
   whishlistService
       .getUserWhishlist()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setWishlistprod(res.wishlistprod);
         setLoadingWhishlist(false);
       })
@@ -96,7 +96,6 @@ export default function User() {
 
     
   }, []);
-console.log(wishlistprod.length)
 
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState('');
