@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../scss/detailProduct.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,6 +5,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import productService from '../../services/Product.service';
+
+
+
 
 import image100 from '../../assets/img/100-percent-satisfaction.svg';
 import viserlab from '../../assets/img/viserlab.jpg';
@@ -14,6 +19,8 @@ import { Alert } from '@mui/material';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
+  
 
   return (
     <div
@@ -47,6 +54,25 @@ function a11yProps(index) {
 
 function DetailProduct() {
   const [value, setValue] = React.useState(0);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    productService
+      .getProductById(id)
+      .then((res) => {
+        console.log(res);
+        setProduct(res.data?.product);
+        setLoading(false);
+      })
+      .catch((err) => {
+        // logout();
+        console.log(err);
+      });
+  
+    
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -78,6 +104,7 @@ function DetailProduct() {
     <div className='detailProduct'>
       <div className='jumbotron p-0 pt-5 bg-light border-bottom itempage'>
         <div className='container itempages'>
+        
           <div className='col-md-12 px-0'>
             <div className='row p-15 title'>
               <div className='col-sm-1'>
@@ -91,9 +118,9 @@ function DetailProduct() {
               </div>
               <div className='col-sm-11'>
                 <h2 className='text-dark'>
-                  ViserLance - Freelancing Marketplace Platform
+                {loading ?'..' :product.name}
                 </h2>
-                <h6>ViserLance - Freelancing Marketplace Platform v1.1</h6>
+                <h6>{loading ?'..' :product.shortDescription}</h6>
               </div>
             </div>
 
@@ -109,6 +136,7 @@ function DetailProduct() {
               <Tab label='Comments' {...a11yProps(3)} />
             </Tabs>
           </div>
+
         </div>
       </div>
       <div className='container itempages'>
@@ -130,7 +158,7 @@ function DetailProduct() {
                     aria-label='Basic example'
                   >
                     <a
-                      href='https://script.viserlab.com/viserlance/'
+                      href={loading ?'..' :product.liveDemo}
                       className='btn btn-primary mr-2 rounded btn-view text-white mx-1'
                       style={{ width: '150px' }}
                     >
@@ -213,38 +241,8 @@ function DetailProduct() {
                   <h4>Item Description</h4>
                 </div>
                 <div className='card-body carddescription'>
-                  <p>
-                    Viserlance, a professional Freelancing Marketplace Platform
-                    that’s comes with Premium features to take your business on
-                    a higher level. It is a complete premium item that comes
-                    with all features with a combination of all types of the
-                    digital marketplace. you able to run gigs-based websites,
-                    Hiring based websites, download-based websites, and what you
-                    need. We receive several requirements from our buyers, some
-                    needs site like codecanyon, some needs Fiverr types and some
-                    wants to start a site like Upwork. Our RND team prepares
-                    this unique business model where you will have an “all in
-                    one” system. It’s developed for those people who want to
-                    start their Freelancing marketplace business website. With a
-                    total global workforce of around 3.5 billion, there are
-                    about 1.1 billion freelancers around the world. 57 million
-                    freelancers were working from home. It’s a huge market and
-                    new marketplace are growing day by day. Are you looking for
-                    a complete Freelancing Marketplace system for your business,
-                    then you are in the right place. No need to pay thousands of
-                    dollars to hire developers to build your Marketplace
-                    Website. Viserlance may assist you to handle unlimited
-                    users, orders, services, categories, digital items,
-                    freelancers, buyers, staff, able to accept payment via
-                    cards, cryptos, and mobile money. the ready-to-go solution,
-                    takes only a few minutes to set up your website with our
-                    system. we also here to provide you best support,
-                    installation, and customization if you need it. hurry up,
-                    get your copy and start your marketplace website. We keep
-                    level badges, Coupons, GDPR popup, Advertisement, and
-                    featured service system on it for better performance and
-                    acceptance.
-                  </p>
+                <div dangerouslySetInnerHTML={{ __html: product?.description }} />
+                 
                   <p>Demo Access: Frontend:</p>
                   <p>
                     <a
@@ -274,21 +272,7 @@ function DetailProduct() {
                   <h4>Features</h4>
                 </div>
                 <div className='card-body featureslist carddescription '>
-                  <h2 id='item-description__highlighted-features'>
-                    Highlighted Features
-                  </h2>
-                  <p>
-                    - Support modern browser and cross-browser compatibility.
-                    <br /> - Strong and powerful admin interface.
-                    <br /> - A clean and modern user interface.
-                    <br /> - 20+ Payment Gateway and 250+ currencies setup.
-                    <br /> - Functionality is Simple and all Dynamic Features.
-                    <br /> - Easy Documentation, GDPR Policy.
-                    <br /> - Regular updates facilities.
-                    <br /> - Premium and quick support.
-                    <br />
-                    <br />
-                  </p>
+                <div dangerouslySetInnerHTML={{ __html: product?.features}} />
                   <h2 id='item-description__user-dashboard-features'>
                     User Dashboard Features
                   </h2>
@@ -550,7 +534,7 @@ function DetailProduct() {
                 <table className='table table-striped mb-0'>
                   <tbody>
                     <tr>
-                      <td className='col-xs-5'>Category</td>
+                      <td className='col-xs-5'>{loading ?'..' :product.category.name}</td>
                       <td className='col-xs-7'>
                         <Link className='text-success' to='category/7'>
                           Scripts &amp; Code
@@ -563,11 +547,13 @@ function DetailProduct() {
                     </tr>
                     <tr>
                       <td>First Release</td>
-                      <td>24 January 2022</td>
+                      <td>{loading ?'..' :product.createdAt}</td>
                     </tr>
                     <tr>
+                   
                       <td>Last updated</td>
-                      <td>24 January 2022</td>
+                      <td>{loading ?'..' :product.updatedAt}</td>
+                      
                     </tr>
                     <tr>
                       <td>Files included</td>
@@ -575,17 +561,17 @@ function DetailProduct() {
                     </tr>
                     <tr>
                       <td>Software version</td>
-                      <td>PHP 7.0, PHP 7.1, PHP 7.2, PHP 7.3, PHP 7.4</td>
+                      <td>{loading ?'..' :product.softwareVersions}</td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <td>File Size</td>
                       <td>35 MB</td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <td>Frameworks</td>
                       <td>
-                        <Link className='text-success' to='/category/7/1'>
-                          PHP Scripts
+                        <Link className='text-success' to={'/category/'+product?.subcategory.id}>
+                        {loading ?'..' :product.subcategory.name}
                         </Link>
                       </td>
                     </tr>

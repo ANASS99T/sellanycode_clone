@@ -96,7 +96,6 @@ export default function User() {
 
     
   }, []);
-console.log(wishlistprod.length)
 
   let { path, url } = useRouteMatch();
   const [active, setActive] = useState('');
