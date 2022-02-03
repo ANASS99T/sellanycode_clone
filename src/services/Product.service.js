@@ -43,6 +43,18 @@ const getProductById = (id) => {
     .then((res) => res)
     .catch((err) => err);
 };
+const getProductsByUser = (id) => {
+  return instance
+    .get('/product/user/'+id)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const deleteProduct = (id) => {
+  return instance
+    .delete('/product/'+id)
+    .then((res) => res)
+    .catch((err) => err);
+};
 
 const productService = {
   getCategories,
@@ -50,6 +62,8 @@ const productService = {
   getSubcategoriesByCategory,
   addProduct,
   updateProduct,
-  getProductById
+  getProductById,
+  getProductsByUser,
+  deleteProduct
 };
 export default productService;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepButton from '@mui/material/StepButton';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+// import Box from '@mui/material/Box';
+// import Stepper from '@mui/material/Stepper';
+// import Step from '@mui/material/Step';
+// import StepButton from '@mui/material/StepButton';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
 import { useRouteMatch } from 'react-router-dom';
 import ItemsMenu from './ItemsMenu';
 import { EditorState } from 'draft-js';
@@ -30,6 +30,7 @@ function UpdateProduct({ categories }) {
     productService
       .getProductById(id)
       .then((res) => {
+          console.log(res);
         loadSubcategories(res.data?.product?.category?.id);
         console.log(res.data?.product);
         setName(res.data?.product.name);
