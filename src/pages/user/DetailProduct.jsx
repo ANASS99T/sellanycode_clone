@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
 import productService from '../../services/Product.service';
+import Moment from 'react-moment';
 
 
 
@@ -547,17 +548,21 @@ function DetailProduct() {
                     </tr>
                     <tr>
                       <td>First Release</td>
-                      <td>{loading ?'..' :product.createdAt}</td>
+                      <td>
+                      <Moment format='YYYY/MM/DD'>{product?.createdAt}</Moment>
+                      </td>
                     </tr>
                     <tr>
                    
                       <td>Last updated</td>
-                      <td>{loading ?'..' :product.updatedAt}</td>
+                      <td>
+                      <Moment format='YYYY/MM/DD'>{product?.updatedAt}</Moment>
+                      </td>
                       
                     </tr>
                     <tr>
                       <td>Files included</td>
-                      <td>.php, .html, .css, .sql, .cs, .c</td>
+                      <td>{product?.filesIncluded}</td>
                     </tr>
                     <tr>
                       <td>Software version</td>

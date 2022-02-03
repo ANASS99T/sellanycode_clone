@@ -86,7 +86,7 @@ export default function User() {
   whishlistService
       .getUserWhishlist()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setWishlistprod(res.wishlistprod);
         setLoadingWhishlist(false);
       })
