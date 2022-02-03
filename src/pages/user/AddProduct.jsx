@@ -640,7 +640,8 @@ function AddProduct({ categories }) {
       .addProduct(formData)
       .then((res) => {
         // console.log(res);
-        window.location.reload();
+        alert('the new product is added successfully');
+        // window.location.reload();
       })
       .catch((err) => console.log(err.response.data));
   };
