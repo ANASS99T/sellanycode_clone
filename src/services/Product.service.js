@@ -55,6 +55,24 @@ const deleteProduct = (id) => {
     .then((res) => res)
     .catch((err) => err);
 };
+const addProductToWishlist = (data) => {
+  return instance
+    .post('/product/whishlist_prod/', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const isProductInWishlist = (data) => {
+  return instance
+    .post('/product/inwhishlist', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const deleteFromWishlist = (data) => {
+  return instance
+    .delete('/product/rmwhislistprod', {data: data})
+    .then((res) => res)
+    .catch((err) => err);
+};
 
 const productService = {
   getCategories,
@@ -64,6 +82,9 @@ const productService = {
   updateProduct,
   getProductById,
   getProductsByUser,
-  deleteProduct
+  deleteProduct,
+  addProductToWishlist,
+  isProductInWishlist,
+  deleteFromWishlist
 };
 export default productService;

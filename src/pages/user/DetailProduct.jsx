@@ -55,12 +55,36 @@ function DetailProduct() {
   const { id } = useParams();
   const [images, setImages] = useState([]);
 
+  const [inWishlist, setInWishlist] = useState(false);
+
   const addToWithlist = () => {
     const data = {
       user: localStorage.getItem('user'),
       product: !loading ? product?.id : '',
     };
-    console.log(data);
+    productService
+      .addProductToWishlist(data)
+      .then((res) => {
+        console.log(res);
+        checkWishlist();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const checkWishlist = () => {
+    productService
+      .isProductInWishlist({
+        product: id,
+        user: localStorage.getItem('user'),
+      })
+      .then((res) => {
+        res.data?.inWishlist ? setInWishlist(true) : setInWishlist(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -125,6 +149,8 @@ function DetailProduct() {
               res.data?.product?.screenshot8,
           ]);
         }
+
+        checkWishlist();
         setLoading(false);
       })
       .catch((err) => {
@@ -149,6 +175,22 @@ function DetailProduct() {
     setIsViewerOpen(true);
   }, []);
 
+  const removeFromWishlist = () => {
+    const data = {
+      product: id,
+      user: localStorage.getItem('user'),
+    };
+
+    productService
+      .deleteFromWishlist(data)
+      .then((res) => {
+        checkWishlist();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const closeImageViewer = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
@@ -170,8 +212,8 @@ function DetailProduct() {
                   />
                 </div>
                 <div className='col-sm-11'>
-                  <h2 className='text-dark'>{product.name}</h2>
-                  <h6>{product.shortDescription}</h6>
+                  <h2 className='text-dark'>{product?.name}</h2>
+                  <h6>{product?.shortDescription}</h6>
                 </div>
               </div>
 
@@ -230,20 +272,34 @@ function DetailProduct() {
                         ></i>
                         {product.likes} Likes
                       </button>
-                      <button
-                        name='addtowishlist'
-                        // href='https://www.sellanycode.com/user/'
-                        // type='submit'
-                        className='btn btn-primary mr-2 rounded btn-view text-white  mx-1'
-                        style={{ marginRight: '0px' }}
-                        onClick={addToWithlist}
-                      >
-                        <i
-                          className='fa fa-heart m-r-xs text-white'
-                          style={{ marginRight: '9px' }}
-                        ></i>
-                        Add to Wishlist
-                      </button>
+                      {inWishlist ? (
+                        <button
+                          // name='addtowishlist'
+                          // href='https://www.sellanycode.com/user/'
+                          // type='submit'
+                          className='btn btn-primary mr-2 rounded btn-view text-white  mx-1'
+                          style={{ marginRight: '0px' }}
+                          onClick={removeFromWishlist}
+                        >
+                          <i
+                            className='fa fa-heart m-r-xs text-white'
+                            style={{ marginRight: '9px' }}
+                          ></i>
+                          Remove from Wishlist
+                        </button>
+                      ) : (
+                        <button
+                          // name='addtowishlist'
+                          // href='https://www.sellanycode.com/user/'
+                          // type='submit'
+                          className='btn btn-primary mr-2 rounded btn-view text-white  mx-1'
+                          style={{ marginRight: '0px' }}
+                          onClick={addToWithlist}
+                        >
+                          <i class='far fa-heart m-r-xs text-white' style={{ marginRight: '9px' }}></i>
+                          Add to Wishlist
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -474,7 +530,9 @@ function DetailProduct() {
                     <br />
                   </div>
                   <div className='row align-items-center justify-content-center'>
-                    <div className='btn btn-primary w-75 my-3 text-white'>Buy Now</div>
+                    <div className='btn btn-primary w-75 my-3 text-white'>
+                      Buy Now
+                    </div>
                   </div>
                 </div>
                 <div className='card-footer text-muted text-center d-flex align-items-center justify-content-center'>
@@ -495,7 +553,6 @@ function DetailProduct() {
                   <h5> Information</h5>
                 </div>
                 <div className='table-responsive'>
-                  
                   <table className='table table-striped mb-0'>
                     <tbody>
                       <tr>
@@ -508,7 +565,7 @@ function DetailProduct() {
                           </Link>
                           /
                           <Link className='text-success' to='/category/7/1'>
-                            {' '+product?.subcategory?.name}
+                            {' ' + product?.subcategory?.name}
                           </Link>
                         </td>
                       </tr>
@@ -528,63 +585,65 @@ function DetailProduct() {
                           </Moment>
                         </td>
                       </tr>
-                      {
-                        product?.filesIncluded ? 
-                      <tr>
-                        <td>Files included</td>
-                        <td>{product?.filesIncluded.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.operatingSystems	 ? 
-                      <tr>
-                        <td>Operating Systems</td>
-                        <td>{product?.operatingSystems.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.supportedCms	 ? 
-                      <tr>
-                        <td>Supported CMS</td>
-                        <td>{product?.supportedCms.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.htmlFrameworks	 ? 
-                      <tr>
-                        <td>HTML/CSS Framework</td>
-                        <td>{product?.htmlFrameworks.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.jsFrameworks	 ? 
-                      <tr>
-                        <td>JavaScript Framework</td>
-                        <td>{product?.jsFrameworks.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.softwareVersions	 ? 
-                      <tr>
-                        <td>Software version</td>
-                        <td>{product?.softwareVersions.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.softwareFrameworks	 ? 
-                      <tr>
-                        <td>Software framework</td>
-                        <td>{product?.softwareFrameworks.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                      {
-                        product?.database	 ? 
-                      <tr>
-                        <td>Database</td>
-                        <td>{product?.database.split(';').join(', ')}</td>
-                      </tr> : null
-                      }
-                     
+                      {product?.filesIncluded ? (
+                        <tr>
+                          <td>Files included</td>
+                          <td>
+                            {product?.filesIncluded.split(';').join(', ')}
+                          </td>
+                        </tr>
+                      ) : null}
+                      {product?.operatingSystems ? (
+                        <tr>
+                          <td>Operating Systems</td>
+                          <td>
+                            {product?.operatingSystems.split(';').join(', ')}
+                          </td>
+                        </tr>
+                      ) : null}
+                      {product?.supportedCms ? (
+                        <tr>
+                          <td>Supported CMS</td>
+                          <td>{product?.supportedCms.split(';').join(', ')}</td>
+                        </tr>
+                      ) : null}
+                      {product?.htmlFrameworks ? (
+                        <tr>
+                          <td>HTML/CSS Framework</td>
+                          <td>
+                            {product?.htmlFrameworks.split(';').join(', ')}
+                          </td>
+                        </tr>
+                      ) : null}
+                      {product?.jsFrameworks ? (
+                        <tr>
+                          <td>JavaScript Framework</td>
+                          <td>{product?.jsFrameworks.split(';').join(', ')}</td>
+                        </tr>
+                      ) : null}
+                      {product?.softwareVersions ? (
+                        <tr>
+                          <td>Software version</td>
+                          <td>
+                            {product?.softwareVersions.split(';').join(', ')}
+                          </td>
+                        </tr>
+                      ) : null}
+                      {product?.softwareFrameworks ? (
+                        <tr>
+                          <td>Software framework</td>
+                          <td>
+                            {product?.softwareFrameworks.split(';').join(', ')}
+                          </td>
+                        </tr>
+                      ) : null}
+                      {product?.database ? (
+                        <tr>
+                          <td>Database</td>
+                          <td>{product?.database.split(';').join(', ')}</td>
+                        </tr>
+                      ) : null}
+
                       {/* <tr>
                       <td>File Size</td>
                       <td>35 MB</td>
@@ -637,9 +696,16 @@ function DetailProduct() {
                   />
                   <div className='author-info'>
                     <Link to={`/profile/${product?.user?.id}`}>
-                      <div className='author-name'> {product?.user?.username}</div>
+                      <div className='author-name'>
+                        {' '}
+                        {product?.user?.username}
+                      </div>
                     </Link>
-                    <div className='portfolio-link'>{product?.user?.devloperType ? product?.user?.devloperType : '' }</div>
+                    <div className='portfolio-link'>
+                      {product?.user?.devloperType
+                        ? product?.user?.devloperType
+                        : ''}
+                    </div>
                   </div>
                   {/* <Link to={`/profile/${product?.user?.id}`}>
                     <button className='btnfollow btn btn-primary btn-lg btn-block font-bold my-3 btnflow'>
@@ -663,7 +729,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -707,7 +773,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -751,7 +817,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -795,7 +861,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -839,7 +905,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -883,7 +949,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -927,7 +993,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>
@@ -971,7 +1037,7 @@ function DetailProduct() {
                   <div className='relativel'>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
                       $39
                     </button>

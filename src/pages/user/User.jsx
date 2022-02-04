@@ -191,7 +191,7 @@ export default function User() {
                 </div>
                 <div className='user-cover'>
                   <Link to={path + '/my-account'} className='float-end m-2'>
-                    <button className='btn btn-sm btn-primary '>
+                    <button className='btn btn-sm btn-primary text-white'>
                       Edit Account
                     </button>
                   </Link>
