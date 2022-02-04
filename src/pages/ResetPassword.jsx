@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/img/logo-sellanycode-light.png";
+import logo from "../assets/img/Transparent-02.png";
 import "../scss/logincard.scss";
 
 export default function ResetPassword() {
