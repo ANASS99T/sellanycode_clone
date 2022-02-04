@@ -42,6 +42,8 @@ import Gurantee from './pages/Gurantee';
 import { LoginContext } from './LoginContext';
 import axios from 'axios';
 
+import Auth from './services/Auth';
+
 const LoginContainer = () => (
   <div>
     <Route
@@ -75,17 +77,27 @@ const LoginContainer = () => (
 );
 
 const DefaultContainer = () => {
-  const { loggedIn } = useContext(LoginContext);
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
 
-  // useEffect(() => {
-  //   console.log(loggedIn);
-  // }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      Auth.jwt()
+        .then((res) => {
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          setLoggedIn(false);
+          clearInterval(interval);
+        });
+    }, 24000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
       <Navigation />
       <Route exact path='/' component={Home} />
-      <Route path='/user' render={() => (loggedIn ? <User /> : <User />)} />
+      <Route path='/user' render={() => (loggedIn ? <User /> : <Login />)} />
 
       {/* Galeries Navigation */}
       <Route path='/apgmbiblio' component={AppGmBiblio} />
@@ -96,10 +108,11 @@ const DefaultContainer = () => {
       <Route path='/gametemplates' component={GamesBiblio} />
       <Route path='/graphics' component={GraphicBiblio} />
 
-      <Route path='/sell-your-code' component={Upload} />
+
+      <Route path='/sell-your-code' render={() => (loggedIn ? <Upload /> : <Login />)} />
       <Route path='/item/:id' component={DetailProduct} />
       <Route path='/about' component={About} />
-      <Route path='/profile/:id' component={Profile} />
+      <Route path='/profile/:id' render={() => (loggedIn ? <Profile /> : <Login />)} />
       <Route path='/privacy-policy' component={PrivacyPolicy} />
       <Route
         path='/developer-terms-conditions'
@@ -157,7 +170,9 @@ function App() {
   }, []);
 
   return (
-    <LoginContext.Provider value={{ loggedIn, toggleLogin, API_URL }}>
+    <LoginContext.Provider
+      value={{ loggedIn, setLoggedIn, toggleLogin, API_URL }}
+    >
       <Router>
         <div className='App'>
           <Switch>
