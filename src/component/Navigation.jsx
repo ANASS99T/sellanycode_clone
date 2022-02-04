@@ -93,7 +93,7 @@ export default function Navigation() {
                     textTransform: 'uppercase',
                     fontWeight: '700',
                     fontSize: '11px',
-                    color: '#6315b8',
+                    color: '#FE5B18',
                     letterSpacing: 0,
                     opacity: 0.8,
                   }}
@@ -169,7 +169,7 @@ export default function Navigation() {
                     textTransform: 'uppercase',
                     fontWeight: '700',
                     fontSize: '11px',
-                    color: '#6315b8',
+                    color: '#FE5B18',
                     letterSpacing: 0,
                     opacity: 0.8,
                   }}
@@ -279,7 +279,7 @@ export default function Navigation() {
                   textTransform: 'uppercase',
                   fontWeight: '700',
                   fontSize: '11px',
-                  color: '#6315b8',
+                  color: '#FE5B18',
                   letterSpacing: 0,
                   opacity: 0.8,
                 }}
@@ -355,7 +355,7 @@ export default function Navigation() {
                   textTransform: 'uppercase',
                   fontWeight: '700',
                   fontSize: '11px',
-                  color: '#6315b8',
+                  color: '#FE5B18',
                   letterSpacing: 0,
                   opacity: 0.8,
                 }}
