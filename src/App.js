@@ -30,6 +30,7 @@ import ThemesBiblio from './pages/Themes';
 import PluginsBiblio from './pages/Plugins';
 import GamesBiblio from './pages/Games';
 import GraphicBiblio from './pages/Graphics';
+import AppBiblio from './pages/AppTemplates';
 
 import SellBuyIos from './pages/SellBuyIos';
 import SellBuyAndroid from './pages/SellBuyAndroid';
@@ -95,6 +96,8 @@ const DefaultContainer = () => {
       <Route path='/themes' component={ThemesBiblio} />
       <Route path='/gametemplates' component={GamesBiblio} />
       <Route path='/graphics' component={GraphicBiblio} />
+      <Route path='/apptemplates' component={AppBiblio} />
+
 
       <Route path='/sell-your-code' component={Upload} />
       <Route path='/item/:id' component={DetailProduct} />

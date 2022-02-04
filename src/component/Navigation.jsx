@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/img/Logo.png';
+// import logo from '../assets/img/Logo.png';
+import logo from '../assets/img/Transparent-022.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavDropdown } from 'react-bootstrap';
 import '../scss/navbar.scss';
@@ -66,7 +67,7 @@ export default function Navigation() {
       <nav className='bg-white navbar navbar-expanded-lg border-bottom'>
         <div className='container d-flex align-items-center justify-content-between'>
           <Link to='/' className='navbar-brand'>
-            <img className='logo' src={logo} alt='Logo' />
+            <img className='logo' src={logo} alt='Logo' style={{ height: '55px' }} />
           </Link>
           <button
             className='btn btn-outline-primary collapse-button'
@@ -85,7 +86,7 @@ export default function Navigation() {
                   App & Game Templates
                 </Link>
                 <span
-                  className='nav-sub-soon'
+                  className='nav-sub-soon text-primary'
                   style={{
                     top: '0px',
                     right: '10px',
@@ -93,7 +94,7 @@ export default function Navigation() {
                     textTransform: 'uppercase',
                     fontWeight: '700',
                     fontSize: '11px',
-                    color: '#FE5B18',
+                    // color: '#6315b8',
                     letterSpacing: 0,
                     opacity: 0.8,
                   }}
@@ -161,7 +162,7 @@ export default function Navigation() {
                   Upload your code{loggedIn}
                 </Link>
                 <span
-                  className='nav-sub-soon'
+                  className='nav-sub-soon text-primary'
                   style={{
                     top: '0px',
                     right: '10px',
@@ -169,7 +170,7 @@ export default function Navigation() {
                     textTransform: 'uppercase',
                     fontWeight: '700',
                     fontSize: '11px',
-                    color: '#FE5B18',
+                    // color: '#6315b8',
                     letterSpacing: 0,
                     opacity: 0.8,
                   }}
@@ -271,7 +272,7 @@ export default function Navigation() {
                 App & Game Templates
               </Link>
               <span
-                className='nav-sub-soon'
+                className='nav-sub-soon text-primary'
                 style={{
                   top: '0px',
                   right: '10px',
@@ -279,7 +280,6 @@ export default function Navigation() {
                   textTransform: 'uppercase',
                   fontWeight: '700',
                   fontSize: '11px',
-                  color: '#FE5B18',
                   letterSpacing: 0,
                   opacity: 0.8,
                 }}
@@ -347,7 +347,7 @@ export default function Navigation() {
                 Upload your code
               </Link>
               <span
-                className='nav-sub-soon'
+                className='nav-sub-soon text-primary'
                 style={{
                   top: '0px',
                   right: '10px',
@@ -355,7 +355,7 @@ export default function Navigation() {
                   textTransform: 'uppercase',
                   fontWeight: '700',
                   fontSize: '11px',
-                  color: '#FE5B18',
+                  // color: '#6315b8',
                   letterSpacing: 0,
                   opacity: 0.8,
                 }}
