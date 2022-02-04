@@ -123,7 +123,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -138,7 +138,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $5</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -153,7 +153,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $15</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -168,7 +168,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $20</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -199,7 +199,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -214,7 +214,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -229,7 +229,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -244,7 +244,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -259,7 +259,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -274,7 +274,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $5</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -289,7 +289,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $15</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -304,7 +304,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $20</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -335,7 +335,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -350,7 +350,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -365,7 +365,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -380,7 +380,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -395,7 +395,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -410,7 +410,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $5</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -425,7 +425,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $15</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -440,7 +440,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $20</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -471,7 +471,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -486,7 +486,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -501,7 +501,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -516,7 +516,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -531,7 +531,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -546,7 +546,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $5</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -561,7 +561,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $15</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -576,7 +576,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $20</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -607,7 +607,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -622,7 +622,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -637,7 +637,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -652,7 +652,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -667,7 +667,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -682,7 +682,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $5</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $5</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -697,7 +697,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $15</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $15</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -712,7 +712,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $20</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $20</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">

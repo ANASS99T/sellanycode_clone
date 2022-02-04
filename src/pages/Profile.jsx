@@ -69,7 +69,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -93,7 +93,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -117,7 +117,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -141,7 +141,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -165,7 +165,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -189,7 +189,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -213,7 +213,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -237,7 +237,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>
@@ -261,7 +261,7 @@ export default function Profile() {
                 <div className='relativel'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice'
+                    className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                   >
                     $9
                   </button>

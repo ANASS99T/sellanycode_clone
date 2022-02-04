@@ -7,6 +7,7 @@ $theme-colors: (
   'lightG': #e8e8e8,
   'success': #28a745,
   'dark' : #343a40,
+  'muted' : #bbbbbb,
 );
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
@@ -22,6 +23,8 @@ $theme-colors: (
   'warning': $warning,
   'danger': $danger,
   'light': $light,
+  'muted' : #bbbbbb,
+
 );
 
 // Import Bootstrap and its default variables
