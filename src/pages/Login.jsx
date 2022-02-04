@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/img/logo-sellanycode-light.png';
+import logo from '../assets/img/Transparent-02.png';
 import '../scss/logincard.scss';
 import Alert from '@mui/material/Alert';
 import { useForm } from 'react-hook-form';
@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <div className='container logincard'>
       <div className='row justify-content-md-center h-100'>
-        <div className='mt-5 card-wrapper d-flex flex-column'>
+        <div className='mt-3 mb-0 card-wrapper d-flex flex-column'>
           <Link to='/Home' className='logo mx-auto'>
             <img className='logo' align='center' src={logo} alt='Logo' />
           </Link>

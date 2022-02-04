@@ -32,7 +32,7 @@ export default function Home() {
               aria-describedby="button-addon2"
             />
             <button
-              className="btn btn-light" style={{background: "white"}}             
+              className="btn btn-light text-white" style={{background: "white"}}             
                type="button"
               id="button-addon2"
             >
@@ -51,7 +51,7 @@ export default function Home() {
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> New Added Items</span>
               <Link to="/">
               <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-sm px-3  button">                    
+                <button type="submit" className="btn btn-primary btn-sm px-3  button  text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
                      View All
               </button>  
@@ -63,7 +63,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product1}></img>
                       </div>
                       <div className="card-body text-center">
@@ -78,7 +78,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product2}></img>
                       </div>
                       <div className="card-body text-center">
@@ -93,7 +93,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product3}></img>
                       </div>
                       <div className="card-body text-center">
@@ -108,7 +108,7 @@ export default function Home() {
                   <div className="cards card box-shadow h-100">
                       <Link to="/">
                       <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice"> $30</button>
+                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
                           <img className="card-img-top" src={product4}></img>
                       </div>
                       <div className="card-body text-center">
@@ -187,7 +187,7 @@ export default function Home() {
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}>Top Selling Items</span>
               <Link to="/">
               <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-sm px-3  button">                    
+                <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
                      View All
               </button>  
@@ -323,7 +323,7 @@ export default function Home() {
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Special Items</span>
               <Link to="/">
               <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-sm px-3  button">                    
+                <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
                      View All
               </button>  
@@ -459,7 +459,7 @@ export default function Home() {
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Hot Items</span>
               <Link to="/">
               <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-sm px-3  button">                    
+                <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
                      View All
               </button>  
@@ -595,7 +595,7 @@ export default function Home() {
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Popular Items</span>
               <Link to="/">
               <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-sm px-3  button">                    
+                <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
                      View All
               </button>  
@@ -738,7 +738,7 @@ export default function Home() {
            </h3> 
            <Link to="/">
               <div className="mb-3">
-                <button type="submit" className="btn btn-primary btn-sm px-3  button cta large extrawide tall " style={{ borderRadius: "5px",marginRight:"20px" }}>                       
+                <button type="submit" className="btn btn-primary btn-sm px-3  button cta large extrawide tall text-white" style={{ borderRadius: "5px",marginRight:"20px" }}>                       
                     Find out more
               </button>  
               </div>
