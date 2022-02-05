@@ -34,7 +34,7 @@ export default function BiblioAppGames() {
                   className="form-control form-control-sm input-form header-search shadow-sm bg-body rounded"
                   placeholder="Search in 2152 codes..."
                   aria-label="Search in 2152 codes..."
-                  minlength="3"
+                  minLength="3"
                   required
                   type="text"
                 />

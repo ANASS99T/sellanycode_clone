@@ -47,33 +47,15 @@ import Auth from './services/Auth';
 
 const LoginContainer = () => (
   <div>
-    <Route
-      path='/login'
-      render={() => (sessionStorage.getItem('token') ? <Home /> : <Login />)}
-    />
-    <Route
-      path='/register'
-      render={() => (sessionStorage.getItem('token') ? <Home /> : <Register />)}
-    />
-    <Route
-      path='/resetpassword'
-      render={() =>
-        sessionStorage.getItem('token') ? <Home /> : <ResetPasswrod />
-      }
-    />
+    <Route path='/login' render={() => <Login />} />
+    <Route path='/register' render={() => <Register />} />
+    <Route path='/resetpassword' render={() => <ResetPasswrod />} />
     <Route
       path='/resetpasswordconfirm'
-      render={() =>
-        sessionStorage.getItem('token') ? <Home /> : <ResetPasswrodConfirm />
-      }
+      render={() => <ResetPasswrodConfirm />}
     />
-    <Route
-      path='/newpasswordlogin'
-      render={() =>
-        sessionStorage.getItem('token') ? <Home /> : <Newpasswordlogin />
-      }
-    />
-    <Route exact path='/' render={() => <Redirect to='/login' />} />
+    <Route path='/newpasswordlogin' render={() => <Newpasswordlogin />} />
+    {/* <Route exact path='/' render={() => <Redirect to='/login' />} /> */}
   </div>
 );
 
@@ -84,7 +66,9 @@ const DefaultContainer = () => {
     const interval = setInterval(() => {
       Auth.jwt()
         .then((res) => {
-          setLoggedIn(true);
+          if (res?.data?.user?.id) {
+            setLoggedIn(true);
+          }
         })
         .catch((err) => {
           setLoggedIn(false);
@@ -98,6 +82,7 @@ const DefaultContainer = () => {
     <div>
       <Navigation />
       <Route exact path='/' component={Home} />
+      <Route exact path='/home' component={Home} />
       <Route path='/user' render={() => (loggedIn ? <User /> : <Login />)} />
 
       {/* Galeries Navigation */}
@@ -110,12 +95,16 @@ const DefaultContainer = () => {
       <Route path='/graphics' component={GraphicBiblio} />
       <Route path='/apptemplates' component={AppBiblio} />
 
-
-
-      <Route path='/sell-your-code' render={() => (loggedIn ? <Upload /> : <Login />)} />
+      <Route
+        path='/sell-your-code'
+        render={() => (loggedIn ? <Upload /> : <Login />)}
+      />
       <Route path='/item/:id' component={DetailProduct} />
       <Route path='/about' component={About} />
-      <Route path='/profile/:id' render={() => (loggedIn ? <Profile /> : <Login />)} />
+      <Route
+        path='/profile/:id'
+        render={() => (loggedIn ? <Profile /> : <Login />)}
+      />
       <Route path='/privacy-policy' component={PrivacyPolicy} />
       <Route
         path='/developer-terms-conditions'
@@ -157,13 +146,18 @@ function App() {
     return instance
       .get('/user/jwt')
       .then((response) => {
-        setLoggedIn(true);
+        if (response?.data?.user) {
+          setLoggedIn(true);
+        }
+
         instance
           .post('/user/logged-in')
           .then((res) => {
-            // console.log(res.data.user)
+            console.log(res.data.user)
             // setUser(res.data.user)}
-            localStorage.setItem('user', res.data.user.id);
+            if (res?.data?.user) {
+              localStorage.setItem('user', res.data.user.id);
+            }
           })
           .catch((err) => err);
       })
