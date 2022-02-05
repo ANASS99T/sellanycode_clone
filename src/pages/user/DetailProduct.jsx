@@ -605,7 +605,7 @@ function DetailProduct() {
                           aria-label='username'
                           name='username'
                           aria-describedby='basic-addon1'
-                          value='Obito'
+                          // value={item?.user.username}
                           readOnly
                         />
                       </div>
