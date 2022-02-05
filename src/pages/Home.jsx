@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import background from "../assets/img/sellanycode-background.jpg";
 import logos from "../assets/img/icons-sellanycode.png";
 import product1 from "../assets/img/Products/FullHolyQuranandAzkarAlMuslimReminder_sellanycode_featured_image_1643044311.png";
@@ -8,10 +8,28 @@ import product4 from "../assets/img/Products/ForzaHorizon5CarRacing_sellanycode_
 
 import "../scss/home.scss";
 import { Link } from "react-router-dom";
+import productService from '../services/Product.service';
+
 
 
 
 export default function Home() {
+    const [newadded, setNewAdded] = useState([]);
+    useEffect(() => {
+        productService
+          .getNewAdded()
+          .then((res) => {
+              console.log(res);
+            console.log(res.products);
+            setNewAdded(res.products);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    
+        
+      }, []);
+ console.log(newadded)
   return (
     <div className="home-page">
       <div
@@ -40,7 +58,7 @@ export default function Home() {
             </button>
           </div>
           <div className="img-logo">
-              <Link to="/">
+              <Link to="/about">
                  <img className="" src={logos} alt="" />
               </Link>
           </div>
@@ -49,143 +67,41 @@ export default function Home() {
       <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> New Added Items</span>
-              <Link to="/">
+              <Link to="/apgmbiblio">
               <div className="mb-3">
                 <button type="submit" className="btn btn-primary btn-sm px-3  button  text-white">                    
-                    <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
+                    <i className="fas fa-eye" style={{ marginRight:"20px" }}></i>    
                      View All
               </button>  
               </div>
               </Link>          
           </div>
           <div className="row rowgames">
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
+          { newadded.map((item, key) => (
+              <div className="col-lg-3 col-md-4 col-sm-12 mb-4" key={key} value={item.id}>
                   <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
-                          <img className="card-img-top" src={product1}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Full Holy Quran and Azkar Al Muslim Reminder
-                          </h5>
-                      </div>
+                      <Link to={`/item/${item?.id}`}>
+                          <div className="relativel">
+                              <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> ${item?.priceSingle}</button>
+                              <img className="card-img-top" src={`http://127.0.0.1:3001/uploads/product/${item?.preview}`}></img>
+                          </div>
+                          <div className="card-body text-center">
+                              <h5 className="card-title text-truncate text-secondary mb-3">
+                              {item?.name}
+                              </h5>
+                          </div>
                       </Link>
                   </div>
               </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
-                          <img className="card-img-top" src={product2}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Animated Sidebar Menu Using HTML & CSS & JavaScript | Responsive Dashboard Side Navigation Bar
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
-                          <img className="card-img-top" src={product3}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Real Traffic Car Driver Racing Game
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
-                          <img className="card-img-top" src={product4}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Forza Horizon 5 - Car Racing
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $30</button>
-                          <img className="card-img-top" src={product1}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Full Holy Quran and Azkar Al Muslim Reminder
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $5</button>
-                          <img className="card-img-top" src={product2}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Animated Sidebar Menu Using HTML & CSS & JavaScript | Responsive Dashboard Side Navigation Bar
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $15</button>
-                          <img className="card-img-top" src={product3}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Real Traffic Car Driver Racing Game
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
-              <div className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <div className="cards card box-shadow h-100">
-                      <Link to="/">
-                      <div className="relativel">
-                          <button className="btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white"> $20</button>
-                          <img className="card-img-top" src={product4}></img>
-                      </div>
-                      <div className="card-body text-center">
-                          <h5 className="card-title text-truncate text-secondary mb-3">
-                          Forza Horizon 5 - Car Racing
-                          </h5>
-                      </div>
-                      </Link>
-                  </div>
-              </div>
+             
+          ))}
           </div>
 
       </div>
       <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}>Top Selling Items</span>
-              <Link to="/">
+              <Link to="/apgmbiblio">
               <div className="mb-3">
                 <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
@@ -321,7 +237,7 @@ export default function Home() {
       {/* <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Special Items</span>
-              <Link to="/">
+              <Link to="/apgmbiblio">
               <div className="mb-3">
                 <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
@@ -457,7 +373,7 @@ export default function Home() {
       <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Hot Items</span>
-              <Link to="/">
+              <Link to="/apgmbiblio">
               <div className="mb-3">
                 <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
@@ -593,7 +509,7 @@ export default function Home() {
       <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Popular Items</span>
-              <Link to="/">
+              <Link to="/apgmbiblio">
               <div className="mb-3">
                 <button type="submit" className="btn btn-primary btn-sm px-3  button text-white">                    
                     <i className="fas fa-eye " style={{ marginRight:"20px" }}></i>    
@@ -736,7 +652,7 @@ export default function Home() {
            <strong> 90% </strong>
            For Exclusive Items! 
            </h3> 
-           <Link to="/">
+           <Link to="/sell-your-work">
               <div className="mb-3">
                 <button type="submit" className="btn btn-primary btn-sm px-3  button cta large extrawide tall text-white" style={{ borderRadius: "5px",marginRight:"20px" }}>                       
                     Find out more

@@ -110,6 +110,30 @@ const loadReviews = (data)=> {
     .then((res) => res)
     .catch((err) => err);
 }
+const getNewAdded = () => {
+  return instance
+    .post('/product/newaddedproduct')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getSimilaritems = (data) => {
+  return instance
+    .get('/product/simillaritems/',data)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getPopularItems = () => {
+  return instance
+    .post('/product/popularproduct')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getHotItems = () => {
+  return instance
+    .post('/product/hotproduct')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
 
 
 const productService = {
@@ -129,6 +153,10 @@ const productService = {
   addComment,
   loadComments,
   addReview,
-  loadReviews
+  loadReviews,
+  getNewAdded,
+  getSimilaritems,
+  getHotItems,
+  getPopularItems,
 };
 export default productService;
