@@ -35,7 +35,7 @@ function PrivacyPolicy() {
           >
             <div className="card mt-3 box-shadow">
               <div className="card-body">
-              <h1 class="underlined-title">Privacy Policy</h1>
+              <h1 className="underlined-title">Privacy Policy</h1>
               <div className="blog-post-content">
               <p>SellAnyCode has established this privacy policy to explain to you how your information is protected, collected and used, which may be updated by SellAnyCode from time to time. We will provide notice of materially significant changes to this privacy policy by posting notice on this site.</p>
               <h2>1. Protecting your privacy.</h2>

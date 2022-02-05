@@ -318,7 +318,7 @@ export default function Home() {
           </div>
 
       </div>
-      <div className="container cards" style={{marginTop:"35px"}}>
+      {/* <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Special Items</span>
               <Link to="/">
@@ -453,7 +453,7 @@ export default function Home() {
               </div>
           </div>
 
-      </div>
+      </div> */}
       <div className="container cards" style={{marginTop:"35px"}}>
           <div className="wrapper mb-3 mt-3 d-flex flex-row" style={{position: "relative" }}>
               <span className="font-weight-bold h4 m-t-sm" style={{fontSize:"27px",position:"relative",left:"-6px"}}> Hot Items</span>

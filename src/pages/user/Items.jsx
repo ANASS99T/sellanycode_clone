@@ -109,7 +109,7 @@ function Items() {
                     </td>
                     <td align='center' style={{ verticalAlign: 'middle' }}>
                       <Tooltip title='New Item' placement='top'>
-                        <span className='badge bg-primary text-white'>New</span>
+                        <span className='badge bg-primary text-white'>{item?.status}</span>
                       </Tooltip>
                     </td>
                     <td>{item?.views}</td>
