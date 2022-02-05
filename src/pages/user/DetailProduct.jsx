@@ -56,7 +56,7 @@ function DetailProduct() {
   const [images, setImages] = useState([]);
 
   const [inWishlist, setInWishlist] = useState(false);
-
+  const [sold, setSold] = useState(false);
   const addToWithlist = () => {
     const data = {
       user: localStorage.getItem('user'),
@@ -85,6 +85,58 @@ function DetailProduct() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const addComment = () => {
+    const data = {
+      product: id,
+      content: comment,
+    };
+
+    productService
+      .addComment(data)
+      .then((res) => {
+        loadComments();
+        setComment('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const addReview = () => {
+    const data = {
+      product: id,
+      content: review,
+    };
+
+    productService
+      .addReview(data)
+      .then((res) => {
+        loadReviews();
+        setReview('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [comments, setComments] = useState([]);
+
+  const loadComments = () => {
+    productService
+      .loadComments({ product: id })
+      .then((res) => {
+        setComments(res?.data.comments);
+      })
+      .catch((err) => {});
+  };
+  const loadReviews = () => {
+    productService
+      .loadReviews({ product: id })
+      .then((res) => {
+        setReviews(res?.data.review);
+      })
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -151,10 +203,22 @@ function DetailProduct() {
         }
 
         checkWishlist();
+        loadComments();
+        loadReviews()
         setLoading(false);
       })
       .catch((err) => {
         // logout();
+        console.log(err);
+      });
+
+    productService
+      .checkSales({ product: id })
+      .then((res) => {
+        setSold(res.data?.sale);
+        console.log(res.data?.sale)
+      })
+      .catch((err) => {
         console.log(err);
       });
   }, []);
@@ -169,7 +233,9 @@ function DetailProduct() {
   const [currentImage, setCurrentImage] = React.useState(0);
   const [isViewerOpen, setIsViewerOpen] = React.useState(false);
   // const images = [];
-
+  const [comment, setComment] = useState('');
+  const [review, setReview] = useState('');
+  const [reviews, setReviews] = useState([]);
   const openImageViewer = React.useCallback((index) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
@@ -195,6 +261,26 @@ function DetailProduct() {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
+
+  const [liked, setLiked] = useState(false);
+  const [likeMessage, setLikeMessage] = useState('Likes');
+
+  const likeProduct = () => {
+    const data = { product: id };
+    if (!liked) {
+      productService
+        .likeProduct(data)
+        .then((res) => {
+          console.log(res);
+          setLiked(true);
+          setLikeMessage('Thank you');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   if (!loading)
     return (
       <div className='detailProduct'>
@@ -261,16 +347,17 @@ function DetailProduct() {
                         Live Demo
                       </a>
                       <button
-                        rel='nofollow'
+                        // rel='nofollow'
                         className='btn btn-primary mr-2 rounded btn-view text-white mx-1'
                         id='VoteDiv'
+                        onClick={likeProduct}
                       >
                         <i
                           className='fa fa-thumbs-up fa-fw m-r-xs text-white '
                           aria-hidden='true'
                           style={{ marginRight: '5px' }}
                         ></i>
-                        {product.likes} Likes
+                        {product.likes} {likeMessage}
                       </button>
                       {inWishlist ? (
                         <button
@@ -296,7 +383,10 @@ function DetailProduct() {
                           style={{ marginRight: '0px' }}
                           onClick={addToWithlist}
                         >
-                          <i class='far fa-heart m-r-xs text-white' style={{ marginRight: '9px' }}></i>
+                          <i
+                            className='far fa-heart m-r-xs text-white'
+                            style={{ marginRight: '9px' }}
+                          ></i>
                           Add to Wishlist
                         </button>
                       )}
@@ -368,16 +458,92 @@ function DetailProduct() {
               <TabPanel value={value} index={1}>
                 <div className='card mt-1 box-shadow review-box'>
                   <div className='card-body'>
-                    <Alert severity='warning'>
-                      You have to purchase this item to leave a review!
-                    </Alert>
+                    {!sold ? (
+                      <Alert severity='warning'>
+                        You have to purchase this item to leave a review!
+                      </Alert>
+                    ) : (
+                      <div id='review'>
+                        <div className='input-group mb-3'>
+                          <span className='input-group-text' id='basic-addon1'>
+                            <i
+                              className='fas fa-user-circle'
+                              aria-hidden='true'
+                            ></i>
+                          </span>
+                          <input
+                            type='text'
+                            className='form-control'
+                            placeholder='username'
+                            aria-label='username'
+                            name='username'
+                            aria-describedby='basic-addon1'
+                            value='Obito'
+                            readOnly
+                          />
+                        </div>
+                        <div className='input-group mb-3'>
+                          <span className='input-group-text' id='basic-addon1'>
+                            <i
+                              className='fas fa-envelope'
+                              aria-hidden='true'
+                            ></i>
+                          </span>
+                          <input
+                            type='email'
+                            className='form-control'
+                            placeholder='email'
+                            aria-label='email'
+                            name='email'
+                            aria-describedby='basic-addon1'
+                            value='anass.taher@gmail.com'
+                            readOnly
+                          />
+                        </div>
+
+                        <div className='mb-3'>
+                          <h6>Review</h6>
+
+                          <textarea
+                            name='message'
+                            className='form-control'
+                            id='exampleInputPassword1'
+                            spellcheck='false'
+                            value={review}
+                            onChange={(e) => setReview(e.target.value)}
+                          ></textarea>
+                        </div>
+                        <button
+                          className='btn btn-primary text-white'
+                          onClick={addReview}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    )}
                     <br />
                     <h4 className='text-center mb-4 font-weight-bold'>
                       All Reviews
                     </h4>
                     <div className='my-1 p-1 bg-light rounded box-shadow'>
                       <div className='card m-b-0'>
-                        <ul className='list-group text-center list-group-flush scroll'></ul>
+                        <div className='list-group text-start mx-3 list-group-flush scroll'>
+                          {reviews.map((item, index) => (
+                            <div className='row my-2 bg-light' key={index}>
+                              <div className='row'>
+                                <div className='col-12'>
+                                  <strong>{item?.user.username}</strong>
+                                  <div className='text-muted ms-1'>
+                                    <Moment fromNow>{item?.createdAt}</Moment>
+                                  </div>
+                                </div>
+                                <div className='col-12'>
+                                  <p>{item?.content}</p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -424,7 +590,7 @@ function DetailProduct() {
                     <h4 className='text-center mb-4 font-weight-bold'>
                       Ask Pre-order Question
                     </h4>
-                    <form action='' id='question'>
+                    <div id='question'>
                       <div className='input-group mb-3'>
                         <span className='input-group-text' id='basic-addon1'>
                           <i
@@ -467,14 +633,39 @@ function DetailProduct() {
                           className='form-control'
                           id='exampleInputPassword1'
                           spellcheck='false'
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
                         ></textarea>
                       </div>
-                      <button className='btn btn-primary'>Submit</button>
-                    </form>
+                      <button
+                        className='btn btn-primary text-white'
+                        onClick={addComment}
+                      >
+                        Submit
+                      </button>
+                    </div>
                     <h4 className='text-center mb-4 font-weight-bold'>
                       All Questions
                     </h4>
-                    <Alert severity='warning'>No Questions!</Alert>
+                    {comments.length === 0 ? (
+                      <Alert severity='warning'>No Questions!</Alert>
+                    ) : (
+                      comments.map((item, index) => (
+                        <div className='row my-2 bg-light' key={index}>
+                          <div className='row'>
+                            <div className='col-12'>
+                              <strong>{item?.user.username}</strong>
+                              <div className='text-muted ms-1'>
+                                <Moment fromNow>{item?.createdAt}</Moment>
+                              </div>
+                            </div>
+                            <div className='col-12'>
+                              <p>{item?.content}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </TabPanel>

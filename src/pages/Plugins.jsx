@@ -11,7 +11,7 @@ export default function BiblioScrCod() {
         <div className="overlay rounded-0 box-shadow "></div>
         <div className="container ">
           <h1 className="mb-1 font-weight-light p-15 title">Plugins</h1>
-          <h6 class="mb-1 font-weight-light p-15">Explore unique plugins and extensions. Expand the functionality of your site. Add statistics, payment options, contact forms and many more unique functions!</h6>
+          <h6 className="mb-1 font-weight-light p-15">Explore unique plugins and extensions. Expand the functionality of your site. Add statistics, payment options, contact forms and many more unique functions!</h6>
         </div>
       </div>
       <div className="container">

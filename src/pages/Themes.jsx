@@ -11,7 +11,7 @@ export default function BiblioScrCod() {
         <div className="overlay rounded-0 box-shadow "></div>
         <div className="container ">
           <h1 className="mb-1 font-weight-light p-15 title">Themes</h1>
-          <h6 class="mb-1 font-weight-light p-15">Discover themes and templates for business websites, landing pages and blogs. These themes are created in plain HTML or created for WordPress, Joomla, PrestaShop or other CMS.</h6>
+          <h6 className="mb-1 font-weight-light p-15">Discover themes and templates for business websites, landing pages and blogs. These themes are created in plain HTML or created for WordPress, Joomla, PrestaShop or other CMS.</h6>
         </div>
       </div>
       <div className="container">

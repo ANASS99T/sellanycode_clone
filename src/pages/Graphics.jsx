@@ -11,7 +11,7 @@ export default function BiblioScrCod() {
         <div className="overlay rounded-0 box-shadow "></div>
         <div className="container ">
           <h1 className="mb-1 font-weight-light p-15 title">Graphics</h1>
-          <h6 class="mb-1 font-weight-light p-15">Browse game graphic assets to help you create your next game. These assets includes 3D models, assets, UI elements and backgrounds, icons to use for websites and logos!
+          <h6 className="mb-1 font-weight-light p-15">Browse game graphic assets to help you create your next game. These assets includes 3D models, assets, UI elements and backgrounds, icons to use for websites and logos!
           </h6>
         </div>
       </div>

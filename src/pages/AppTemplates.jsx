@@ -11,7 +11,7 @@ export default function BiblioScrCod() {
         <div className="overlay rounded-0 box-shadow "></div>
         <div className="container ">
           <h1 className="mb-1 font-weight-light p-15 title">App Templates</h1>
-          <h6 class="mb-1 font-weight-light p-15">Search Unity Source Codes, Discover App Templates & Source Codes. These templates & source codes can be easily modified and used to create and launch your own app on Android or iOS. App templates include source code for iOS, Android, Unity, Corona, Cordova, Ionic, Buildbox and more. Get your app template and create and launch your app today.</h6>
+          <h6 className="mb-1 font-weight-light p-15">Search Unity Source Codes, Discover App Templates & Source Codes. These templates & source codes can be easily modified and used to create and launch your own app on Android or iOS. App templates include source code for iOS, Android, Unity, Corona, Cordova, Ionic, Buildbox and more. Get your app template and create and launch your app today.</h6>
         </div>
       </div>
       <div className="container">

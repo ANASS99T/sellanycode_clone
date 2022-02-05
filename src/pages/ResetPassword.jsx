@@ -26,7 +26,7 @@ export default function ResetPassword() {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
-                <div class="form-text text-muted" style={{fontSize: "15px"}}> By clicking "Reset Password" you will get reset link.</div>
+                <div className="form-text text-muted" style={{fontSize: "15px"}}> By clicking "Reset Password" you will get reset link.</div>
               </div>
               <div className="mb-3">
                   <Link to="/resetpasswordconfirm">

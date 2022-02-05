@@ -73,6 +73,44 @@ const deleteFromWishlist = (data) => {
     .then((res) => res)
     .catch((err) => err);
 };
+const likeProduct = (data) => {
+  return instance
+    .post('/product/likeprod', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const checkSales = (data) => {
+  return instance
+    .post('/sales/checkSales', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const addComment = (data) => {
+  return instance
+    .post('/product/comment', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+const addReview = (data) => {
+  return instance
+    .post('/product/review', data)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+const loadComments = (data)=> {
+  return instance
+    .post('/product/allcomments', data)
+    .then((res) => res)
+    .catch((err) => err);
+}
+const loadReviews = (data)=> {
+  return instance
+    .post('/product/allreviews', data)
+    .then((res) => res)
+    .catch((err) => err);
+}
+
 
 const productService = {
   getCategories,
@@ -85,6 +123,12 @@ const productService = {
   deleteProduct,
   addProductToWishlist,
   isProductInWishlist,
-  deleteFromWishlist
+  deleteFromWishlist,
+  likeProduct,
+  checkSales,
+  addComment,
+  loadComments,
+  addReview,
+  loadReviews
 };
 export default productService;
