@@ -30,6 +30,7 @@
     "react-draft-wysiwyg": "^1.14.7",
     "react-dropzone": "^11.5.1",
     "react-hook-form": "^7.25.3",
+    "react-hooks-paginator": "^0.5.0",
     "react-moment": "^1.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "4.0.3",
