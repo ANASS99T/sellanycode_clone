@@ -17,6 +17,7 @@ import Register from './pages/Register';
 import ResetPasswrod from './pages/ResetPassword';
 import ResetPasswrodConfirm from './pages/ResetPasswordConfirm';
 import Newpasswordlogin from './pages/NewLoginPass';
+import Store from './pages/Store';
 import AppGmBiblio from './pages/BiblioAppGames';
 import ScrCodeBiblio from './pages/BiblioScrCod';
 import Upload from './pages/Upload';
@@ -85,15 +86,18 @@ const DefaultContainer = () => {
       <Route exact path='/home' component={Home} />
       <Route path='/user' render={() => (loggedIn ? <User /> : <Login />)} />
 
+      <Route path='/store' component={Store} />
+      {/* <Route path='/store/category/:id' component={Store} /> */}
+      {/* <Route path='/store/subcategory/:id' component={Store} /> */}
       {/* Galeries Navigation */}
-      <Route path='/apgmbiblio' component={AppGmBiblio} />
+      {/* <Route path='/apgmbiblio' component={AppGmBiblio} />
       <Route path='/scriptcode' component={ScrCodeBiblio} />
       <Route path='/themes' component={ThemesBiblio} />
       <Route path='/plugins' component={PluginsBiblio} />
       <Route path='/themes' component={ThemesBiblio} />
       <Route path='/gametemplates' component={GamesBiblio} />
       <Route path='/graphics' component={GraphicBiblio} />
-      <Route path='/apptemplates' component={AppBiblio} />
+      <Route path='/apptemplates' component={AppBiblio} /> */}
 
       <Route
         path='/sell-your-code'
@@ -153,7 +157,7 @@ function App() {
         instance
           .post('/user/logged-in')
           .then((res) => {
-            console.log(res.data.user)
+            console.log(res.data.user);
             // setUser(res.data.user)}
             if (res?.data?.user) {
               localStorage.setItem('user', res.data.user.id);
