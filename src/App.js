@@ -157,7 +157,7 @@ function App() {
         instance
           .post('/user/logged-in')
           .then((res) => {
-            console.log(res.data.user);
+            // console.log(res.data.user);
             // setUser(res.data.user)}
             if (res?.data?.user) {
               localStorage.setItem('user', res.data.user.id);

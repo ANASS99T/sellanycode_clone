@@ -79,7 +79,7 @@ export default function Navigation() {
             <ul className='main-menu'>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to={`/store/category/0`}
+                  to={`/store`}
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -103,17 +103,17 @@ export default function Navigation() {
                 </span>
                 <div className='sub-menu d-flex justify-content-around flex-column'>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/apgmbiblio/ios' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       iOS
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/apgmbiblio/android' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       Android
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/apgmbiblio/unity' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       Unity
                     </Link>
                   </div>
@@ -121,7 +121,7 @@ export default function Navigation() {
               </li>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/scriptcode'
+                  to='/store'
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
@@ -129,22 +129,22 @@ export default function Navigation() {
                 </Link>
                 <div className='sub-menu d-flex justify-content-around flex-column'>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/subcat/javaScript' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       javaScript
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/subcat/php' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       Php
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/subcat/python' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       Python
                     </Link>
                   </div>
                   <div className='my-1 mx-1 item'>
-                    <Link to='/subcat/java' className='text-secondary'>
+                    <Link to='/store' className='text-secondary'>
                       Java
                     </Link>
                   </div>

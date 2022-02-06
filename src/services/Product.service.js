@@ -165,6 +165,19 @@ const getProductsBySubcategory = (subcategory) => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+const getProductsByCategoryName = (category) => {
+  return instance
+    .post('/product/categoryName/' + category)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+
+const userProducts = () => {
+  return instance
+    .get('/sales/sold/')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
 
 
 const productService = {
@@ -194,6 +207,7 @@ const productService = {
   getAllProducts,
   getProductsByCategory,
   getProductsBySubcategory,
-
+  getProductsByCategoryName,
+  userProducts,
 };
 export default productService;

@@ -15,7 +15,6 @@ export default function Store() {
   const [subcategories, setSubcategories] = useState([]);
   const [selectedSubcategory, setSelectedSubcategory] = useState({});
 
-
   // let { path, url } = useRouteMatch();
 
   const search = () => {
@@ -104,17 +103,21 @@ export default function Store() {
   };
 
   useEffect(() => {
-    const url = window.location.href.split('/')
-
-    if(url[url.length - 2] === 'category')
-    {
-      if(url[url.length - 1] === '0'){
-        console.log(true)
-      }
-    }
-
     getAllCategories();
     getAllProducts();
+
+    // const url = window.location.href.split('/');
+
+    // if (url[url.length - 2] === 'category') {
+    //   const cat = url[url.length - 1].replaceAll('%20', ' ').toLowerCase();
+
+    //   productService
+    //     .getProductsByCategoryName(cat)
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => console.log(err));
+    // }
   }, []);
 
   useEffect(() => {
