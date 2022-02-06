@@ -63,10 +63,24 @@ function Account({ user }) {
       });
   };
 
-  const updateUser = (data) => {
+  const [email, setEmail] = useState(user?.email);
+  const [fulName, setFullName] = useState(user?.fullName);
+  const [username, setUsername] = useState(user?.username);
+  const [paypalEmail, setPaypalEmail] = useState(user?.paypalEmail);
+  const updateUser = (e) => {
+
+    e.preventDefault();
+    const data = {}
+    data.email = email
+    data.fulName = fulName
+    data.username = username
+    data.empaypalEmailail = paypalEmail
+    console.log("hello")
     userService
       .updateUSer(data)
-      .then((res) => {})
+      .then((res) => {
+        window.location.reload();
+      })
       .catch((err) => {
         console.log(
           err.response.data?.message
@@ -168,7 +182,7 @@ function Account({ user }) {
               data-bs-parent='#accordionExample'
             >
               <div className='accordion-body'>
-                <form onSubmit={handleSubmit(updateUser)}>
+                <form onSubmit={updateUser}>
                   <div className='my-3'>
                     <div className='input-group'>
                       <span className='input-group-text' id='email-address'>
@@ -181,14 +195,16 @@ function Account({ user }) {
                         aria-label='Email Address'
                         placeholder='Enter your Email'
                         aria-describedby='email-address'
-                        defaultValue={user?.email}
-                        {...register('email', {
-                          required: true,
-                          pattern: {
-                            value: /\S+@\S+\.\S+/,
-                            message: 'Email format is not valid',
-                          },
-                        })}
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
+                        // defaultValue={user?.email}
+                        // {...register('email', {
+                        //   required: false,
+                        //   pattern: {
+                        //     value: /\S+@\S+\.\S+/,
+                        //     message: 'Email format is not valid',
+                        //   },
+                        // })}
                       />
                     </div>
                   </div>
@@ -207,10 +223,12 @@ function Account({ user }) {
                         aria-label='Name'
                         placeholder='Enter your Name'
                         aria-describedby='Name'
-                        defaultValue={user?.fullName}
-                        {...register('fullName', {
-                          required: true,
-                        })}
+                        value={fulName}
+                        onChange={(e)=>setFullName(e.target.value)}
+                        // defaultValue={user?.fullName}
+                        // {...register('fullName', {
+                        //   required: false,
+                        // })}
                       />
                     </div>
                   </div>
@@ -229,10 +247,11 @@ function Account({ user }) {
                         aria-label='Name'
                         placeholder='Enter your Username'
                         aria-describedby='Username'
-                        defaultValue={user?.username}
-                        {...register('username', {
-                          required: true,
-                        })}
+                        value={username}
+                        onChange={(e)=>setUsername(e.target.value)}
+                        // {...register('username', {
+                        //   required: false,
+                        // })}
                       />
                     </div>
                   </div>
@@ -248,14 +267,16 @@ function Account({ user }) {
                         aria-label='Email Paypal'
                         placeholder='Enter your PayPal Email'
                         aria-describedby='email-address'
-                        defaultValue={user?.paypalEmail}
-                        {...register('paypalEmail', {
-                          required: true,
-                          pattern: {
-                            value: /\S+@\S+\.\S+/,
-                            message: 'Email format is not valid',
-                          },
-                        })}
+                        value={paypalEmail}
+                        onChange={(e)=>setPaypalEmail(e.target.value)}
+                        // defaultValue={user?.paypalEmail}
+                        // {...register('paypalEmail', {
+                        //   required: false,
+                        //   pattern: {
+                        //     value: /\S+@\S+\.\S+/,
+                        //     message: 'Email format is not valid',
+                        //   },
+                        // })}
                       />
                     </div>
                   </div>
@@ -322,7 +343,7 @@ function Account({ user }) {
                           type='checkbox'
                           value={item}
                           id={item}
-                          defaultChecked={user?.operatingSystem.includes(item)}
+                          defaultChecked={user?.operatingSystem?.includes(item)}
                           onChange={handleCheckDevTypes}
                         />
                         <label className='form-check-label' htmlFor={item}>
@@ -340,7 +361,7 @@ function Account({ user }) {
                           type='checkbox'
                           value={item}
                           id={item + index}
-                          defaultChecked={user?.frameworks.includes(item)}
+                          defaultChecked={user?.frameworks?.includes(item)}
                           onChange={handleCheckFrameworks}
                         />
                         <label

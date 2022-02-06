@@ -42,7 +42,7 @@ export default function Login() {
           <div className='card shadow p-3 mb-5 bg-body rounded '>
             <div className='card-body  '>
               <h4 className='text-center'> Welcome back!</h4>
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit)} autoComplete="none">
                 <div className='mb-3 '>
                   <label htmlFor='exampleInputEmail1' className='form-label'>
                     Email address
@@ -53,6 +53,7 @@ export default function Login() {
                     className='form-control'
                     id='exampleInputEmail1'
                     aria-describedby='emailHelp'
+                    autoComplete="none"
                     {...register('email', {
                       required: 'Email is required',
                       pattern: {
@@ -70,6 +71,7 @@ export default function Login() {
                     type='password'
                     // name='password'
                     className='form-control'
+                    autoComplete="none"
                     id='exampleInputPassword1'
                     {...register('password', {
                       required: 'Password is required',

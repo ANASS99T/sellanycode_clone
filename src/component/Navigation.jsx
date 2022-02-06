@@ -20,7 +20,7 @@ export default function Navigation() {
       .then((res) => {
         // console.log(res.success);
         if (!res.success) {
-          toggleLogin();
+          // toggleLogin();
         }
       })
       .catch((err) => {

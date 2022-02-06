@@ -32,17 +32,17 @@ export default function User() {
   const { toggleLogin } = useContext(LoginContext);
   const [loading, setLoading] = useState(true);
   const [loadingwhishlist, setLoadingWhishlist] = useState(true);
-  const logout = () => {
-    AuthService.logout()
-      .then((res) => {
-        // console.log(res);
-        toggleLogin();
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.error(err.response.data?.error);
-      });
-  };
+  // const logout = () => {
+  //   AuthService.logout()
+  //     .then((res) => {
+  //       // console.log(res);
+  //       toggleLogin();
+  //       window.location.reload();
+  //     })
+  //     .catch((err) => {
+  //       console.error(err.response.data?.error);
+  //     });
+  // };
 
   const [categories, setCategories] = useState([]);
   const [wishlistprod, setWishlistprod] = useState([]);

@@ -134,6 +134,19 @@ const getHotItems = () => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+const getTopSelling = () => {
+  return instance
+    .post('/product/topsellingproduct')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+
+const getProductsByName = (name) => {
+  return instance
+    .post('/product/name/'+name)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
 
 
 const productService = {
@@ -158,5 +171,8 @@ const productService = {
   getSimilaritems,
   getHotItems,
   getPopularItems,
+  getTopSelling,
+  getProductsByName,
+  
 };
 export default productService;

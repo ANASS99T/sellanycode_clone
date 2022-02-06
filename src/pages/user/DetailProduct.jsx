@@ -6,14 +6,18 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import productService from '../../services/Product.service';
+import userService from '../../services/User.service';
+import AuthService from '../../services/Auth';
+
 import Moment from 'react-moment';
 
 import image100 from '../../assets/img/100-percent-satisfaction.svg';
 import viserlab from '../../assets/img/viserlab.jpg';
 import ImageViewer from 'react-simple-image-viewer';
 import { Alert } from '@mui/material';
+// import { LoginContext } from '../../LoginContext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,8 +53,12 @@ function a11yProps(index) {
 }
 
 function DetailProduct() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const { loggedIn } = useContext(LoginContext);
+
   const [value, setValue] = React.useState(0);
   const [product, setProduct] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const [images, setImages] = useState([]);
@@ -80,10 +88,11 @@ function DetailProduct() {
         user: localStorage.getItem('user'),
       })
       .then((res) => {
-        res.data?.inWishlist ? setInWishlist(true) : setInWishlist(false);
+        res?.data?.inWishlist ? setInWishlist(true) : setInWishlist(false);
       })
       .catch((err) => {
         console.log(err);
+        window.location.href = '/login';
       });
   };
 
@@ -101,6 +110,7 @@ function DetailProduct() {
       })
       .catch((err) => {
         console.log(err);
+        window.location.href = '/login';
       });
   };
   const addReview = () => {
@@ -140,86 +150,116 @@ function DetailProduct() {
   };
 
   useEffect(() => {
-    productService
-      .getProductById(id)
+    AuthService.jwt()
       .then((res) => {
-        console.log(res);
-        setProduct(res.data?.product);
-        if (res.data?.product?.screenshot1 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot1,
-          ]);
-        }
-        if (res.data?.product?.screenshot2 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot2,
-          ]);
-        }
-        if (res.data?.product?.screenshot3 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot3,
-          ]);
-        }
-        if (res.data?.product?.screenshot4 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot4,
-          ]);
-        }
-        if (res.data?.product?.screenshot5 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot5,
-          ]);
-        }
-        if (res.data?.product?.screenshot6 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot6,
-          ]);
-        }
-        if (res.data?.product?.screenshot7 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot7,
-          ]);
-        }
-        if (res.data?.product?.screenshot8 !== null) {
-          setImages((oldArray) => [
-            ...oldArray,
-            'http://127.0.0.1:3001/uploads/product/' +
-              res.data?.product?.screenshot8,
-          ]);
+        console.log(res.success);
+        const log = res.success
+        console.log(log)
+        if (!res.success) {
+          setLoggedIn(false);
+        } else {
+          setLoggedIn(true);
         }
 
-        checkWishlist();
-        loadComments();
-        loadReviews()
-        setLoading(false);
-      })
-      .catch((err) => {
-        // logout();
-        console.log(err);
-      });
+        console.log('I m heeeeer');
+        productService
+          .getProductById(id)
+          .then((res) => {
+            
+            // console.log(res);
+            setProduct(res?.data?.product);
+            if (res?.data?.product?.screenshot1 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot1,
+              ]);
+            }
+            if (res?.data?.product?.screenshot2 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot2,
+              ]);
+            }
+            if (res?.data?.product?.screenshot3 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot3,
+              ]);
+            }
+            if (res?.data?.product?.screenshot4 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot4,
+              ]);
+            }
+            if (res?.data?.product?.screenshot5 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot5,
+              ]);
+            }
+            if (res?.data?.product?.screenshot6 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot6,
+              ]);
+            }
+            if (res?.data?.product?.screenshot7 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot7,
+              ]);
+            }
+            if (res?.data?.product?.screenshot8 !== null) {
+              setImages((oldArray) => [
+                ...oldArray,
+                'http://127.0.0.1:3001/uploads/product/' +
+                  res?.data?.product?.screenshot8,
+              ]);
+            }
+            // console.log('logged in : ' + loggedIn);
+            if (log) {
+              checkWishlist();
 
-    productService
-      .checkSales({ product: id })
-      .then((res) => {
-        setSold(res.data?.sale);
-        console.log(res.data?.sale)
+
+              userService
+                .getUserById(localStorage.getItem('user'))
+                .then((res) => {
+                  // console.log(res);
+                  setCurrentUser(res?.user);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+
+              productService
+                .checkSales({ product: id })
+                .then((res) => {
+                  setSold(res?.data?.sale);
+                  console.log(res?.data?.sale);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+            loadComments();
+            loadReviews();
+            setLoading(false);
+          })
+          .catch((err) => {
+            // logout();
+            console.log(err);
+          });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }, []);
 
@@ -366,7 +406,11 @@ function DetailProduct() {
                           // type='submit'
                           className='btn btn-primary mr-2 rounded btn-view text-white  mx-1'
                           style={{ marginRight: '0px' }}
-                          onClick={removeFromWishlist}
+                          onClick={
+                            loggedIn
+                              ? removeFromWishlist
+                              : () => (window.location.href = '/login')
+                          }
                         >
                           <i
                             className='fa fa-heart m-r-xs text-white'
@@ -381,7 +425,11 @@ function DetailProduct() {
                           // type='submit'
                           className='btn btn-primary mr-2 rounded btn-view text-white  mx-1'
                           style={{ marginRight: '0px' }}
-                          onClick={addToWithlist}
+                          onClick={
+                            loggedIn
+                              ? addToWithlist
+                              : () => (window.location.href = '/login')
+                          }
                         >
                           <i
                             className='far fa-heart m-r-xs text-white'
@@ -478,7 +526,7 @@ function DetailProduct() {
                             aria-label='username'
                             name='username'
                             aria-describedby='basic-addon1'
-                            value='Obito'
+                            value={currentUser ? currentUser?.username : ''}
                             readOnly
                           />
                         </div>
@@ -496,7 +544,7 @@ function DetailProduct() {
                             aria-label='email'
                             name='email'
                             aria-describedby='basic-addon1'
-                            value='anass.taher@gmail.com'
+                            value={currentUser ? currentUser?.email : ''}
                             readOnly
                           />
                         </div>
@@ -508,7 +556,7 @@ function DetailProduct() {
                             name='message'
                             className='form-control'
                             id='exampleInputPassword1'
-                            spellcheck='false'
+                            spellCheck='false'
                             value={review}
                             onChange={(e) => setReview(e.target.value)}
                           ></textarea>
@@ -605,7 +653,7 @@ function DetailProduct() {
                           aria-label='username'
                           name='username'
                           aria-describedby='basic-addon1'
-                          // value={item?.user.username}
+                          value={currentUser ? currentUser?.username : ''}
                           readOnly
                         />
                       </div>
@@ -620,7 +668,7 @@ function DetailProduct() {
                           aria-label='email'
                           name='email'
                           aria-describedby='basic-addon1'
-                          value='anass.taher@gmail.com'
+                          value={currentUser ? currentUser?.email : ''}
                           readOnly
                         />
                       </div>
@@ -632,14 +680,18 @@ function DetailProduct() {
                           name='message'
                           className='form-control'
                           id='exampleInputPassword1'
-                          spellcheck='false'
+                          spellCheck='false'
                           value={comment}
                           onChange={(e) => setComment(e.target.value)}
                         ></textarea>
                       </div>
                       <button
                         className='btn btn-primary text-white'
-                        onClick={addComment}
+                        onClick={
+                          loggedIn
+                            ? addComment
+                            : () => (window.location.href = '/login')
+                        }
                       >
                         Submit
                       </button>
