@@ -3,6 +3,7 @@ import product1 from '../assets/img/Products/CasttoTVScreenMirroring_sellanycode
 import { useRouteMatch, Switch, Route, Link } from 'react-router-dom';
 import '../scss/biblio.scss';
 import productService from '../services/Product.service';
+import Paginator from 'react-hooks-paginator';
 
 export default function Store() {
   const [products, setProducts] = useState([]);
@@ -106,18 +107,26 @@ export default function Store() {
   }, []);
 
   useEffect(() => {
-      if(selectedCategory !== null){
-          getSubcategories();
-          getProductByCategory();
-      }
-      else{
-          getAllProducts()
-      }
+    if (selectedCategory !== null) {
+      getSubcategories();
+      getProductByCategory();
+    } else {
+      getAllProducts();
+    }
   }, [selectedCategory]);
 
   useEffect(() => {
     getProductBySubategory();
   }, [selectedSubcategory]);
+
+  const PAGE_LIMIT = 1;
+  const [offset, setOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentData, setCurrentData] = useState([]);
+
+  useEffect(() => {
+    setCurrentData(products.slice(offset, offset + PAGE_LIMIT));
+  }, [offset, products]);
 
   if (!loading)
     return (
@@ -265,7 +274,7 @@ export default function Store() {
 
             <div className='col-lg-9 galerie'>
               <div className='row'>
-                {products.map((item, key) => (
+                {currentData.map((item, key) => (
                   <div className='col-lg-3 col-md-6 mb-4' key={key}>
                     <div className='card h-100 box-shadow'>
                       <Link to={`/item/${item?.id}`}>
@@ -305,7 +314,7 @@ export default function Store() {
                 ))}
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -335,7 +344,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -365,7 +374,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -395,7 +404,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -425,7 +434,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -455,7 +464,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -485,7 +494,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -515,7 +524,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -545,7 +554,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -575,7 +584,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -605,7 +614,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -635,7 +644,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -665,7 +674,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -695,7 +704,7 @@ export default function Store() {
                 </div>
                 <div className='col-lg-3 col-md-6 mb-4'>
                   <div className='card h-100 box-shadow'>
-                    <Link>
+                    <Link to='/'>
                       <div className='relativel'>
                         <img className='card-img-top' src={product1} />
                       </div>
@@ -723,9 +732,16 @@ export default function Store() {
                     </div>
                   </div>
                 </div>
-
                 {/* Pagination */}
               </div>
+              <Paginator
+                totalRecords={products.length}
+                pageLimit={PAGE_LIMIT}
+                pageNeighbours={2}
+                setOffset={setOffset}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
             </div>
           </div>
         </div>
