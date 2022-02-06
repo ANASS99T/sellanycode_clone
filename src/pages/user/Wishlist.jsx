@@ -1,13 +1,48 @@
-import { useRouteMatch, Switch, Route, Link } from 'react-router-dom';
-import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import '../../scss/user.scss';
-import { Alert, Tooltip } from '@mui/material';
-import TransactionList from './TransactionList';
+// import TransactionList from './TransactionList';
 import whishlistService from '../../services/Whishlist.service';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Tooltip,
+} from '@mui/material';
 
 
 function Wishlist({wishlistprod}) {
 
+  const [open, setOpen] = React.useState(false);
+  const [selectedId, setSeectedId] = useState('');
+
+  const handleClickOpen = (id) => {
+    setSeectedId(id);
+    // console.log(selectedId);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const removeProduct = () => {
+    // console.log(selectedId);
+    whishlistService
+      .removeProductFromWhishlist(selectedId)
+      .then((res) => {
+        handleClose();
+        alert('Product removed successfully');
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+
+      })
+      .catch((err) => console.log(err));
+  };
 
 
   return (
@@ -35,22 +70,49 @@ function Wishlist({wishlistprod}) {
                       {item.product.priceSingle}
                     </span>
                   </td>
-                  <td>
-                    <div className='d-flex align-items-center justify-content-between'>
+                  <td >  
+                    <div className='d-flex align-items-center justify-content-between' >
                       <Tooltip title='View Item' placement='top'>
                         <Link to={'/item/'+item.product.id}>
-                          <button className='btn btn-sm btn-warning'>
+                          <button className='btn btn-sm btn-warning' style={{ verticalAlign: 'middle' }}>
                             <i className='fas text-white fa-search-plus'></i>
                           </button>
                         </Link>
                       </Tooltip>
                       <Tooltip title='Delete Item' placement='top'>
-                        <Link to='/delete/item'>
-                          <button className='btn btn-sm btn-danger'>
-                            <i className='fas text-white fa-trash-alt'></i>
+                          
+                          <button
+                            className='btn btn-sm btn-danger'
+                            onClick={() => handleClickOpen(item?.id)}
+                            style={{marginRight:"5px"}}>
+                            <i className='fas fa-trash-alt text-white'></i>
                           </button>
-                        </Link>
-                      </Tooltip>
+
+                        </Tooltip>
+                        <Dialog
+                          open={open}
+                          onClose={handleClose}
+                          aria-labelledby='alert-dialog-title'
+                          aria-describedby='alert-dialog-description'
+                        >
+                          <DialogTitle id='alert-dialog-title'>
+                            {"Use Google's location service?"}
+                          </DialogTitle>
+                          <DialogContent>
+                            <DialogContentText id='alert-dialog-description'>
+                              Are you sure you want to remove This item ?
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleClose} autoFocus>
+                              Cancel
+                            </Button>
+                            <Button onClick={removeProduct}>
+                              Delete
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
+
                     </div>
                   </td>
                   </tr>

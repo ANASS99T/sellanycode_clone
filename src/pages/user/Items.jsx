@@ -78,10 +78,10 @@ function Items() {
                   <th style={{ width: '88px' }}>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ verticalAlign: 'middle' }}>
                 {products.map((item, index) => (
                   <tr height='58px' key={index}>
-                    <td>
+                    <td >
                       <img
                         className='card-img-top'
                         style={{
@@ -96,7 +96,7 @@ function Items() {
                       />
                     </td>
                     <td>{item?.name}</td>
-                    <td align='center' style={{ verticalAlign: 'middle' }}>
+                    <td align='center' >
                       {item.priceSingle > 0 ? (
                         <>{item.priceSingle}</>
                       ) : (
@@ -107,18 +107,18 @@ function Items() {
                         </Tooltip>
                       )}
                     </td>
-                    <td align='center' style={{ verticalAlign: 'middle' }}>
+                    <td align='center'>
                       <Tooltip title='New Item' placement='top'>
                         <span className='badge bg-primary text-white'>{item?.status}</span>
                       </Tooltip>
                     </td>
-                    <td>{item?.views}</td>
-                    <td>{item?.sales}</td>
+                    <td align='center'>{item?.views}</td>
+                    <td align='center'>{item?.sales}</td>
                     <td>
-                      <div className='d-flex align-items-center'>
+                      <div className='d-flex align-items-center justify-content-between'>
                         <Tooltip title='View Item' placement='top'>
                           <Link to={`/item/${item?.id}`}>
-                            <button className='btn btn-sm btn-success'>
+                            <button className='btn btn-sm btn-success' style={{marginRight:"5px"}}>
                               <i className='fas fa-search-plus text-white'></i>
                             </button>
                           </Link>
@@ -126,7 +126,7 @@ function Items() {
 
                         <Tooltip title='Edit Item' placement='top'>
                           <Link to={`/user/edit-product/${item?.id}`}>
-                            <button className='btn btn-sm btn-primary'>
+                            <button className='btn btn-sm btn-primary' style={{marginRight:"5px"}}>
                               <i className='fas fa-pencil-alt text-white'></i>
                             </button>
                           </Link>
@@ -136,7 +136,7 @@ function Items() {
                           <button
                             className='btn btn-sm btn-danger'
                             onClick={() => handleClickOpen(item?.id)}
-                          >
+                            style={{marginRight:"5px"}}>
                             <i className='fas fa-trash-alt text-white'></i>
                           </button>
 

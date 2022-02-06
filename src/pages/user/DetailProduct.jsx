@@ -351,7 +351,7 @@ function DetailProduct() {
               >
                 <Tab label='Item' {...a11yProps(0)} />
                 <Tab label='Reviews' {...a11yProps(1)} />
-                <Tab label='Support' {...a11yProps(2)} />
+                {/* <Tab label='Support' {...a11yProps(2)} /> */}
                 <Tab label='Comments' {...a11yProps(3)} />
               </Tabs>
             </div>
@@ -597,7 +597,7 @@ function DetailProduct() {
                   </div>
                 </div>
               </TabPanel>
-              <TabPanel value={value} index={2}>
+              {/* <TabPanel value={value} index={2}>
                 <div className='card mt-3 box-shadow'>
                   <div className='card-body'>
                     <div
@@ -631,7 +631,7 @@ function DetailProduct() {
                     </div>
                   </div>
                 </div>
-              </TabPanel>
+              </TabPanel> */}
               <TabPanel value={value} index={3}>
                 <div className='card mt-3 box-shadow'>
                   <div className='card-body'>
