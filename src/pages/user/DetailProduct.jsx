@@ -152,10 +152,10 @@ function DetailProduct() {
   useEffect(() => {
     AuthService.jwt()
       .then((res) => {
-        console.log(res.success);
-        const log = res.success
+        // console.log(res?.success);
+        const log = res?.success ? res?.success : false
         console.log(log)
-        if (!res.success) {
+        if (!res?.success) {
           setLoggedIn(false);
         } else {
           setLoggedIn(true);

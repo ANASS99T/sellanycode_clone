@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import product1 from '../assets/img/Products/CasttoTVScreenMirroring_sellanycode_featured_image_1643113410.jpg';
-import { useRouteMatch, Switch, Route, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../scss/biblio.scss';
 import productService from '../services/Product.service';
 import Paginator from 'react-hooks-paginator';
 
 export default function Store() {
+  const params = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState('');
@@ -14,7 +15,8 @@ export default function Store() {
   const [subcategories, setSubcategories] = useState([]);
   const [selectedSubcategory, setSelectedSubcategory] = useState({});
 
-  let { path, url } = useRouteMatch();
+
+  // let { path, url } = useRouteMatch();
 
   const search = () => {
     if (name !== '') {
@@ -102,6 +104,15 @@ export default function Store() {
   };
 
   useEffect(() => {
+    const url = window.location.href.split('/')
+
+    if(url[url.length - 2] === 'category')
+    {
+      if(url[url.length - 1] === '0'){
+        console.log(true)
+      }
+    }
+
     getAllCategories();
     getAllProducts();
   }, []);
