@@ -4,6 +4,7 @@ import './App.scss';
 import './scss/costum.scss';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Navigation from './component/Navigation';
+
 import {
   Route,
   BrowserRouter as Router,
