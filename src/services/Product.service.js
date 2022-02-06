@@ -143,7 +143,25 @@ const getTopSelling = () => {
 
 const getProductsByName = (name) => {
   return instance
-    .post('/product/name/'+name)
+    .get('/product/name/'+name)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getAllProducts = () => {
+  return instance
+    .get('/product/')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getProductsByCategory = (category) => {
+  return instance
+    .get('/product/category/'+category)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const getProductsBySubcategory = (subcategory) => {
+  return instance
+    .get('/product/subcategory/' + subcategory)
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -173,6 +191,9 @@ const productService = {
   getPopularItems,
   getTopSelling,
   getProductsByName,
-  
+  getAllProducts,
+  getProductsByCategory,
+  getProductsBySubcategory,
+
 };
 export default productService;
