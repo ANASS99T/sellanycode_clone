@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/user.scss';
 import productService from '../../services/Product.service';
+import { saveAs } from 'file-saver';
 
 function Downloads() {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,10 @@ function Downloads() {
       });
   }, []);
 
-  const downloadfile = () => {};
+  const downloadfile = (file) => {
+    if (file) return saveAs(`http://127.0.0.1:3001/uploads/product/${file}`, file);
+    else return alert('No file to download');
+  };
 
   if (!loading)
     return (
@@ -46,8 +50,8 @@ function Downloads() {
                         <td>{item?.name}</td>
                         <td>
                           <button
-                            className='btn btn-outline-primary'
-                            onClick={downloadfile}
+                            className='btn btn-primary'
+                            onClick={() => downloadfile(item?.mainZip)}
                           >
                             <i className='fas fa-cloud-download-alt text-white'></i>
                           </button>

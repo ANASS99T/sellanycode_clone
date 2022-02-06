@@ -1,6 +1,7 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:3001/api';
 
+
 const instance = axios.create({
   withCredentials: true,
   baseURL: API_URL,
@@ -179,6 +180,20 @@ const userProducts = () => {
     .catch((err) => err);
 };
 
+const salesSize = () => {
+  return instance
+    .get('/sales/userSelsSize/')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+const wishlistSize = () => {
+  return instance
+    .post('/product/wishlistSize/')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+
+
 
 const productService = {
   getCategories,
@@ -209,5 +224,7 @@ const productService = {
   getProductsBySubcategory,
   getProductsByCategoryName,
   userProducts,
+  salesSize,
+  wishlistSize
 };
 export default productService;

@@ -6,7 +6,7 @@ import TransactionList from './TransactionList';
 
 function WithdrawPast() {
   let { path, url } = useRouteMatch();
-  const [active, setActive] = useState('transactions');
+  const [active, setActive] = useState('withdraw-past');
 
   return (
     <div className='my-items'>
