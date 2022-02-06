@@ -79,7 +79,7 @@ export default function Navigation() {
             <ul className='main-menu'>
               <li className=' menu-item' style={{ position: 'relative' }}>
                 <Link
-                  to='/apgmbiblio'
+                  to={`/store/category/0`}
                   className='text-secondary'
                   style={{ fontWeight: 300, fontSize: '19px' }}
                 >
