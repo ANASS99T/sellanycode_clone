@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import productService from '../../services/Product.service';
 import userService from '../../services/User.service';
 import AuthService from '../../services/Auth';
@@ -18,6 +18,7 @@ import viserlab from '../../assets/img/viserlab.jpg';
 import ImageViewer from 'react-simple-image-viewer';
 import { Alert } from '@mui/material';
 // import { LoginContext } from '../../LoginContext';
+// import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,6 +54,8 @@ function a11yProps(index) {
 }
 
 function DetailProduct() {
+  const paypal = useRef();
+
   const [loggedIn, setLoggedIn] = useState(false);
   // const { loggedIn } = useContext(LoginContext);
 
@@ -153,8 +156,8 @@ function DetailProduct() {
     AuthService.jwt()
       .then((res) => {
         // console.log(res?.success);
-        const log = res?.success ? res?.success : false
-        console.log(log)
+        const log = res?.success ? res?.success : false;
+        console.log(log);
         if (!res?.success) {
           setLoggedIn(false);
         } else {
@@ -165,7 +168,6 @@ function DetailProduct() {
         productService
           .getProductById(id)
           .then((res) => {
-            
             // console.log(res);
             setProduct(res?.data?.product);
             if (res?.data?.product?.screenshot1 !== null) {
@@ -228,7 +230,6 @@ function DetailProduct() {
             if (log) {
               checkWishlist();
 
-
               userService
                 .getUserById(localStorage.getItem('user'))
                 .then((res) => {
@@ -252,6 +253,32 @@ function DetailProduct() {
             loadComments();
             loadReviews();
             setLoading(false);
+
+            window.paypal
+              .Button({
+                createOrder: (data, actions, error) => {
+                  return actions.order.create({
+                    intent: 'CAPTURE',
+                    purchase_units: [
+                      {
+                        description: res?.data?.product?.name,
+                        amount: {
+                          currenct_code: 'USD',
+                          value: res?.data?.product?.priceSingle,
+                        },
+                      },
+                    ],
+                  });
+                },
+                onApprove: async (data, actions) => {
+                  const order = await actions.order.capture();
+                  console.log(order);
+                },
+                onError: (err) => {
+                  console.log(err);
+                },
+              })
+              .render(paypal.current);
           })
           .catch((err) => {
             // logout();
@@ -773,8 +800,12 @@ function DetailProduct() {
                     <br />
                   </div>
                   <div className='row align-items-center justify-content-center'>
-                    <div className='btn btn-primary w-75 my-3 text-white'>
+                    {/* <div className='btn btn-primary w-75 my-3 text-white' onClick={checkout}>
                       Buy Now
+                    </div> */}
+
+                    <div>
+                      <div ref={paypal}></div>
                     </div>
                   </div>
                 </div>
