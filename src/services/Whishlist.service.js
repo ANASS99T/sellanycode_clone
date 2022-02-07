@@ -19,16 +19,13 @@ const getUserWhishlist = () => {
       .then((res) => res.data)
       .catch((err) => err);
   };
-
-const removeProductFromWhishlist = (data) => {
+const removeProductFromWhishlist = (id) => {
     return instance
-      .post('/rmwhislistprod/', data)
-      .then((response) => {
-        return response.data;
-      })
+      .delete('/product/removefromwhishlist/'+id)
+      .then((res) => res)
       .catch((err) => err);
   };
-  
+
 
 const whishlistService = {
     addProductToWhishlist,

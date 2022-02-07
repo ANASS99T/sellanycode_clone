@@ -152,6 +152,8 @@ function DetailProduct() {
       .catch((err) => {});
   };
 
+  const [similarprod, setSimilarprod] = useState([]);
+
   useEffect(() => {
     AuthService.jwt()
       .then((res) => {
@@ -164,7 +166,7 @@ function DetailProduct() {
           setLoggedIn(true);
         }
 
-        console.log('I m heeeeer');
+        // console.log('I m heeeeer');
         productService
           .getProductById(id)
           .then((res) => {
@@ -250,6 +252,23 @@ function DetailProduct() {
                   console.log(err);
                 });
             }
+            const prod=res?.data?.product;
+            console.log(res?.data?.product)
+            const data = {
+              product :prod?.id,
+              category : prod?.category?.id
+            }
+            productService
+            .getSimilaritems(data)
+            .then((res) => {
+                console.log('wa zen')
+                console.log(res);
+              // console.log(res.products);
+              setSimilarprod(res?.products);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
             loadComments();
             loadReviews();
             setLoading(false);
@@ -288,8 +307,11 @@ function DetailProduct() {
       .catch((err) => {
         console.error(err);
       });
+      
+     
   }, []);
 
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -378,7 +400,7 @@ function DetailProduct() {
               >
                 <Tab label='Item' {...a11yProps(0)} />
                 <Tab label='Reviews' {...a11yProps(1)} />
-                <Tab label='Support' {...a11yProps(2)} />
+                {/* <Tab label='Support' {...a11yProps(2)} /> */}
                 <Tab label='Comments' {...a11yProps(3)} />
               </Tabs>
             </div>
@@ -624,7 +646,7 @@ function DetailProduct() {
                   </div>
                 </div>
               </TabPanel>
-              <TabPanel value={value} index={2}>
+              {/* <TabPanel value={value} index={2}>
                 <div className='card mt-3 box-shadow'>
                   <div className='card-body'>
                     <div
@@ -658,7 +680,7 @@ function DetailProduct() {
                     </div>
                   </div>
                 </div>
-              </TabPanel>
+              </TabPanel> */}
               <TabPanel value={value} index={3}>
                 <div className='card mt-3 box-shadow'>
                   <div className='card-body'>
