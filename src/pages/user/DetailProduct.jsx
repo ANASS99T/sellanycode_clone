@@ -369,7 +369,8 @@ function DetailProduct() {
         });
     }
   };
-
+//  console.log('hana a zen')
+//   console.log(product?.user?.id);  
   if (!loading)
     return (
       <div className='detailProduct'>
