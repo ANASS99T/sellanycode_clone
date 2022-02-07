@@ -96,6 +96,7 @@ export default function Store() {
         
         setProducts(res?.products);
         setLoading(false);
+        setSelectedCategory(null)
       })
       .catch((err) => {
         console.log(err);
@@ -127,6 +128,7 @@ export default function Store() {
       getProductByCategory();
     } else {
       getAllProducts();
+      setSelectedCategory(null);
     }
   }, [selectedCategory]);
 
@@ -134,7 +136,7 @@ export default function Store() {
     getProductBySubategory();
   }, [selectedSubcategory]);
 
-  const PAGE_LIMIT = 1;
+  const PAGE_LIMIT = 10;
   const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);

@@ -25,7 +25,7 @@ export default function Home() {
     productService
       .getPopularItems()
       .then((res) => {
-        console.log(res?.products)
+        // console.log(res?.products)
         setPropularItems(res?.products);
       })
       .catch((err) => {

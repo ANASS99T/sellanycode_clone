@@ -168,7 +168,7 @@ export default function User() {
                             /*user?.fullName ? ( */
                             <Avatar
                               alt='Remy Sharp'
-                              {...stringAvatar('Anass Obito')}
+                              {...stringAvatar('User User')}
                               sx={{ width: 100, height: 100 }}
                             />
                           )

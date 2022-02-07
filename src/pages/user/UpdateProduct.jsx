@@ -32,7 +32,7 @@ function UpdateProduct({ categories }) {
       .then((res) => {
           console.log(res);
         loadSubcategories(res.data?.product?.category?.id);
-        console.log(res.data?.product);
+        // console.log(res.data?.product);
         setName(res.data?.product.name);
         setShortDescription(res.data?.product?.shortDescription);
         setSelectedCat(res.data?.product?.category?.id);
