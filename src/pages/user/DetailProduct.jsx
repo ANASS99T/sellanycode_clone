@@ -17,6 +17,7 @@ import image100 from '../../assets/img/100-percent-satisfaction.svg';
 import viserlab from '../../assets/img/viserlab.jpg';
 import ImageViewer from 'react-simple-image-viewer';
 import { Alert } from '@mui/material';
+import PaypalCheckoutButton from '../../component/PaypalCheckoutButton';
 // import { LoginContext } from '../../LoginContext';
 // import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
@@ -805,7 +806,10 @@ function DetailProduct() {
                     </div> */}
 
                     <div>
-                      <div ref={paypal}></div>
+                      {/* <div ref={paypal}></div> */}
+
+                      <PaypalCheckoutButton product={product} />
+
                     </div>
                   </div>
                 </div>
