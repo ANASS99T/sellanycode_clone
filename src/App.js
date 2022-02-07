@@ -108,7 +108,7 @@ const DefaultContainer = () => {
       <Route path='/about' component={About} />
       <Route
         path='/profile/:id'
-        render={() => (loggedIn ? <Profile /> : <Login />)}
+        component={Profile}
       />
       <Route path='/privacy-policy' component={PrivacyPolicy} />
       <Route

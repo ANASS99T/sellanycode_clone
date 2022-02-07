@@ -97,7 +97,7 @@ export default function Home() {
           >
             New Added Items
           </span>
-          <Link to='/apgmbiblio'>
+          <Link to='/store'>
             <div className='mb-3'>
               <button
                 type='submit'
@@ -146,7 +146,7 @@ export default function Home() {
           >
             Top Selling Items
           </span>
-          <Link to='/apgmbiblio'>
+          <Link to='/store'>
             <div className='mb-3'>
               <button
                 type='submit'
@@ -195,7 +195,7 @@ export default function Home() {
           >
             Hot Items
           </span>
-          <Link to='/apgmbiblio'>
+          <Link to='/store'>
             <div className='mb-3'>
               <button
                 type='submit'
@@ -244,7 +244,7 @@ export default function Home() {
           >
             Popular Items
           </span>
-          <Link to='/apgmbiblio'>
+          <Link to='/store'>
             <div className='mb-3'>
               <button
                 type='submit'
