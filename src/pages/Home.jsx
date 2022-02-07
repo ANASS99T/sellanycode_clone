@@ -25,6 +25,7 @@ export default function Home() {
     productService
       .getPopularItems()
       .then((res) => {
+        console.log(res?.products)
         setPropularItems(res?.products);
       })
       .catch((err) => {
@@ -49,7 +50,7 @@ export default function Home() {
         setHotItems(err);
       });
   }, []);
-  console.log(newadded);
+//   console.log(newadded);
   return (
     <div className='home-page'>
       <div

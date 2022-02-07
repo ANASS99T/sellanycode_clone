@@ -118,7 +118,7 @@ const getNewAdded = () => {
 };
 const getSimilaritems = (data) => {
   return instance
-    .get('/product/simillaritems/',data)
+    .post('/product/simillaritems/',data)
     .then((res) => res.data)
     .catch((err) => err);
 };

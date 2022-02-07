@@ -24,6 +24,7 @@
     "html-to-draftjs": "^1.5.0",
     "immutable": "^4.0.0",
     "jsdom": "^19.0.0",
+    "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.1",
