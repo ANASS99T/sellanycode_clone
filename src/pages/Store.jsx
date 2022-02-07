@@ -93,6 +93,7 @@ export default function Store() {
     productService
       .getAllProducts()
       .then((res) => {
+        
         setProducts(res?.products);
         setLoading(false);
       })
@@ -142,6 +143,7 @@ export default function Store() {
     setCurrentData(products.slice(offset, offset + PAGE_LIMIT));
   }, [offset, products]);
 
+  
   if (!loading)
     return (
       <div className='GamBibli-page'>

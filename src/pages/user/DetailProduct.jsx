@@ -170,7 +170,7 @@ function DetailProduct() {
         productService
           .getProductById(id)
           .then((res) => {
-            // console.log(res);
+            console.log(res?.data?.product?.category?.id);
             setProduct(res?.data?.product);
             if (res?.data?.product?.screenshot1 !== null) {
               setImages((oldArray) => [
@@ -1019,27 +1019,28 @@ function DetailProduct() {
             <span className='font-weight-bold h4 m-t-sm'>Similar Items</span>
           </div>
           <div className='row p-15 similar-box'>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
+          {similarprod.map((item, key) => (
+            <div className='col-lg-3 col-md-4 col-sm-6 mb-4' key={key}>
               <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
+                <a href={`/item/${item?.id}`}>
                   <div className='relativel'>
                     <button
                       type='button'
                       className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
                     >
-                      $39
+                      ${item?.priceSingle}
                     </button>
                     <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
+                      className='card-img-top semilar-item-img'
+                      src={`http://127.0.0.1:3001/uploads/product/${item?.preview}`}
+                      alt={item?.preview}
                     />
                   </div>
                   <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
+                    <h6 className='card-title mb-3'>{item?.name}</h6>
                   </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
+                </a>
+                {/* <div className='card-footer' style={{ display: 'none' }}>
                   <Link to='/item/2200/advance-pdf-tool-app'> </Link>
                   <div className='clearfix'>
                     <Link to='/item/2200/advance-pdf-tool-app'> </Link>
@@ -1060,317 +1061,10 @@ function DetailProduct() {
                       $39
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4'>
-              <div className='card box-shadow h-100'>
-                <Link to='/item/2200/advance-pdf-tool-app'>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      $39
-                    </button>
-                    <img
-                      className='card-img-top'
-                      src='https://www.sellanycode.com/system/assets/uploads/products/AdvancePDFToolapp_sellanycode_featured_image_1639596255.png'
-                      alt='Advance PDF Tool app'
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>Advance PDF Tool app</h6>
-                  </div>
-                </Link>
-                <div className='card-footer' style={{ display: 'none' }}>
-                  <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                  <div className='clearfix'>
-                    <Link to='/item/2200/advance-pdf-tool-app'> </Link>
-                    <button className='btn btn-sm float-left pr-0'>
-                      <i className='fa fa-eye' aria-hidden='true'></i> 51
-                    </button>
-                    <button className='btn btn-sm float-left'>
-                      <i
-                        className='fas fa-shopping-basket'
-                        aria-hidden='true'
-                      ></i>
-                      0
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-success btn-sm float-right font-weight-bold'
-                    >
-                      $39
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          ))}
           </div>
         </div>
 
