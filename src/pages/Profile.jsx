@@ -1,9 +1,42 @@
-import React from 'react';
 import '../scss/profile.scss';
-import viserlab from '../assets/img/viserlab.jpg';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import Moment from 'react-moment';
+import productService from '../services/Product.service';
+import userService from '../services/User.service';
 
 export default function Profile() {
+
+  const [product, setProduct] = useState(null);
+  const [user, setUser] = useState(null);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    
+    userService
+    .getUserById(id)
+    .then((res) => {
+      console.log(res.user);
+      setUser(res.user);
+      // setLoading(false);
+    })
+    .catch((err) => {
+      // logout();
+      console.log(err);
+    });
+
+    productService
+        .getProductsByUser(id)
+        .then((res) => {
+          console.log(res);
+          setProduct(res?.data.products);
+        })
+        .catch((err) => {});
+     
+  }, []);
+  
   return (
     <div className='profile'>
       <div
@@ -15,15 +48,15 @@ export default function Profile() {
           <div className='author-info-row'>
             <div className='first-col'>
               <img
-                src={viserlab}
+                src={`http://127.0.0.1:3001/uploads/product/${user?.avatar}`}
                 alt=''
                 height='120'
                 width='120'
                 className='avatar'
               />
               <div className='author-title'>
-                <div className='name'> ViserLab </div>
-                <div className='type'> Independent Developer </div>
+                <div className='name'> {user?.fullName} </div>
+                <div className='type'> {user?.devloperType}</div>
                 <Link to='/register'>
                   <button className='btn btn-primary btn-lg btn-block font-bold mt-4'>
                     Contact this author
@@ -40,13 +73,13 @@ export default function Profile() {
                 (Likes)
               </div>
               <div className='author-meta-row'>
-                Member since: <strong>October 15, 2021</strong>
+                Member since: <strong><Moment format='YYYY/MM/DD'>{user?.createdAt}</Moment></strong>
               </div>
               <div className='author-meta-row'>
-                Expert in: <strong>iOS, Android, Unity</strong>
+                Expert in: <strong>{user?.frameworks}</strong>
               </div>
               <div className='author-meta-row'>
-                Developing experience: <strong>3-5 years</strong>
+                Developing experience: <strong>{user?.devlopingExperience}</strong>
               </div>
             </div>
           </div>
