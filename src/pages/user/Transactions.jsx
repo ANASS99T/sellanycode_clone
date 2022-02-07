@@ -1,90 +1,101 @@
-import React, { useState } from 'react';
-import { useRouteMatch, Switch, Route, Link } from "react-router-dom";
-import "../../scss/user.scss"
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch, Link } from 'react-router-dom';
+import '../../scss/user.scss';
 import { Alert, Tooltip } from '@mui/material';
 import TransactionList from './TransactionList';
+import userService from '../../services/User.service';
+import Moment from 'react-moment';
 
 function Transactions() {
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    let { path, url } = useRouteMatch();
-    const [active, setActive] = useState("transactions")
+  let { path, url } = useRouteMatch();
+  const [active, setActive] = useState('transactions');
 
-    return <div className="my-items">
+  useEffect(() => {
+    userService
+      .transactions()
+      .then((res) => {
+        setTransactions(res?.transactions);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
+  if (!loading)
+    return (
+      <div className='my-items'>
         <TransactionList url={url} active={active} setActive={setActive} />
-
-        {/* <div id="transactions" className="collapse show mt-2">
-            <div className="table-responsive">
-                <table className="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th width="87"></th>
-                            <th width="190">Item Name</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th width="55">Views</th>
-                            <th>Sales</th>
-                            <th style={{ width: "88px" }}>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr height="58px">
-                            <td>
-                                <img className="card-img-top" style={{ width: "45px", borderRadius: "3px", position: "relative", left: "9px", verticalAlign: "middle" }} src="https://www.sellanycode.com/images/sellanycode-min.png" alt="" />
-                            </td>
-                            <td>
-
-                            </td>
-                            <td align="center" style={{ verticalAlign: "middle" }}>
-                                <Tooltip title="Free Item" placement="top">
-                                    <span className="badge bg-primary text-white" >Free</span>
-                                </Tooltip>
-                            </td>
-                            <td align="center" style={{ verticalAlign: "middle" }}>
-                                <Tooltip title="New Item" placement="top">
-                                    <span className="badge bg-primary text-white">New</span>
-                                </Tooltip>
-                            </td>
-                            <td>3</td>
-                            <td>0</td>
-                            <td>
-                                <div className="d-flex align-items-center">
-                                    <Tooltip title="View Item" placement="top">
-                                        <Link to="/view/item">
-                                            <button className="btn btn-sm btn-success"><i className="fas fa-search-plus"></i></button>
-                                        </Link>
-                                    </Tooltip>
-
-                                    <Tooltip title="Edit Item" placement="top">
-                                        <Link to="/edite/item">
-                                            <button className="btn btn-sm btn-primary"><i className="fas fa-pencil-alt"></i></button>
-                                        </Link>
-                                    </Tooltip>
-                                    <Tooltip title="Delete Item" placement="top">
-                                        <Link to="/delete/item">
-                                            <button className="btn btn-sm btn-danger"><i className="fas fa-trash-alt"></i></button>
-                                        </Link>
-                                    </Tooltip>
-
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colSpan="7">
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
+        {transactions.length > 0 ? (
+          <div id='transactions' className='collapse show mt-2'>
+            <div className='table-responsive'>
+              <table className='table table-striped table-bordered table-hover'>
+                <thead>
+                  <tr>
+                    <th width='87'>ID</th>
+                    <th width='190'>Date</th>
+                    <th>Type</th>
+                    <th>Detail</th>
+                    <th width='55'>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {transactions.length > 0 &&
+                    transactions.map((item, key) => (
+                      <tr height='58px' key={key}>
+                        <td>
+                          <b>{item?.id.split('-')[0]}</b>
+                        </td>
+                        <td>
+                          <Moment format='YYYY/MM/DD'>{item?.createdAt}</Moment>
+                        </td>
+                        <td align='center' style={{ verticalAlign: 'middle' }}>
+                          {item?.type}
+                        </td>
+                        <td align='center' style={{ verticalAlign: 'middle' }}>
+                          {item?.product?.name}
+                        </td>
+                        <td>{item?.amount}</td>
+                        <td>
+                          {item?.status.toLowerCase() === 'success' ? (
+                            <Tooltip title='View Item' placement='top'>
+                              <button className='btn btn-sm btn-success'>
+                                <i className='fas fa-check text-white'></i>
+                              </button>
+                            </Tooltip>
+                          ) : item?.status.toLowerCase() === 'failed' ? (
+                            <Tooltip title='View Item' placement='top'>
+                              <button className='btn btn-sm btn-warning'>
+                                <i className='fas fa-times text-white'></i>
+                              </button>
+                            </Tooltip>
+                          ) : (
+                            '-'
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th colSpan='7'></th>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
-        </div> */}
-
-        <div className="my-2 p-3 bg-white">
-
-            <Alert severity="info" className="my-2">No Transaction Found!</Alert>
-        </div>
-    </div>;
+          </div>
+        ) : (
+          <div className='my-2 p-3 bg-white'>
+            <Alert severity='info' className='my-2'>
+              No Transaction Found!
+            </Alert>
+          </div>
+        )}
+      </div>
+    );
+  else return <div>Loading ...</div>;
 }
 
 export default Transactions;
