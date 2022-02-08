@@ -17,6 +17,7 @@ import image100 from '../../assets/img/100-percent-satisfaction.svg';
 import viserlab from '../../assets/img/viserlab.jpg';
 import ImageViewer from 'react-simple-image-viewer';
 import { Alert } from '@mui/material';
+import PaypalCheckoutButton from '../../component/PaypalCheckoutButton';
 // import { LoginContext } from '../../LoginContext';
 // import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
@@ -255,9 +256,9 @@ function DetailProduct() {
             const prod=res?.data?.product;
             // console.log(res?.data?.product)
             const data = {
-              product :prod?.id,
-              category : prod?.category?.id
-            }
+              product: prod?.id,
+              category: prod?.category?.id,
+            };
             productService
             .getSimilaritems(data)
             .then((res) => {
@@ -307,11 +308,8 @@ function DetailProduct() {
       .catch((err) => {
         console.error(err);
       });
-      
-     
   }, []);
 
-  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -369,8 +367,8 @@ function DetailProduct() {
         });
     }
   };
-//  console.log('hana a zen')
-//   console.log(product?.user?.id);  
+  //  console.log('hana a zen')
+  //   console.log(product?.user?.id);
   if (!loading)
     return (
       <div className='detailProduct'>
@@ -823,13 +821,19 @@ function DetailProduct() {
                     <br />
                   </div>
                   <div className='row align-items-center justify-content-center'>
-                    {/* <div className='btn btn-primary w-75 my-3 text-white' onClick={checkout}>
-                      Buy Now
-                    </div> */}
-
-                    <div>
-                      <div ref={paypal}></div>
-                    </div>
+                    {loggedIn ? (
+                      <div>
+                        <div className='paypal-button-container mt-4 w-75 mx-auto'>
+                          <PaypalCheckoutButton product={product} />
+                        </div>
+                      </div>
+                    ) : (
+                      <Link to='/login' className='text-center'>
+                        <div className='btn btn-primary w-75 my-3 text-white mx-auto'>
+                          Buy Now
+                        </div>
+                      </Link>
+                    )}
                   </div>
                 </div>
                 <div className='card-footer text-muted text-center d-flex align-items-center justify-content-center'>
@@ -1020,28 +1024,28 @@ function DetailProduct() {
             <span className='font-weight-bold h4 m-t-sm'>Similar Items</span>
           </div>
           <div className='row p-15 similar-box'>
-          {similarprod.map((item, key) => (
-            <div className='col-lg-3 col-md-4 col-sm-6 mb-4' key={key}>
-              <div className='card box-shadow h-100'>
-                <a href={`/item/${item?.id}`}>
-                  <div className='relativel'>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
-                    >
-                      ${item?.priceSingle}
-                    </button>
-                    <img
-                      className='card-img-top semilar-item-img'
-                      src={`http://127.0.0.1:3001/uploads/product/${item?.preview}`}
-                      alt={item?.preview}
-                    />
-                  </div>
-                  <div className='card-body text-center'>
-                    <h6 className='card-title mb-3'>{item?.name}</h6>
-                  </div>
-                </a>
-                {/* <div className='card-footer' style={{ display: 'none' }}>
+            {similarprod.map((item, key) => (
+              <div className='col-lg-3 col-md-4 col-sm-6 mb-4' key={key}>
+                <div className='card box-shadow h-100'>
+                  <a href={`/item/${item?.id}`}>
+                    <div className='relativel'>
+                      <button
+                        type='button'
+                        className='btn btn-primary btn-sm float-right font-weight-bold buttonprice text-white'
+                      >
+                        ${item?.priceSingle}
+                      </button>
+                      <img
+                        className='card-img-top semilar-item-img'
+                        src={`http://127.0.0.1:3001/uploads/product/${item?.preview}`}
+                        alt={item?.preview}
+                      />
+                    </div>
+                    <div className='card-body text-center'>
+                      <h6 className='card-title mb-3'>{item?.name}</h6>
+                    </div>
+                  </a>
+                  {/* <div className='card-footer' style={{ display: 'none' }}>
                   <Link to='/item/2200/advance-pdf-tool-app'> </Link>
                   <div className='clearfix'>
                     <Link to='/item/2200/advance-pdf-tool-app'> </Link>
@@ -1063,9 +1067,9 @@ function DetailProduct() {
                     </button>
                   </div>
                 </div> */}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
 

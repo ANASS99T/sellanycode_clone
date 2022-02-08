@@ -4,7 +4,7 @@ import './App.scss';
 import './scss/costum.scss';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Navigation from './component/Navigation';
-
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import {
   Route,
   BrowserRouter as Router,
@@ -106,10 +106,7 @@ const DefaultContainer = () => {
       />
       <Route path='/item/:id' component={DetailProduct} />
       <Route path='/about' component={About} />
-      <Route
-        path='/profile/:id'
-        component={Profile}
-      />
+      <Route path='/profile/:id' component={Profile} />
       <Route path='/privacy-policy' component={PrivacyPolicy} />
       <Route
         path='/developer-terms-conditions'
@@ -172,52 +169,56 @@ function App() {
   }, []);
 
   return (
-    <LoginContext.Provider
-      value={{ loggedIn, setLoggedIn, toggleLogin, API_URL }}
+    <PayPalScriptProvider
+      options={{ 'client-id': process.env.REACT_APP_PAYPAL_CLIENT_ID }}
     >
-      <Router>
-        <div className='App'>
-          <Switch>
-            <Route
-              exact
-              path='/(login)'
-              render={() =>
-                loggedIn ? <Redirect to='/' /> : <LoginContainer />
-              }
-            />
-            <Route
-              exact
-              path='/(register)'
-              render={() =>
-                loggedIn ? <Redirect to='/' /> : <LoginContainer />
-              }
-            />
-            <Route
-              exact
-              path='/(resetpassword)'
-              render={() =>
-                loggedIn ? <Redirect to='/' /> : <LoginContainer />
-              }
-            />
-            <Route
-              exact
-              path='/(resetpasswordconfirm)'
-              render={() =>
-                loggedIn ? <Redirect to='/' /> : <LoginContainer />
-              }
-            />
-            <Route
-              exact
-              path='/(newpasswordlogin)'
-              render={() =>
-                loggedIn ? <Redirect to='/' /> : <LoginContainer />
-              }
-            />
-            <Route render={() => <DefaultContainer loggedIn={loggedIn} />} />
-          </Switch>
-        </div>
-      </Router>
-    </LoginContext.Provider>
+      <LoginContext.Provider
+        value={{ loggedIn, setLoggedIn, toggleLogin, API_URL }}
+      >
+        <Router>
+          <div className='App'>
+            <Switch>
+              <Route
+                exact
+                path='/(login)'
+                render={() =>
+                  loggedIn ? <Redirect to='/' /> : <LoginContainer />
+                }
+              />
+              <Route
+                exact
+                path='/(register)'
+                render={() =>
+                  loggedIn ? <Redirect to='/' /> : <LoginContainer />
+                }
+              />
+              <Route
+                exact
+                path='/(resetpassword)'
+                render={() =>
+                  loggedIn ? <Redirect to='/' /> : <LoginContainer />
+                }
+              />
+              <Route
+                exact
+                path='/(resetpasswordconfirm)'
+                render={() =>
+                  loggedIn ? <Redirect to='/' /> : <LoginContainer />
+                }
+              />
+              <Route
+                exact
+                path='/(newpasswordlogin)'
+                render={() =>
+                  loggedIn ? <Redirect to='/' /> : <LoginContainer />
+                }
+              />
+              <Route render={() => <DefaultContainer loggedIn={loggedIn} />} />
+            </Switch>
+          </div>
+        </Router>
+      </LoginContext.Provider>
+    </PayPalScriptProvider>
   );
 }
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import product1 from '../assets/img/Products/CasttoTVScreenMirroring_sellanycode_featured_image_1643113410.jpg';
 import { Link, useParams } from 'react-router-dom';
 import '../scss/biblio.scss';
 import productService from '../services/Product.service';
@@ -136,7 +135,7 @@ export default function Store() {
     getProductBySubategory();
   }, [selectedSubcategory]);
 
-  const PAGE_LIMIT = 10;
+  const PAGE_LIMIT = 20;
   const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
