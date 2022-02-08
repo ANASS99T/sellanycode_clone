@@ -134,7 +134,7 @@ export default function Store() {
     getProductBySubategory();
   }, [selectedSubcategory]);
 
-  const PAGE_LIMIT = 1;
+  const PAGE_LIMIT = 20;
   const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
@@ -187,7 +187,7 @@ export default function Store() {
                       <button
                         className='btn header-searchcustombtn btn-sm btn-success'
                         style={{
-                          background: '#6315b8',
+                          // background: '#6315b8',
                           height: '34px',
                           marginLeft: '-15px',
                           width: '40px',
