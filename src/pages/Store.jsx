@@ -187,9 +187,8 @@ export default function Store() {
                     />
                     <div className='input-group-append'>
                       <button
-                        className='btn header-searchcustombtn btn-sm btn-success'
+                        className='btn header-searchcustombtn btn-sm btn-primary'
                         style={{
-                          background: '#6315b8',
                           height: '34px',
                           marginLeft: '-15px',
                           width: '40px',
@@ -199,8 +198,8 @@ export default function Store() {
                         id='button-addon2'
                       >
                         <i
-                          className='fas fa-search text-white'
-                          style={{ fontSize: '15px' }}
+                          className='fas fa-search text-white '
+                          style={{ fontSize: '15px'}}
                         ></i>
                       </button>
                     </div>
