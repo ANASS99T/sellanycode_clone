@@ -16,15 +16,15 @@ function ItemsMenu({ url, active, setActive }) {
                     <li className="nav-item active">
                         <Link className={`nav-link  ${active === 'myitems' ? 'active text-white' : 'text-muted'}`} to={`/user/myitems`} onClick={() => setActive('myitems')}>My Items</Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className={`nav-link  ${active === 'my-products' ? 'active text-white' : 'text-muted'}`} to={`/user/my-products`} onClick={() => setActive('my-products')}>Approved Items</Link>
-                    </li>
-                    <li className="nav-item">
+                    </li> */}
+                    {/* <li className="nav-item">
                         <Link className={`nav-link  ${active === 'my-waiting-products' ? 'active text-white' : 'text-muted'}`} to={`/user/my-waiting-products`} onClick={() => setActive('my-waiting-products')}>Waiting Approval</Link>
-                    </li>
-                    <li className="nav-item">
+                    </li> */}
+                    {/* <li className="nav-item">
                         <Link className={`nav-link  ${active === 'my-rejected-products' ? 'active text-white' : 'text-muted'}`} to={`/user/my-rejected-products`} onClick={() => setActive('my-rejected-products')}>Rejected Items</Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                         <Link className={`nav-link  ${active === 'add-product' ? 'active text-white' : 'text-muted'}`} to={`/user/add-product`} onClick={() => setActive('add-product')}>Add Item</Link>
                     </li>
