@@ -13,7 +13,29 @@ const isOwner = (data) => {
     .catch((err) => err);
 };
 
+const successTransactions = (data) => {
+  return instance
+    .post('/transaction/successTransaction', data)
+    .then((res) => res?.data)
+    .catch((err) => err);
+};
+const failedTransaction = (data) => {
+  return instance
+    .post('/transaction/failedTransaction', data)
+    .then((res) => res?.data)
+    .catch((err) => err);
+};
+const hasProduct = (data) => {
+  return instance
+    .post('/transaction/hasProduct', data)
+    .then((res) => res?.data)
+    .catch((err) => err);
+};
+
 const transactionService = {
   isOwner,
+  successTransactions,
+  failedTransaction,
+  hasProduct
 };
 export default transactionService;

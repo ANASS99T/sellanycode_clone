@@ -5,6 +5,7 @@ import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
+import { AlertTitle } from '@mui/material';
 
 const PaypalCheckoutButton = (props) => {
   const { product } = props;
@@ -13,39 +14,97 @@ const PaypalCheckoutButton = (props) => {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const [already, setAlready] = useState(false);
-  const [isOwner, setIsOwner] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [type, setType] = useState('');
 
   useEffect(() => {
+      console.log({ description: product?.name, amount: product?.priceSingle })
     setMyProduct({ description: product?.name, amount: product?.priceSingle });
     // console.log(product?.id)
     transactionService
       .isOwner({ product: product?.id })
       .then((res) => {
-        console.log(res?.isOwner);
-        setIsOwner(res?.isOwner);
-        setMessage('You are the owner of this item');
-        setType('warning');
+        console.log("is owner : ", res?.isOwner)
+
+        if (res?.isOwner) {
+          setIsOwner(true);
+          setMessage('You are the owner of this item');
+          setType('warning');
+        } else {
+          setIsOwner(false);
+          setMessage('You are the owner of this item');
+          setType('warning');
+        }
       })
       .catch((err) => {
         console.log(err);
+        setMessage('An error occured');
+        setType('error');
+      });
+
+    transactionService
+      .hasProduct({ product: product?.id })
+      .then((res) => {
+          console.log("Has porduct : ", res?.hasProduct)
+        if (res?.hasProduct) {
+          setAlready(true);
+          setMessage(
+            'You already bought this product. Go to your account downloads to view your item'
+          );
+          setType('warning');
+        } else {
+          setAlready(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage('An error occured');
+        setType('error');
       });
   }, []);
 
   const handleApprove = (orderID) => {
     // Confirm the order in the backend
-
-    setPaidFor(true);
+    transactionService
+      .successTransactions({
+        product: product?.id,
+        amount: product?.priceSingle,
+        reference: orderID,
+      })
+      .then((res) => {
+        setMessage('Thank you for your purchase!');
+        setType('success');
+        setPaidFor(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage('An error occured');
+        setType('error');
+      });
   };
 
   const FailedPayment = () => {
-    alert(message);
-    console.log('Faild payment');
+    transactionService
+      .failedTransaction({
+        product: product?.id,
+        amount: product?.priceSingle,
+        reference: '-',
+      })
+      .then((res) => {
+        setMessage('Transaction failed');
+        setType('error');
+        setPaidFor(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage('An error occured');
+        setType('error');
+      });
   };
 
-  if (!paidFor)
+//   if (!paidFor)
     return (
       <div>
         <PayPalButtons
@@ -64,14 +123,18 @@ const PaypalCheckoutButton = (props) => {
           }}
           onClick={(data, actions) => {
             if (isOwner) {
-              setMessage('You are the owner of this item');
-
-              return actions.reject();
+              //   setMessage('You are the owner of this item');
+              setTimeout(() => {
+                return setOpen(true);
+              }, 300);
             } else if (already) {
-              alert(
-                'You already bought this product. Go to your account downloads to view your item'
-              );
-              return actions.reject();
+              //   setMessage('You are the owner of this item');
+              setTimeout(() => {
+                return setOpen(true);
+              }, 300);
+              //   return actions.reject();
+              // } else {
+              //   return actions.resolve();
             } else {
               return actions.resolve();
             }
@@ -90,7 +153,16 @@ const PaypalCheckoutButton = (props) => {
             console.log('order cancelled');
           }}
         />
-        {/* <Collapse in={open}>
+        <Collapse
+          in={open}
+          style={{
+            maxWidth: '500px',
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            zIndex: '1000',
+          }}
+        >
           <Alert
             severity={type}
             action={
@@ -107,17 +179,20 @@ const PaypalCheckoutButton = (props) => {
             }
             sx={{ mb: 2 }}
           >
+            <AlertTitle style={{ textTransform: 'capitalize' }}>
+              {type}
+            </AlertTitle>
             {message}
           </Alert>
-        </Collapse> */}
+        </Collapse>
       </div>
     );
-  else
-    return (
-      <div className='text-primary text-center'>
-        Thank you for your purchase!
-      </div>
-    );
+//   else
+//     return (
+//       <div className='text-primary text-center'>
+//         Thank you for your purchase!
+//       </div>
+//     );
 };
 
 export default PaypalCheckoutButton;
