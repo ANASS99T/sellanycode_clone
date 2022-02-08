@@ -20,13 +20,12 @@ const PaypalCheckoutButton = (props) => {
   const [type, setType] = useState('');
 
   useEffect(() => {
-      console.log({ description: product?.name, amount: product?.priceSingle })
     setMyProduct({ description: product?.name, amount: product?.priceSingle });
     // console.log(product?.id)
     transactionService
       .isOwner({ product: product?.id })
       .then((res) => {
-        console.log("is owner : ", res?.isOwner)
+        console.log('is owner : ', res?.isOwner);
 
         if (res?.isOwner) {
           setIsOwner(true);
@@ -47,7 +46,7 @@ const PaypalCheckoutButton = (props) => {
     transactionService
       .hasProduct({ product: product?.id })
       .then((res) => {
-          console.log("Has porduct : ", res?.hasProduct)
+        console.log('Has porduct : ', res?.hasProduct);
         if (res?.hasProduct) {
           setAlready(true);
           setMessage(
@@ -104,7 +103,8 @@ const PaypalCheckoutButton = (props) => {
       });
   };
 
-//   if (!paidFor)
+  //   if (!paidFor)
+  if (!isOwner && !already && !paidFor)
     return (
       <div>
         <PayPalButtons
@@ -121,78 +121,51 @@ const PaypalCheckoutButton = (props) => {
               ],
             });
           }}
-          onClick={(data, actions) => {
-            if (isOwner) {
-              //   setMessage('You are the owner of this item');
-              setTimeout(() => {
-                return setOpen(true);
-              }, 300);
-            } else if (already) {
-              //   setMessage('You are the owner of this item');
-              setTimeout(() => {
-                return setOpen(true);
-              }, 300);
-              //   return actions.reject();
-              // } else {
-              //   return actions.resolve();
-            } else {
-              return actions.resolve();
-            }
-          }}
           onApprove={async (data, actions) => {
             const order = await actions.order.capture();
             console.log('order : ', order);
             handleApprove(data.orderID);
+            setPaidFor(true);
           }}
           onError={(err) => {
+            if (isOwner === true || already === true) {
+              setTimeout(() => {
+                return setOpen(true);
+              }, 300);
+            }
             FailedPayment();
+            console.error('paypal error: ', err);
+            alert('payement Failed');
             setError(err);
-            console.log('paypal error: ', err);
           }}
           onCancel={() => {
+            setType('warning');
+            setMessage('Order cancelled');
+            setOpen(true);
             console.log('order cancelled');
           }}
         />
-        <Collapse
-          in={open}
-          style={{
-            maxWidth: '500px',
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            zIndex: '1000',
-          }}
-        >
-          <Alert
-            severity={type}
-            action={
-              <IconButton
-                aria-label='close'
-                color='inherit'
-                size='small'
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                <CloseIcon fontSize='inherit' />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
-          >
-            <AlertTitle style={{ textTransform: 'capitalize' }}>
-              {type}
-            </AlertTitle>
-            {message}
-          </Alert>
-        </Collapse>
       </div>
     );
-//   else
-//     return (
-//       <div className='text-primary text-center'>
-//         Thank you for your purchase!
-//       </div>
-//     );
+  else
+    return (
+      //   <Collapse
+      //     in={open}
+      //     className="w-100"
+      //     style={{
+      //     //   maxWidth: '500px',
+      //     //   position: 'fixed',
+      //     //   bottom: '20px',
+      //     //   right: '20px',
+      //     //   zIndex: '1000',
+      //     }}
+      //   >
+      <Alert severity={type} sx={{ mb: 2 }}>
+        <AlertTitle style={{ textTransform: 'capitalize' }}>Message</AlertTitle>
+        {message}
+      </Alert>
+      //   </Collapse>
+    );
 };
 
 export default PaypalCheckoutButton;

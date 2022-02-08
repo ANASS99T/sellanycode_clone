@@ -55,7 +55,7 @@ export default function Home() {
     <div className='home-page'>
       <div
         className='hp-hero'
-        style={{ backgroundImage: `url(${background})`, height: '485px' }}
+        style={{ backgroundImage: `url(${background})`, height: '485px', objectFit:'cover' }}
       >
         <div className='content container '>
           <h1 className='title mb-5'>
