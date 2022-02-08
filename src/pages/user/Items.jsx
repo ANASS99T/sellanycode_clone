@@ -51,7 +51,7 @@ function Items() {
     productService
       .getProductsByUser(user)
       .then((res) => {
-        console.log(res.data?.products);
+        // console.log(res.data?.products);
         setProducts(res.data?.products);
         setLoading(false);
       })

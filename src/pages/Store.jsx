@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import product1 from '../assets/img/Products/CasttoTVScreenMirroring_sellanycode_featured_image_1643113410.jpg';
 import { Link, useParams } from 'react-router-dom';
 import '../scss/biblio.scss';
 import productService from '../services/Product.service';
@@ -96,6 +95,7 @@ export default function Store() {
         
         setProducts(res?.products);
         setLoading(false);
+        setSelectedCategory(null)
       })
       .catch((err) => {
         console.log(err);
@@ -127,6 +127,7 @@ export default function Store() {
       getProductByCategory();
     } else {
       getAllProducts();
+      setSelectedCategory(null);
     }
   }, [selectedCategory]);
 
@@ -185,9 +186,8 @@ export default function Store() {
                     />
                     <div className='input-group-append'>
                       <button
-                        className='btn header-searchcustombtn btn-sm btn-success'
+                        className='btn header-searchcustombtn btn-sm btn-primary'
                         style={{
-                          // background: '#6315b8',
                           height: '34px',
                           marginLeft: '-15px',
                           width: '40px',
@@ -197,8 +197,8 @@ export default function Store() {
                         id='button-addon2'
                       >
                         <i
-                          className='fas fa-search text-white'
-                          style={{ fontSize: '15px' }}
+                          className='fas fa-search text-white '
+                          style={{ fontSize: '15px'}}
                         ></i>
                       </button>
                     </div>

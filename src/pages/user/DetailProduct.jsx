@@ -171,7 +171,7 @@ function DetailProduct() {
         productService
           .getProductById(id)
           .then((res) => {
-            console.log(res?.data?.product?.category?.id);
+            // console.log(res?.data?.product?.category?.id);
             setProduct(res?.data?.product);
             if (res?.data?.product?.screenshot1 !== null) {
               setImages((oldArray) => [
@@ -247,29 +247,29 @@ function DetailProduct() {
                 .checkSales({ product: id })
                 .then((res) => {
                   setSold(res?.data?.sale);
-                  console.log(res?.data?.sale);
+                  // console.log(res?.data?.sale);
                 })
                 .catch((err) => {
                   console.log(err);
                 });
             }
-            const prod = res?.data?.product;
-            console.log(res?.data?.product);
+            const prod=res?.data?.product;
+            // console.log(res?.data?.product)
             const data = {
               product: prod?.id,
               category: prod?.category?.id,
             };
             productService
-              .getSimilaritems(data)
-              .then((res) => {
-                console.log('wa zen');
-                console.log(res);
-                // console.log(res.products);
-                setSimilarprod(res?.products);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+            .getSimilaritems(data)
+            .then((res) => {
+                
+                // console.log(res);
+              // console.log(res.products);
+              setSimilarprod(res?.products);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
             loadComments();
             loadReviews();
             setLoading(false);

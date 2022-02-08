@@ -192,6 +192,12 @@ const wishlistSize = () => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+const productnumber = () => {
+  return instance
+    .post('/product/productnumber')
+    .then((res) => res.data)
+    .catch((err) => err);
+};
 
 
 
@@ -225,6 +231,7 @@ const productService = {
   getProductsByCategoryName,
   userProducts,
   salesSize,
-  wishlistSize
+  wishlistSize,
+  productnumber,
 };
 export default productService;

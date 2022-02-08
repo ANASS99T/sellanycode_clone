@@ -25,7 +25,7 @@ export default function Home() {
     productService
       .getPopularItems()
       .then((res) => {
-        console.log(res?.products)
+        // console.log(res?.products)
         setPropularItems(res?.products);
       })
       .catch((err) => {
@@ -61,8 +61,14 @@ export default function Home() {
           <h1 className='title mb-5'>
             Market for selling source codes
           </h1>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
 
-          <div className='input-group mb-5 searchBar'>
+
+          {/* <div className='input-group mb-5 searchBar'>
             <input
               type='text'
               className='form-control'
@@ -78,7 +84,7 @@ export default function Home() {
             >
               <i className='fas fa-search' style={{ fontSize: '30px' }}></i>
             </button>
-          </div>
+          </div> */}
           <div className='img-logo'>
             <Link to='/about'>
               <img className='' src={logos} alt='' />

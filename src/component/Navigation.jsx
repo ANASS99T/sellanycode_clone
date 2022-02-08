@@ -8,11 +8,15 @@ import '../scss/navbar.scss';
 import { LoginContext } from '../LoginContext';
 import AuthService from '../services/Auth';
 import userService from '../services/User.service';
+import productService from '../services/Product.service';
+
 
 export default function Navigation() {
   const [toggled, setToggled] = useState(false);
   const [user, setUser] = useState(null);
   const { loggedIn, toggleLogin } = useContext(LoginContext);
+  const [prodnumb, setProdNmb] = useState(0);
+
 
   useEffect(() => {
     // console.log(loggedIn)
@@ -49,7 +53,14 @@ export default function Navigation() {
         }
       }, 240000);
     // }
+
+    productService
+      .productnumber()
+      .then((res) => setProdNmb(res?.productNumber))
+      .catch((err) => console.log(err));
+
   }, []);
+
 
   const logout = () => {
     AuthService.logout()
@@ -99,7 +110,7 @@ export default function Navigation() {
                     opacity: 0.8,
                   }}
                 >
-                  (2148)
+                  ({prodnumb})
                 </span>
                 <div className='sub-menu d-flex justify-content-around flex-column'>
                   <div className='my-1 mx-1 item'>
