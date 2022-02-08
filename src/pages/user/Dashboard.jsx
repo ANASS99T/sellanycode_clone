@@ -1,9 +1,19 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Tooltip } from '@mui/material';
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Tooltip,
+} from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/user.scss';
-// import userService from '../../services/User.service';
+import userService from '../../services/User.service';
 import productService from '../../services/Product.service';
+import Moment from 'react-moment';
 
 function Dashboard({ url }) {
   const [active, setActive] = useState('myitems');
@@ -22,6 +32,8 @@ function Dashboard({ url }) {
     setOpen(false);
   };
 
+  const [transactions, setTransactions] = useState([]);
+
   useEffect(() => {
     const user = localStorage.getItem('user');
 
@@ -29,12 +41,28 @@ function Dashboard({ url }) {
       .getProductsByUser(user)
       .then((res) => {
         // console.log(res.data?.products);
-        setProducts(res.data?.products);
+        if (res.data?.products.length > 5) {
+          setProducts(res.data?.products.slice(0, 5));
+        } else {
+          setProducts(res.data?.products);
+        }
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
+    setLoading(true);
+    userService
+      .transactions()
+      .then((res) => {
+        if (res?.transactions.length > 5) {
+          setTransactions(res?.transactions.slice(0, 5));
+        } else {
+          setTransactions(res?.transactions);
+        }
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const deleteProduct = () => {
@@ -56,29 +84,87 @@ function Dashboard({ url }) {
       <div className='dashbaord'>
         <div className='my-1 p-3 bg-white rounded box-shadow'>
           <h4 className='pb-2 mb2'>Last Transactions</h4>
-          <div id='transactions' className='collapse show'>
-            <div className='table-responsive'>
-              <table className='table table-striped table-bordered'>
-                <thead>
-                  <tr>
-                    <th scope='col'>ID</th>
-                    <th scope='col'>Date</th>
-                    <th scope='col'>Details</th>
-                    <th scope='col'>Amount</th>
-                    <th scope='col'>Status</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
+          {transactions.length > 0 ? (
+            <div id='transactions' className='collapse show mt-2'>
+              <div className='table-responsive'>
+                <table className='table table-striped table-bordered table-hover'>
+                  <thead>
+                    <tr>
+                      <th width='87'>ID</th>
+                      <th width='190'>Date</th>
+                      <th>Type</th>
+                      <th>Detail</th>
+                      <th width='55'>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {transactions.length > 0 &&
+                      transactions.map((item, key) => (
+                        <tr height='58px' key={key}>
+                          <td>
+                            <b>{item?.id.split('-')[0]}</b>
+                          </td>
+                          <td>
+                            <Moment format='YYYY/MM/DD'>
+                              {item?.createdAt}
+                            </Moment>
+                          </td>
+                          <td
+                            align='center'
+                            style={{ verticalAlign: 'middle' }}
+                          >
+                            {item?.type}
+                          </td>
+                          <td
+                            align='center'
+                            style={{ verticalAlign: 'middle' }}
+                          >
+                            {item?.product?.name}
+                          </td>
+                          <td>{item?.amount}</td>
+                          <td>
+                            {item?.status.toLowerCase() === 'success' ? (
+                              <Tooltip title='Success' placement='top'>
+                                <button className='btn btn-sm btn-success'>
+                                  <i className='fas fa-check text-white'></i>
+                                </button>
+                              </Tooltip>
+                            ) : item?.status.toLowerCase() === 'failed' ? (
+                              <Tooltip title='Failed' placement='top'>
+                                <button className='btn btn-sm btn-warning'>
+                                  <i className='fas fa-times text-white'></i>
+                                </button>
+                              </Tooltip>
+                            ) : (
+                              '-'
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colSpan='7'></th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
             </div>
+          ) : (
+            <div className='my-2 p-3 bg-white'>
+              <Alert severity='info' className='my-2'>
+                No Transaction Found!
+              </Alert>
+            </div>
+          )}
 
-            <div className='row justify-content-md-center align-items-center'>
-              <Link to={`${url}/transactions`} className='text-center'>
-                <button className='btn btn-sm  btn-primary text-white'>
-                  View All Trancations
-                </button>
-              </Link>
-            </div>
+          <div className='row justify-content-md-center align-items-center'>
+            <Link to={`/user/transactions`} className='text-center'>
+              <button className='btn btn-sm  btn-primary text-white'>
+                View All Trancations
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -194,14 +280,14 @@ function Dashboard({ url }) {
               </table>
             </div>
             <div className='d-flex w-100 align-items-center justify-content-between'>
-              <Link to={`${url}/transactions`} className='text-center'>
+              <Link to={`/user/add-product`} className='text-center'>
                 <button className='btn btn-sm  btn-primary text-white'>
                   + Upload Code
                 </button>
               </Link>
-              <Link to={`${url}/transactions`} className='text-center'>
+              <Link to={`/user/myitems`} className='text-center'>
                 <button className='btn btn-sm  btn-primary text-white'>
-                  View All Trancations
+                  View All Items
                 </button>
               </Link>
             </div>

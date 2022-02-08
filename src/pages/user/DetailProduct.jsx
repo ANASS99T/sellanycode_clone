@@ -823,14 +823,14 @@ function DetailProduct() {
                   <div className='row align-items-center justify-content-center'>
                     {loggedIn ? (
                       <div>
-                        <div className='paypal-button-container mt-4 w-75 mx-auto'>
+                        <div className='paypal-button-container mt-4 mx-auto'>
                           <PaypalCheckoutButton product={product} />
                         </div>
                       </div>
                     ) : (
                       <Link to='/login' className='text-center'>
                         <div className='btn btn-primary w-75 my-3 text-white mx-auto'>
-                          Buy Now
+                          Login to buy
                         </div>
                       </Link>
                     )}
