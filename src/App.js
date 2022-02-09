@@ -28,11 +28,11 @@ import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DeveloperTermsConditions from './pages/TermsConditions';
 import BuyerTermsConditions from './pages/BuyerTermsConditions';
-import ThemesBiblio from './pages/Themes';
-import PluginsBiblio from './pages/Plugins';
-import GamesBiblio from './pages/Games';
-import GraphicBiblio from './pages/Graphics';
-import AppBiblio from './pages/AppTemplates';
+// import ThemesBiblio from './pages/Themes';
+// import PluginsBiblio from './pages/Plugins';
+// import GamesBiblio from './pages/Games';
+// import GraphicBiblio from './pages/Graphics';
+// import AppBiblio from './pages/AppTemplates';
 
 import SellBuyIos from './pages/SellBuyIos';
 import SellBuyAndroid from './pages/SellBuyAndroid';
@@ -56,7 +56,7 @@ const LoginContainer = () => (
       path='/resetpasswordconfirm'
       render={() => <ResetPasswrodConfirm />}
     />
-    <Route path='/newpasswordlogin' render={() => <Newpasswordlogin />} />
+    <Route path='/reset-password/:id/:token' render={() => <Newpasswordlogin />} />
     {/* <Route exact path='/' render={() => <Redirect to='/login' />} /> */}
   </div>
 );
@@ -208,7 +208,7 @@ function App() {
               />
               <Route
                 exact
-                path='/(newpasswordlogin)'
+                path='/(reset-password)/:id/:token'
                 render={() =>
                   loggedIn ? <Redirect to='/' /> : <LoginContainer />
                 }

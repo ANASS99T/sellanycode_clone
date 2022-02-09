@@ -51,6 +51,26 @@ const transactionsSuccess = () => {
     .catch((err) => err);
 };
 
+const ResetPasswordEmail = (data) => {
+  return instance
+    .post('/user/reset-password', data)
+    .then((res) => res?.data)
+    .catch((err) => err);
+};
+
+const CheckResetPasswordToken = (data) => {
+  return instance
+    .post(`/user/reset-password/${data?.id}/${data?.token}`)
+    .then((res) => res?.data)
+    .catch((err) => err);
+};
+const ResetPassword = (data) => {
+  return instance
+    .put(`/user/reset-password/`, data)
+    .then((res) => res?.data)
+    .catch((err) => err);
+};
+
 const userService = {
   loggedInUser,
   getUserById,
@@ -58,6 +78,9 @@ const userService = {
   updatePassword,
   updateAvatar,
   transactions,
-  transactionsSuccess
+  transactionsSuccess,
+  ResetPasswordEmail,
+  CheckResetPasswordToken,
+  ResetPassword
 };
 export default userService;
