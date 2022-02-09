@@ -26,7 +26,7 @@ export default function Profile() {
     userService
     .getUserById(id)
     .then((res) => {
-      console.log(res.user);
+      // console.log(res.user);
       setUser(res.user);
       // setLoading(false);
     })

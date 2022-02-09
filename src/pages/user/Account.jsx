@@ -75,7 +75,7 @@ function Account({ user }) {
     data.fulName = fulName
     data.username = username
     data.empaypalEmailail = paypalEmail
-    // console.log("hello")
+    console.log("hello")
     userService
       .updateUSer(data)
       .then((res) => {

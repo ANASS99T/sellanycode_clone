@@ -87,7 +87,7 @@ function UserMenu({ url, active, setActive }) {
           <i className='fas fa-user text-secondary'></i>
           <div className='text'>My Account</div>
         </Link>
-        <Link
+        {/* <Link
           to={`${url}/support`}
           className={`list-group-item list-group-item-action d-flex align-items-center text-secondary 
             ${active === 'support' ? 'active' : ''}`}
@@ -95,7 +95,7 @@ function UserMenu({ url, active, setActive }) {
         >
           <i className='fas fa-envelope text-secondary'></i>
           <div className='text'>Support</div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
