@@ -59,27 +59,27 @@ export default function Footer() {
                 <h4 className="beta">Navigation</h4>
                 <ul className="links responsive">
                   <li>
-                    <Link to="/apgmbiblio">
+                    <Link to="/store">
                       <span>App & Game Templates</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/scriptcode">
+                    <Link to="/store">
                       <span>Scripts & Code</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/themes">
+                    <Link to="/store">
                       <span>Themes</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/plugins">
+                    <Link to="/store">
                       <span>Plugins</span>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/graphics">
+                    <Link to="/store">
                       <span>Graphics</span>
                     </Link>
                   </li>
@@ -200,6 +200,25 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="small-gap medium-4 columns">
+        <p className="footer-heart links responsive">
+          Made with{" "}
+          <g-emoji
+            className="g-emoji"
+            alias="heart"
+            fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"
+          >
+            <img
+              className="emoji"
+              alt="heart"
+              height="20"
+              width="20"
+              src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"
+            />
+          </g-emoji>{" "}
+          by <span>FC Code</span>
+        </p>
       </div>
     </footer>
   );
